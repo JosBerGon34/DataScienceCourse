@@ -1,4 +1,4 @@
-# --- GESTIÓN DE ENTORNOS VIRTUALES (venv) ---
+python# --- GESTIÓN DE ENTORNOS VIRTUALES (venv) ---
 
 # 1. Crear un nuevo entorno virtual (carpeta .venv)
 python3 -m venv .venv
