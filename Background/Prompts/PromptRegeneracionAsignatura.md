@@ -123,7 +123,7 @@ Columnas DataSet:
 
 Fuente: https://ess.sikt.no/en/data-builder/
 Nombre del Dataset Local: EssSurveys.csv
-Fecha de las Encuestas 2023, Tirada ESS11.
+Fecha de las Encuestas 2026, Tirada ESS11.
 
 
 EL DATASET CATEGORICO LO EXTRAEREMOS DE GUSTOS Y OTRAS PREFERENCIAS DE GRAFICAS O TABLAS DE PAGINAS WEB.
