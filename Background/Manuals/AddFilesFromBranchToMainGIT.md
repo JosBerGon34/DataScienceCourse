@@ -1,4 +1,5 @@
 🛠️ Paso a Paso en la Terminal
+
 1. Guarda y confirma los cambios en tu rama actual
 Asegúrate de estar en tu rama de trabajo (supongamos que se llama mi-rama o el módulo en el que estés) y tener confirmados los cambios de la carpeta:
 
