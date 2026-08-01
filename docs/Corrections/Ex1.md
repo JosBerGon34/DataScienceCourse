@@ -1,27 +1,24 @@
 ### 💻 Tu Reto (Escribe el código en tu cuaderno local):
 
-1. **Creación del dataset sintético:** Crea una lista de diccionarios llamada `registros_desempleo` con 4 registros basados en Eurostat:
-    - Registro 1: `{"geo": "ES", "TIME_PERIOD": 2025, "age": "Y25-54", "sex": "T", "OBS_VALUE": 11.5}`
-        
-    - Registro 2: `{"geo": "DE", "TIME_PERIOD": 2025, "age": "Y25-54", "sex": "T", "OBS_VALUE": 3.8}`
-        
-    - Registro 3: `{"geo": "FR", "TIME_PERIOD": 2025, "age": "Y25-54", "sex": "T", "OBS_VALUE": 7.2}`
-        
-    - Registro 4 (dato corrupto/inválido): `{"geo": "IT", "TIME_PERIOD": 2025, "age": "Y25-54", "sex": "T", "OBS_VALUE": None}`
+#### **2. Practical Task**
 
-2. **Desarrollo de la función con filtrado estricto:** Escribe una función llamada `calcular_desempleo_promedio(registros: list) -> str` que:
+1. **Synthetic Dataset Construction**: Create a list of dictionaries named `registros_desempleo` with Eurostat-based microdata:
     
-    - Recorra la lista `registros`.
+    - `{"geo": "ES", "TIME_PERIOD": 2025, "age": "Y25-54", "sex": "T", "OBS_VALUE": 11.5}`
         
-    - Verifique mediante `isinstance()` o comprobación de tipo si `OBS_VALUE` es un número (`int` o `float`) válido.
+    - `{"geo": "DE", "TIME_PERIOD": 2025, "age": "Y25-54", "sex": "T", "OBS_VALUE": 3.8}`
         
-    - Si encuentra un valor nulo (`None`) o no numérico, imprima un aviso por consola indicando qué país (`geo`) ha sido ignorado.
+    - `{"geo": "FR", "TIME_PERIOD": 2025, "age": "Y25-54", "sex": "T", "OBS_VALUE": 7.2}`
         
-    - Calcule el promedio de los registros válidos.
+    - `{"geo": "IT", "TIME_PERIOD": 2025, "age": "Y25-54", "sex": "T", "OBS_VALUE": None}` _(Corrupted record)_
         
-    - Retorne una cadena formateada con `f-string` especificando el resultado final redondeado a **2 decimales**.
+2. **Function Implementation with Strict Validation**: Write a function `calcular_desempleo_promedio(registros: list) -> str` that:
     
-**Copia y pega tu código solucionado cuando lo tengas listo.** Revisaremos la lógica, el manejo de errores y pasaremos inmediatamente al Ejercicio 2.
+    - Iterates through `registros` and verifies whether `OBS_VALUE` is a valid number (`int` or `float`) using `isinstance()`.
+        
+    - Prints a console warning identifying discarded invalid/missing records (e.g., country code `"IT"`).
+        
+    - Returns the mean value formatted as an f-string rounded to 2 decimal places.
 
 
 ```python
