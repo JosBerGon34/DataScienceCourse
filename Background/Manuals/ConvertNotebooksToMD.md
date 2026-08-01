@@ -9,7 +9,8 @@ pip install nbconvert
 Por defecto, nbconvert extrae las imágenes y crea una carpeta adjunta.
 
 # Sintaxis
-jupyter nbconvert --to markdown tu_notebook.ipynb
+jupyter nbconvert --to markdown tu_notebook.ipynb #Clicando encima del notebook para crear la ventana de terminal, si el notebook ya tiene salidas outputcells se imprimen en el md.
+
 
 # Output generado:
 # 1. tu_notebook.md

@@ -62,6 +62,9 @@ Numberlist: list[int]=[12, 15, 7, 22, 19, 30, 11, 4, 8, 17]
 print(f"List: {Numberlist} | Estructure Type: {type(Numberlist)} | 1st element type: {type(Numberlist[0])}")
 ```
 
+    List: [12, 15, 7, 22, 19, 30, 11, 4, 8, 17] | Estructure Type: <class 'list'> | 1st element type: <class 'int'>
+
+
 
 ```python
 #This way provide us to apply a logic or boolean filter(mask) to the whole block of data,
@@ -117,3 +120,6 @@ sum, prime = number_filtering(Numberlist)
 print(f"Result: {sum}, ¿Prime? {'yes' if prime else 'No'}")  
 
 ```
+
+    Result: 76, ¿Prime? No
+
