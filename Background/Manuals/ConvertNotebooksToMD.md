@@ -35,6 +35,28 @@ Puedes especificar el directorio de salida para los archivos y la carpeta de ass
 # Exporta el .md y la carpeta de assets dentro de la carpeta 'docs'
 jupyter nbconvert --to markdown tu_notebook.ipynb --output-dir ./docs  
 
+🖱️ Opción B: Extensiones en VSCodium (Uso Manual)
+Si prefieres hacerlo con clics dentro del editor, instala una de estas extensiones desde el Marketplace (funcionan igual en VSCodium):
+
+"Jupyter To Markdown" (Recomendada):
+Instalación: Busca Leytton.jupyter-to-markdown en extensiones.
+Uso: Click derecho sobre el archivo .ipynb en el explorador → "Convert To Markdown".
+Comportamiento: Ejecuta nbconvert internamente. Generará el .md y la carpeta _files en el mismo directorio.
+Limitación: No suele permitir configurar fácilmente "sin assets" desde la UI; para eso es mejor la terminal. 
+"Project To Markdown":
+Útil si quieres unir todo tu proyecto (varios archivos) en un solo .md, pero menos específica para notebooks individuales con gestión de assets. 
+📋 Resumen para tu Repositorio (Cheatsheet)
+Objetivo	Comando / Acción	Resultado de Assets
+Estándar	jupyter nbconvert --to markdown nota.ipynb	✅ Crea carpeta nota_files/ con imágenes. 
+Solo Texto/Código	jupyter nbconvert --to markdown --TemplateExporter.exclude_output=True nota.ipynb	❌ Sin imágenes ni carpeta extra. 
+Mover de carpeta	jupyter nbconvert --to markdown nota.ipynb --output-dir ./docs	✅ Crea docs/nota.md y docs/nota_files/. 
+VSCodium (Click)	Ext: Jupyter To Markdown → Click Derecho	✅ Igual que el estándar (crea carpeta). 
+
+Flujo de trabajo sugerido para tu caso:
+Ejecuta el comando en la terminal integrada de VSCodium (Ctrl + ñ o Ctrl + `).
+Usa el comando estándar para tener el backup completo con gráficos.
+Si necesitas una versión ligera para leer en GitHub sin descargar imágenes, usa el flag --TemplateExporter.exclude_output=True.
+
 
 fuentes:
 
