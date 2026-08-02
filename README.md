@@ -48,7 +48,7 @@ The curriculum is structured into progressive modules moving from foundational c
 * **Machine Learning & Statistics:** Scikit-Learn, Statsmodels, XGBoost, Imbalanced-Learn
 * **Deployment & APIs:** Flask, Native HTML/JS Client
 * **Learning Environment:** Jupyter Notebooks, VS Code, NotebookLM
-
+* **Instant Access:** All my excercises from every branch (each branch its a different module, ergo different notebook excercise.) are converted to markdown with cell output prints, you can find them from main in "docs" folder, aswell the theory and corrections in the same folder. Also you can find my cheatsheets, scripts and prompts (the one i used to reestructure the original course) in the "Background" folder.
 ---
 
 ## 📍 Related Repositories
