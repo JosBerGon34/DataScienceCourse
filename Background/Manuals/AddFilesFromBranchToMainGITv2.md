@@ -11,7 +11,7 @@ Para evitar errores como `error: ruta especificada no concordó con ningún arch
 ```bash
 # Ir a la raíz del repositorio local
 cd "$(git rev-parse --show-toplevel)"
-
+    cd ~/Documentos/DataScienceCourse
 
 
 🚀 Flujo de Trabajo Paso a Paso
