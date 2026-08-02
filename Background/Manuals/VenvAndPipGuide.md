@@ -39,10 +39,11 @@ pip install -r requirements.txt
 
 # 11. Limpiar la caché de pip (soluciona errores de descarga o instalación corrupta)
 pip cache purge
-
+    #Matar cualquier proceso desde terminal:
+    #pkill -f code
 # 12. Ver información de la caché de pip
 pip cache info
-
+ 
 
 # --- SOLUCIÓN DE PROBLEMAS EN VSCODIUM ---
 
