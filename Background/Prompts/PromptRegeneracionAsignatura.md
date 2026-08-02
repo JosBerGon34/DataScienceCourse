@@ -77,7 +77,7 @@ Columnas DataSet:
 
 ·hhmmb - Number of people living regularly as member of             household?
 
-·gndr - Gender
+·gndr - Gender [1Male ,2Female]
 
 ·agegroup - Age group, post coded
 
