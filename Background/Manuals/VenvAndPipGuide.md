@@ -43,7 +43,12 @@ pip cache purge
     #pkill -f code
 # 12. Ver información de la caché de pip
 pip cache info
- 
+## A veces se buggea Vscodium, para desbuggear el funcionamiento utiliza estas instrucciones:
+    pkill -f codium
+
+    source .pracc/bin/activate
+    jupyter lab
+        #A veces simplemente al abrir y cerrar jupyterlab y ejecutar el notebook mediante el .venv local del repositorio hace que reenganche el vscodium todo normal.
 
 # --- SOLUCIÓN DE PROBLEMAS EN VSCODIUM ---
 
