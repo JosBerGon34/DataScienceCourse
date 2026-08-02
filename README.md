@@ -21,14 +21,14 @@ This repository contains a **comprehensive curriculum redesign (Remodel) and syn
 
 ---
 
-## 🗺️ Course Structure & Syllabus
+## 🗺️ Course Structure & Syllabus ("Git checkout main")
 
 The curriculum is structured into progressive modules moving from foundational core concepts to production deployment:
 
 | Module | Description / Applied Focus |
 | :--- | :--- |
-| **🟢 MODULE 1:** | **Prework Review & Native Python:** Complex nested data structures (lists, dicts) and high-performance iterations without external libraries. |
-| **🟢 MODULE 2:** | **Linear Algebra & Calculus for ML:** Matrix operations, vectors, and derivatives tailored for Machine Learning optimization algorithms. |
+| **🟢 MODULE 1:** | **Prework Review & Native Python:** Complex nested data structures (lists, dicts) and high-performance iterations without external libraries. "Git checkout Module1.1" |
+| **🟢 MODULE 2:** | **Linear Algebra & Calculus for ML:** Matrix operations, vectors, and derivatives tailored for Machine Learning optimization algorithms."Git checkout Module2.1" |
 | **🟢 MODULE 3:** | **Git, GitHub & Project Management:** Collaborative workflows, version control best practices, and repository architecture. |
 | **🟢 MODULE 4:** | **Probability & Descriptive Statistics:** Sample metrics, distributions, and socio-economic variable analysis. |
 | **🟢 MODULE 5:** | **NumPy & Pandas:** High-performance data ingestion, merging, and reshaping on Eurostat and ESS microdata datasets. |
@@ -48,7 +48,7 @@ The curriculum is structured into progressive modules moving from foundational c
 * **Machine Learning & Statistics:** Scikit-Learn, Statsmodels, XGBoost, Imbalanced-Learn
 * **Deployment & APIs:** Flask, Native HTML/JS Client
 * **Learning Environment:** Jupyter Notebooks, VS Code, NotebookLM
-
+* **Instant Access:** All my excercises from every branch (each branch its a different module, ergo different notebook excercise.) are converted to markdown with cell output prints, you can find them from main in "docs" folder, aswell the theory and corrections in the same folder. Also you can find my cheatsheets, scripts and prompts (the one i used to reestructure the original course) in the "Background" folder.
 ---
 
 ## 📍 Related Repositories
