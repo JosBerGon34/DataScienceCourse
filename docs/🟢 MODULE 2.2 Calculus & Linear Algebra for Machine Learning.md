@@ -43,10 +43,10 @@ import numpy as np
 
 # Synthetic Dataset: 4 Countries [x1: GDP Growth %, x2: Social Trust (0-10)]
 X = np.array([
-    [1.5, 7.0],  # Country A
-    [3.0, 5.0],  # Country B
-    [0.5, 8.5],  # Country C
-    [2.0, 4.0]   # Country D
+    [1.5, 7.0],  # Country A gender male
+    [3.0, 5.0],  # Country A gender female
+    [0.5, 8.5],  # Country B gender male
+    [2.0, 4.0]   # Country B gender female
 ], dtype=np.float64)
 
 # Target: Overall Life Satisfaction (0-10 scale)

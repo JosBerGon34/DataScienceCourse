@@ -1,0 +1,10 @@
+# Core Data Science
+numpy
+pandas
+matplotlib
+scikit-learn
+
+# Notebook environment
+ipykernel
+jupyterlab
+jupytext
