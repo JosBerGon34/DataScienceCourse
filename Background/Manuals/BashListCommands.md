@@ -1,9 +1,17 @@
 # Bash Cheat Sheet
 
 #Especific GIT commands:
-
-
+~
+kill -9 $(pgrep -f .pracc313) it kills python kernel, if it get bugged
  A cheat sheet for bash commands.
+
+pkill -9 -f "vscodium.*python" kills all vscodium subprocess
+
+pkill -f "vscodestorage" kills all vscode subprocess
+
+Presiona Ctrl + Shift + P dentro de VSCodium.
+Escribe y selecciona: 'Developer: Restart Extension Host.'
+Esto liberará el venv bloqueado sin cerrar tus pestañas abiertas.
 
 ## Command History
 
