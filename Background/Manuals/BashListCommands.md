@@ -1,7 +1,7 @@
 # Bash Cheat Sheet
 
 #Especific GIT commands:
-~
+~~~~~~~~~~~~~(If u cant generate this keybind, that is important, you have it here)
 kill -9 $(pgrep -f .pracc313) it kills python kernel, if it get bugged
  A cheat sheet for bash commands.
 
