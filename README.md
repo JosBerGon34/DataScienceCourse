@@ -29,7 +29,7 @@ The curriculum is structured into progressive modules moving from foundational c
 | :--- | :--- |
 | **🟢 MODULE 1:** | **Prework Review & Native Python:** Complex nested data structures (lists, dicts) and high-performance iterations without external libraries. "Git checkout Module1.1" |
 | **🟢 MODULE 2:** | **Linear Algebra & Calculus for ML:** Matrix operations, vectors, and derivatives tailored for Machine Learning optimization algorithms."Git checkout Module2.1" |
-| **🟢 MODULE 3:** | **Git, GitHub & Project Management:** Collaborative workflows, version control best practices, and repository architecture. |
+| **🟢 MODULE 3:** | **Git, GitHub & Project Management:** Collaborative workflows, version control best practices, and repository architecture."Git checkout Module3.1/Module3.2b/Module3.3" |
 | **🟢 MODULE 4:** | **Probability & Descriptive Statistics:** Sample metrics, distributions, and socio-economic variable analysis. |
 | **🟢 MODULE 5:** | **NumPy & Pandas:** High-performance data ingestion, merging, and reshaping on Eurostat and ESS microdata datasets. |
 | **🟢 MODULE 6:** | **Data Cleaning & Imputation:** Advanced missing data strategies (distinguishing survey non-response codes `77, 88, 99` from valid boundary responses). |

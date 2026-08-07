@@ -531,7 +531,7 @@ Typical output:
   remotes/origin/Module1.1
   remotes/origin/Module2.1
   remotes/origin/Module3.1
-  remotes/origin/Module3.2
+  remotes/origin/Module3.2b
 ```
 
 ---
