@@ -1,7 +1,8 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-
+#Jupyterlab local executions PIDs
+.jupyter.pid
 # C extensions
 *.so
 

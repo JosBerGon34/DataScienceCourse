@@ -1,6 +1,7 @@
 jupyterlab
 notebook
 ipykernel
+jupyterlab-latex
 
 numpy
 pandas
