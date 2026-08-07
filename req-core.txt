@@ -1,0 +1,10 @@
+numpy
+pandas
+duckdb
+pyarrow
+
+jupyterlab
+ipykernel
+
+plotly
+matplotlib
