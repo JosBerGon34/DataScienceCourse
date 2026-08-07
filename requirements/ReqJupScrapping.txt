@@ -1,0 +1,6 @@
+-r ReqJupCore.txt
+
+beautifulsoup4
+lxml
+playwright
+aiohttp

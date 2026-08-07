@@ -1,0 +1,6 @@
+-r ReqJupCore.txt
+
+black
+ruff
+pytest
+mypy

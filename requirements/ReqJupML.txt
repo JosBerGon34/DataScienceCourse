@@ -1,0 +1,5 @@
+-r ReqJupCore.txt
+
+scikit-learn
+xgboost
+lightgbm

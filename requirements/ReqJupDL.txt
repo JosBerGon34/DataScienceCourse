@@ -1,0 +1,5 @@
+-r ReqJupML.txt
+
+torch
+torchvision
+tensorflow
