@@ -54,8 +54,8 @@ sudo mkdir -p /etc/systemd/system/postgresql.service.d
 
 ## 5. Start and Enable Service
 ```bash
-
-sudo systemctl daemon-reload
+sudo su -l postgres -c "initdb --locale=C.UTF-8 --encoding=UTF8 -D '/run/media/josu/Samba/postgres/data'";
+sudo systemctl daemon-reload;
 sudo systemctl enable --now postgresql
 ```
 
