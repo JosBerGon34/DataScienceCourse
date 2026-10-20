@@ -30,8 +30,8 @@ The curriculum is structured into progressive modules moving from foundational c
 | **🟢 MODULE 1:** | **Prework Review & Native Python:** Complex nested data structures (lists, dicts) and high-performance iterations without external libraries. "Git checkout Module1.1" |
 | **🟢 MODULE 2:** | **Linear Algebra & Calculus for ML:** Matrix operations, vectors, and derivatives tailored for Machine Learning optimization algorithms."Git checkout Module2.1" |
 | **🟢 MODULE 3:** | **Git, GitHub & Project Management:** Collaborative workflows, version control best practices, and repository architecture."Git checkout Module3.1/Module3.2b/Module3.3" |
-| **🟢 MODULE 4:** | **Probability & Descriptive Statistics:** Sample metrics, distributions, and socio-economic variable analysis. |
-| **🟢 MODULE 5:** | **NumPy & Pandas:** High-performance data ingestion, merging, and reshaping on Eurostat and ESS microdata datasets. |
+| **🟢 MODULE 4:** | **Probability & Descriptive Statistics:** Sample metrics, distributions, and socio-economic variable analysis. "Git checkout Module4.1/Module4.2"|
+| **🟢 MODULE 5:** | **NumPy & Pandas:** High-performance data ingestion, merging, and reshaping on Eurostat and ESS microdata datasets."Git checkout Module5.1" |
 | **🟢 MODULE 6:** | **Data Cleaning & Imputation:** Advanced missing data strategies (distinguishing survey non-response codes `77, 88, 99` from valid boundary responses). |
 | **🟢 MODULE 7:** | **Exploratory Data Analysis (EDA):** Pattern discovery, correlation analysis, and advanced visualizations (Matplotlib/Seaborn). |
 | **🟢 MODULE 8:** | **Feature Engineering & Resampling:** Data transformations, structural clustering (K-Means), and properly calibrated SMOTE oversampling. |
