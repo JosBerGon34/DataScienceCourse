@@ -1,4 +1,4 @@
-🛠️ Opción A: Línea de Comandos (Recomendada para Automatización)
+cds🛠️ Opción A: Línea de Comandos (Recomendada para Automatización)
 Esta es la opción más robusta. Utiliza la herramienta jupyter nbconvert que se instala junto con Jupyter. 
 
 Requisito previo:
