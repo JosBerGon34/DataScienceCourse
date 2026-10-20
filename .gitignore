@@ -88,4 +88,11 @@ target/
 
 # Mypy cache
 .mypy_cache/
+# Jupyter temporary & execution files
+.virtual_documents/
 .jupyter.pid
+*.pid
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+.env
