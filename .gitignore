@@ -96,3 +96,18 @@ target/
 # Jupyter checkpoints
 .ipynb_checkpoints/
 .env
+.env
+configsql.cfg
+*.db
+*.duckdb
+# Archivos de bases de datos locales (ignorar completamente)
+*.db
+*.sqlite
+*.sqlite3
+*.duckdb
+*.dump
+
+# Credenciales y configuración sensible
+.env
+configsql.cfg
+*.cfg
