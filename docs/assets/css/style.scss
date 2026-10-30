@@ -6,25 +6,31 @@
 #main_content_wrap, 
 .container, 
 .main-content,
-#main_content {
-    max-width: 1600px !important;
-    width: 96% !important;
+#main_content,
+body {
+    max-width: 1400px !important;
+    width: 95% !important;
     margin: 0 auto !important;
-    box-sizing: border-box !important;
 }
 
 /* ================================================================= *
- * 2. FONDO GENERAL Y TIPOGRAFÍA GLOBAL (MODO OSCURO GITHUB)         *
+ * 2. FORZAR MODO OSCURO GLOBAL (ELIMINA EL FONDO BLANCO)             *
  * ================================================================= */
-body, .markdown-body {
+html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap {
     background-color: #0d1117 !important;
     color: #c9d1d9 !important;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
-    font-size: 16px !important;
-    line-height: 1.5 !important;
 }
 
-/* Forzar que las tarjetas o bloques de texto tengan el tono de tarjeta GitHub */
+.markdown-body {
+    background-color: transparent !important;
+    color: #c9d1d9 !important;
+    font-weight: 500 !important;
+    font-size: 16px !important;
+}
+
+/* ================================================================= *
+ * 3. CAPA INTERMEDIA: Tarjetas de contenido                         *
+ * ================================================================= */
 .markdown-body > p,
 .markdown-body > ul,
 .markdown-body > ol,
@@ -42,19 +48,18 @@ body, .markdown-body {
 }
 
 /* ================================================================= *
- * 3. BLOQUES DE CÓDIGO Y CELDAS (PROBLEMA A RESUELTO)               *
+ * 4. BLOQUES DE CÓDIGO Y COMENTARIOS (PROBLEMA DE GRISES RESUELTO)   *
  * ================================================================= */
 .markdown-body .highlight,
 .markdown-body pre,
-pre:not(.highlight pre) {
+.markdown-body pre:not(.highlight pre) {
     background-color: #0d1117 !important;
     border: 1px solid #30363d !important;
     border-radius: 8px !important;
     padding: 16px !important;
     margin-bottom: 16px !important;
-    color: #e6edf3 !important; /* Texto perfectamente legible */
-    width: 100% !important;
-    box-sizing: border-box !important;
+    overflow-x: auto !important;
+    color: #c9d1d9 !important;
 }
 
 .markdown-body .highlight pre {
@@ -62,28 +67,26 @@ pre:not(.highlight pre) {
     border: none !important;
     padding: 0 !important;
     margin: 0 !important;
-    color: #e6edf3 !important;
 }
 
 /* Código en línea (inline code) */
 .markdown-body code {
-    background-color: rgba(110, 118, 129, 0.4) !important;
+    background-color: #21262d !important;
     color: #79c0ff !important;
     padding: 0.2em 0.4em;
     border-radius: 6px;
     border: 1px solid #30363d !important;
-    font-size: 85% !important;
 }
 
 /* ================================================================= *
- * 4. ROUGE SYNTAX HIGHLIGHTING (COLORES DE CÓDIGO CLAROS)           *
+ * 5. ROUGE SYNTAX HIGHLIGHTING (ASEGURAR COMENTARIOS CLAROS)        *
  * ================================================================= */
 .highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr {
-    color: #ff7b72 !important; /* Palabras clave */
+    color: #7ee787 !important; /* Verde brillante para import, def, etc. */
     font-weight: bold;
 }
 .highlight .n, .highlight .nx {
-    color: #e6edf3 !important;
+    color: #c9d1d9 !important;
 }
 .highlight .s, .highlight .s1, .highlight .s2 {
     color: #a5d6ff !important; /* Strings en azul claro */
@@ -91,9 +94,10 @@ pre:not(.highlight pre) {
 .highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo, .highlight .m {
     color: #79c0ff !important;
 }
+/* Comentarios: Se cambia a un gris claro y nítido (#8b949e o #96a3b0) con buena visibilidad */
 .highlight .c, .highlight .c1, .highlight .cm {
-    color: #8b949e !important; /* Comentarios */
-    font-style: italic;
+    color: #96a3b0 !important; 
+    font-style: italic !important;
 }
 .highlight .ow, .highlight .o {
     color: #ff7b72 !important;
@@ -103,50 +107,33 @@ pre:not(.highlight pre) {
 }
 
 /* ================================================================= *
- * 5. TABLAS DE PANDAS Y ANCHO EXTENDIDO (PROBLEMA C RESUELTO)       *
+ * 6. TABLAS DE PANDAS ESTIRADAS CON SCROLL INTERNO                  *
  * ================================================================= */
 table {
-    display: table !important;
-    width: 100% !important;
-    max-width: 100% !important;
+    display: block !important;
     overflow-x: auto !important;
+    width: 100% !important;
     background-color: #161b22 !important;
     border-radius: 8px;
-    border-collapse: collapse !important;
-    margin-bottom: 20px !important;
+    padding: 8px;
     border: 1px solid #30363d !important;
-}
-
-th, td {
-    padding: 10px 14px !important;
-    border: 1px solid #30363d !important;
-    color: #c9d1d9 !important;
-}
+} 
 
 th {
-    background-color: hwb(212 13% 78%) !important;
+    background-color: #21262d !important;
     color: #ffffff !important;
 }
 
-tr:nth-child(even) {
-    background-color: #11151c !important;
-}
-
-/* Asegurar que las imágenes y outputs aprovechen el ancho */
-.markdown-body img {
-    max-width: 100% !important;
-    height: auto !important;
-    border-radius: 6px;
-    display: block;
-    margin: 10px auto;
+td {
+    color: #c9d1d9 !important;
 }
 
 /* ================================================================= *
- * 6. BOTÓN DE RETORNO AL ÍNDICE                                    *
+ * 7. ESTILO PARA EL BOTÓN DE RETORNO AL ÍNDICE                      *
  * ================================================================= */
 .back-to-index {
     display: inline-block;
-    background-color: #238636 !important;
+    background-color: #238636 !important; /* Verde GitHub */
     color: #ffffff !important;
     padding: 10px 18px;
     border-radius: 6px;
@@ -155,7 +142,7 @@ tr:nth-child(even) {
     margin-bottom: 20px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.3);
     transition: background-color 0.2s;
-}
+} 
 
 .back-to-index:hover {
     background-color: #2ea043 !important;
