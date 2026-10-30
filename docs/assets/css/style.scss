@@ -3,14 +3,15 @@
 @import "{{ site.theme }}";
 
 /* ================================================================= *
- * 1. ANCHO DE PÁGINA Y CONTENEDORES PRINCIPALES DE MIDNIGHT          *
+ * 1. ANCHO DE PÁGINA TOTAL (1400px fluidos sin restricciones)       *
  * ================================================================= */
 #main_content_wrap, 
 .container, 
 .main-content,
 #main_content,
 body,
-.inner {
+.inner,
+.wrapper {
     max-width: 1400px !important;
     width: 95% !important;
     margin: 0 auto !important;
@@ -18,15 +19,14 @@ body,
 }
 
 /* ================================================================= *
- * 2. MODO OSCURO GLOBAL (Elimina cualquier fondo o residuo blanco)  *
+ * 2. MODO OSCURO GLOBAL Y CONTENEDOR MARKDOWN                      *
  * ================================================================= */
-html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #main_content, .inner {
+html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #main_content, .inner, .wrapper {
     background-color: #0d1117 !important;
     color: #c9d1d9 !important;
 }
 
-.markdown-body, 
-.wrapper {
+.markdown-body {
     background-color: transparent !important;
     color: #c9d1d9 !important;
     font-size: 16px !important;
@@ -35,35 +35,49 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #mai
 }
 
 /* ================================================================= *
- * 3. TARJETAS DE TEXTO Y BLOQUES DEL MARKDOWN                       *
+ * 3. TEXTO Y PÁRRAFOS FLUIDOS (Sin artefactos raros en texto plano)  *
  * ================================================================= */
-#main_content > p,
-#main_content > ul,
-#main_content > ol,
-#main_content > h1,
-#main_content > h2,
-#main_content > h3,
-#main_content > h4,
-#main_content blockquote {
-    background-color: #161b22 !important;
-    border: 1px solid #30363d !important;
-    border-radius: 8px;
-    padding: 16px 20px;
-    margin-bottom: 16px;
+.markdown-body p,
+.markdown-body ul,
+.markdown-body ol,
+.markdown-body li {
+    background-color: transparent !important;
+    border: none !important;
     color: #c9d1d9 !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    line-height: 1.6 !important;
+}
+
+/* Encabezados limpios y delimitados */
+.markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 {
+    color: #f0f6fc !important;
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 0.3em;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    width: 100% !important;
+}
+
+/* Citas */
+.markdown-body blockquote {
+    background-color: #161b22 !important;
+    border-left: 4px solid #30363d !important;
+    padding: 12px 16px;
+    margin: 16px 0;
+    color: #8b949e !important;
+    border-radius: 0 8px 8px 0;
 }
 
 /* ================================================================= *
- * 4. CELDAS DE CÓDIGO Y HIGHLIGHTER-ROUGE (ANCHO TOTAL REAL)        *
+ * 4. CELDAS DE CÓDIGO Y HIGHLIGHTER-ROUGE (Ancho 100% real de 1400px) *
  * ================================================================= */
 div.highlighter-rouge,
 .highlighter-rouge,
 .highlight,
 pre,
 pre:not(.highlight pre) {
-    background-color: #0d1117 !important;
+    background-color: #161b22 !important;
     border: 1px solid #30363d !important;
     border-radius: 8px !important;
     padding: 16px !important;
@@ -76,7 +90,8 @@ pre:not(.highlight pre) {
 }
 
 div.highlighter-rouge div.highlight,
-.highlighter-rouge .highlight {
+.highlighter-rouge .highlight,
+.highlight pre {
     background-color: transparent !important;
     border: none !important;
     padding: 0 !important;
@@ -85,28 +100,23 @@ div.highlighter-rouge div.highlight,
     max-width: 100% !important;
 }
 
-.highlight pre {
+/* CÓDIGO EN LÍNEA: Restringido EXCLUSIVAMENTE a bloques preformateados o 
+   etiquetas <code> que estén dentro de bloques de código, evitando 
+   que contaminen el texto plano de los párrafos del markdown. */
+pre code, 
+code.highlighter-rouge,
+.highlight code {
     background-color: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
-}
-
-/* Código en línea (inline code) */
-code {
-    background-color: #21262d !important;
     color: #79c0ff !important;
-    padding: 0.2em 0.4em;
-    border-radius: 6px;
-    border: 1px solid #30363d !important;
+    padding: 0 !important;
+    border: none !important;
 }
 
 /* ================================================================= *
  * 5. HIGHLIGHTING DE CÓDIGO (Colores y Comentarios Nítidos)         *
  * ================================================================= */
 .highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr {
-    color: #7ee787 !important; /* Verde brillante para palabras clave */
+    color: #7ee787 !important; /* Palabras clave en verde brillante */
     font-weight: bold;
 }
 .highlight .n, .highlight .nx {
@@ -145,19 +155,23 @@ table {
     padding: 8px;
     border: 1px solid #30363d !important;
     box-sizing: border-box !important;
+    margin-bottom: 16px !important;
 } 
 
 th {
     background-color: #21262d !important;
     color: #ffffff !important;
+    padding: 8px 12px;
 }
 
 td {
     color: #c9d1d9 !important;
+    padding: 8px 12px;
+    border-top: 1px solid #30363d;
 }
 
 /* ================================================================= *
- * 7. BOTÓN DE RETORNO AL ÍNDICE                                    *
+ * 7. BOTÓN DE RETORNO ALÍNDICE                                     *
  * ================================================================= */
 .back-to-index {
     display: inline-block;
