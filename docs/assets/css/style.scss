@@ -1,0 +1,36 @@
+---
+---
+@import "{{ site.theme }}";
+
+/* 1. Aprovechar el ancho del monitor (Celdas estiradas) */
+#main_content_wrap, .container, .main-content {
+  max-width: 1400px !important;
+  width: 95% !important;
+}
+
+/* 2. Mayor grosor y legibilidad en las fuentes */
+body, p, li, td, th, a {
+  font-weight: 500 !important; /* Aumenta el grosor base */
+  font-size: 16px !important;
+}
+
+/* 2.1 Color de enlaces de alto contraste para fondos oscuros */
+a {
+  color: #4da6ff !important;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* 3. Comportamiento de DataFrames y Celdas de Código */
+table {
+  display: block !important;
+  overflow-x: auto !important; /* Slider interno solo para tablas gigantes */
+  width: 100% !important;
+}
+
+pre, code {
+  font-weight: 600 !important; /* Código aún más grueso */
+  border-radius: 6px;
+}

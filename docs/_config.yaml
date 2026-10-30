@@ -1,0 +1,10 @@
+theme: jekyll-theme-slate
+title: "JosBerGon34 Data Science Portfolio"
+description: "A comprehensive curriculum redesign and applied data science projects."
+
+# Evita que Jekyll pierda tiempo procesando carpetas que no son parte de la web
+exclude:
+  - .venv/
+  - node_modules/
+  - Scripts/
+  - .env
