@@ -140,10 +140,13 @@ code.highlighter-rouge,
 }
 
 /* ================================================================= *
- * TABLAS GLOBALES (DataFrames de Pandas y general)                   *
+ * TABLAS EXCLUSIVAS DE OUTPUT CELLS (DataFrames y Resultados)       *
  * ================================================================= */
-table {
-    display: block !important;
+.output table,
+.output_area table,
+.jp-OutputArea-output table,
+div.output_subarea table {
+    display: table !important;
     width: 100% !important;
     max-width: 100% !important;
     overflow-x: auto !important;
@@ -153,25 +156,35 @@ table {
     border: 1px solid #30363d !important;
     box-sizing: border-box !important;
     margin-bottom: 16px !important;
-} 
+}
 
-table th, 
-table td {
-    padding: 6px 10px !important;
+/* Celdas unitarias compactas y proporcionales para outputs */
+.output table th, 
+.output table td,
+.output_area table th, 
+.output_area table td,
+.jp-OutputArea-output table th,
+.jp-OutputArea-output table td {
+    padding: 5px 8px !important;
     font-size: 11px !important;
     box-sizing: border-box !important;
     white-space: nowrap !important;
-    color: #c9d1d9 !important;
     border-top: 1px solid #30363d !important;
 }
 
-table th {
+/* Cabeceras diferenciadas en los outputs */
+.output table th,
+.output_area table th,
+.jp-OutputArea-output table th {
     background-color: #21262d !important;
     color: #ffffff !important;
     font-weight: 600;
 }
 
-table tr:nth-child(even) {
+/* Filas alternas para mayor claridad visual en tablas de datos */
+.output table tr:nth-child(even),
+.output_area table tr:nth-child(even),
+.jp-OutputArea-output table tr:nth-child(even) {
     background-color: #11151c !important;
 }
 /* ================================================================= *
