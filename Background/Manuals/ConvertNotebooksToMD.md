@@ -7,7 +7,8 @@ pip install nbconvert
 
 1. Exportar CON Assets (Imágenes)
 Por defecto, nbconvert extrae las imágenes y crea una carpeta adjunta.
-
+jupyter nbconvert --to markdown notebooks/Ex7.1.ipynb --output-dir docs/Corrections/
+git add docs/Corrections/ #Usa este comando desde la raiz del repo
 # Sintaxis
 jupyter nbconvert --to markdown tu_notebook.ipynb #Clicando encima del notebook para crear la ventana de terminal, si el notebook ya tiene salidas outputcells se imprimen en el md.
 jupyter nbconvert --to markdown Ex6.1.ipynb
