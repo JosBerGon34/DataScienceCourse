@@ -11,6 +11,8 @@ Por defecto, nbconvert extrae las imágenes y crea una carpeta adjunta.
 # Sintaxis
 jupyter nbconvert --to markdown tu_notebook.ipynb #Clicando encima del notebook para crear la ventana de terminal, si el notebook ya tiene salidas outputcells se imprimen en el md.
 jupyter nbconvert --to markdown Ex6.1.ipynb
+# convertir a HTML estructurado mejor visualizacion en github
+jupyter nbconvert --to html --ExternalizerExtension.enabled=True tu_notebook.ipynb   
 
 # Output generado:
 # 1. tu_notebook.md
