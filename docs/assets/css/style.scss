@@ -140,10 +140,11 @@ code.highlighter-rouge,
 }
 
 /* ================================================================= *
- * 6. TABLAS DE PANDAS AMPLIADAS AL 100%                            *
+ * TABLAS DE PANDAS Y STATS (Escadas al 100% sin romper los 1400px)   *
  * ================================================================= */
-table {
-    display: table !important;
+table, 
+.markdown-body table {
+    display: block !important;
     width: 100% !important;
     max-width: 100% !important;
     overflow-x: auto !important;
@@ -153,18 +154,24 @@ table {
     border: 1px solid #30363d !important;
     box-sizing: border-box !important;
     margin-bottom: 16px !important;
-} 
-
-th {
-    background-color: #21262d !important;
-    color: #ffffff !important;
-    padding: 8px 12px;
 }
 
-td {
+/* Forzar que las celdas y filas respeten el flujo porcentual */
+table th, 
+table td {
     color: #c9d1d9 !important;
     padding: 8px 12px;
-    border-top: 1px solid #30363d;
+    box-sizing: border-box !important;
+    white-space: nowrap; /* Evita saltos extraños en matrices numéricas */
+}
+
+table th {
+    background-color: #21262d !important;
+    color: #ffffff !important;
+}
+
+table tr:nth-child(even) {
+    background-color: #11151c !important;
 }
 
 /* ================================================================= *
