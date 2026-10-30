@@ -140,55 +140,54 @@ code.highlighter-rouge,
 }
 
 /* ================================================================= *
- * TABLAS GLOBALES DE OUTPUT CELLS (Head, Describe, DataFrames y Styler) *
+ * TABLAS INTEGRADAS EN OUTPUT CELLS (Con recuadro idéntico a .highlight) *
  * ================================================================= */
+.markdown-body table,
+table,
 .output table,
 .output_area table,
 .jp-OutputArea-output table,
 div.output_subarea table {
-    display: table !important;
+    display: block !important;
     width: 100% !important;
     max-width: 100% !important;
     overflow-x: auto !important;
-    background-color: #161b22 !important;
-    border-radius: 8px !important;
-    padding: 4px !important;
-    border: 1px solid #30363d !important;
-    box-sizing: border-box !important;
+    background-color: #161b22 !important; /* Fondo idéntico al de las cajas de código */
+    border: 1px solid #30363d !important;    /* Recuadro de borde sutil GitHub Dark */
+    border-radius: 8px !important;         /* Esquinas redondeadas */
+    padding: 16px !important;              /* Padding interno simétrico al de los outputs */
     margin-bottom: 16px !important;
+    box-sizing: border-box !important;
 }
 
-/* Celdas unitarias compactas y proporcionales para cualquier output */
+/* Celdas unitarias compactas, profesionales y legibles */
+.markdown-body table th, 
+.markdown-body table td,
+table th, 
+table td,
 .output table th, 
-.output table td,
-.output_area table th, 
-.output_area table td,
-.jp-OutputArea-output table th,
-.jp-OutputArea-output table td,
-div.output_subarea table th,
-div.output_subarea table td {
-    padding: 5px 8px !important;
+.output table td {
+    padding: 6px 10px !important;
     font-size: 11px !important;
     box-sizing: border-box !important;
     white-space: nowrap !important;
     border-top: 1px solid #30363d !important;
 }
 
-/* Cabeceras diferenciadas en los outputs */
-.output table th,
-.output_area table th,
-.jp-OutputArea-output table th,
-div.output_subarea table th {
+/* Cabeceras de tabla estilizadas */
+.markdown-body table th,
+table th,
+.output table th {
     background-color: #21262d !important;
     color: #ffffff !important;
     font-weight: 600 !important;
+    border-bottom: 2px solid #30363d !important;
 }
 
-/* Filas alternas automáticas para tablas estándar (ej. .describe() o .head()) */
-.output table tr:nth-child(even),
-.output_area table tr:nth-child(even),
-.jp-OutputArea-output table tr:nth-child(even),
-div.output_subarea table tr:nth-child(even) {
+/* Filas alternas automáticas para optimizar la lectura de datos */
+.markdown-body table tr:nth-child(even),
+table tr:nth-child(even),
+.output table tr:nth-child(even) {
     background-color: #11151c !important;
 }
 
