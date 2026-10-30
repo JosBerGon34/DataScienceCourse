@@ -60,7 +60,7 @@ The curriculum is structured into progressive modules moving from foundational c
 
 ## 📖  Page Web Viewer:
 
-* [View full documentation](https://tu-usuario.github.io/tu-repo/)
-
+- [📋 Statements](Statements/index.md)
+- [✅ Corrections](Corrections/index.md)   
 
 *Maintained and refactored by [JosBerGon34](https://github.com/JosBerGon34).*
