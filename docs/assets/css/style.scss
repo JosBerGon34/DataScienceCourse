@@ -173,6 +173,38 @@ table th {
 table tr:nth-child(even) {
     background-color: #11151c !important;
 }
+/* ================================================================= *
+ * TABLAS EXCLUSIVAS DE OUTPUT CELLS (DataFrames de Pandas)           *
+ * ================================================================= */
+.output table,
+.output_area table,
+.jp-OutputArea-output table {
+    display: table !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    background-color: #161b22 !important;
+    border-radius: 8px;
+    padding: 4px;
+    border: 1px solid #30363d !important;
+    box-sizing: border-box !important;
+    margin-bottom: 16px !important;
+}
+
+.output table th, 
+.output table td,
+.output_area table th, 
+.output_area table td {
+    padding: 4px 8px !important;
+    box-sizing: border-box !important;
+    white-space: nowrap;
+}
+
+.output table th,
+.output_area table th {
+    background-color: #21262d !important;
+    color: #ffffff !important;
+}
 
 /* ================================================================= *
  * 7. BOTÓN DE RETORNO AL ÍNDICE                                    *
