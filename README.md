@@ -31,9 +31,9 @@ The curriculum is structured into progressive modules moving from foundational c
 | **🟢 MODULE 2:** | **Linear Algebra & Calculus for ML:** Matrix operations, vectors, and derivatives tailored for Machine Learning optimization algorithms."Git checkout Module2.1" |
 | **🟢 MODULE 3:** | **Git, GitHub & Project Management:** Collaborative workflows, version control best practices, and repository architecture."Git checkout Module3.1/Module3.2b/Module3.3" |
 | **🟢 MODULE 4:** | **Probability & Descriptive Statistics:** Sample metrics, distributions, and socio-economic variable analysis. "Git checkout Module4.1/Module4.2/Module6.2"(Pre-EDA)|
-| **🟢 MODULE 5:** | **NumPy & Pandas:** High-performance data ingestion, merging, and reshaping on Eurostat and ESS microdata datasets."Git checkout Module5.1" |
+| **🟢 MODULE 5:** | **NumPy & Pandas:** High-performance data ingestion, merging, and reshaping on Eurostat and ESS microdata datasets."Git checkout MOdule5.1" |
 | **🟢 MODULE 6:** | **Data Cleaning & Imputation:** Advanced missing data strategies (distinguishing survey non-response codes `77, 88, 99` from valid boundary responses)."Git checkout Module6.1" |
-| **🟢 MODULE 7:** | **Exploratory Data Analysis (EDA):** Pattern discovery, correlation analysis, and advanced visualizations (Matplotlib/Seaborn). |
+| **🟢 MODULE 7:** | **Exploratory Data Analysis (EDA):** Pattern discovery, correlation analysis, and advanced visualizations (Matplotlib/Seaborn)."Git checkout Module7.1" |
 | **🟢 MODULE 8:** | **Feature Engineering & Resampling:** Data transformations, structural clustering (K-Means), and properly calibrated SMOTE oversampling. |
 | **🟢 MODULE 9:** | **Predictive Modeling & Validation:** Regression/Classification models, hyperparameter tuning, and country-grouped cross-validation (`GroupKFold`). |
 | **🟢 MODULE 10:** | **Deployment & Web Application:** Integrating trained models into a Flask backend paired with a standalone HTML/JS client interface. |
@@ -54,7 +54,13 @@ The curriculum is structured into progressive modules moving from foundational c
 ## 📍 Related Repositories
 
 * 📂 **Original Repository (4GA.DataScience):** [JosBerGon34/4GA.DataScience](https://github.com/JosBerGon34/4GA.DataScience)
-* 📂 **Remodeled Repository (DataScienceCourse):** Current repository.
+* 📂 **Remodeled Repository (DataScienceCourse):** [JosBerGon34/DataScienceCourse](https://github.com/JosBerGon34/DataScienceCourse) Current repository.
 
 ---
+
+## 📖  Page Web Viewer:
+
+* [View full documentation](https://tu-usuario.github.io/tu-repo/)
+
+
 *Maintained and refactored by [JosBerGon34](https://github.com/JosBerGon34).*
