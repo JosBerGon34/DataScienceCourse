@@ -33,16 +33,41 @@
   margin-bottom: 16px;
 }
 
-/* 4. Cajas de Jupyter y Código completas */
-.markdown-body pre, 
-.jp-Cell, .jp-OutputArea, .jp-InputArea, .jp-RenderedText pre {
-  background-color: #0d1117 !important; /* Fondo más oscuro para código */
+/* 4. Bloques de código (.highlight es lo que nbconvert genera) */
+.markdown-body .highlight {
+  background-color: #0d1117 !important;
   border: 1px solid #30363d !important;
-  color: #adbac7 !important;
   border-radius: 8px;
   padding: 16px;
+  margin-bottom: 16px;
+  overflow-x: auto;
 }
 
+.markdown-body .highlight pre {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* 4b. Outputs de texto: <pre> sueltos que NO están dentro de .highlight */
+.markdown-body pre:not(.highlight pre) {
+  background-color: #0d1117 !important;
+  border: 1px solid #30363d !important;
+  border-radius: 8px;
+  padding: 16px;
+  color: #adbac7 !important;
+  overflow-x: auto;
+}   
+
+/* Outputs de texto (pre sueltos, sin .highlight) */
+.markdown-body pre:not(.highlight pre) {
+  background-color: #0d1117 !important;
+  border: 1px solid #30363d !important;
+  border-radius: 8px;
+  padding: 16px;
+  color: #adbac7 !important;
+}   
 /* 5. Código en línea (inline code) */
 .markdown-body code {
   background-color: #21262d !important;
@@ -108,21 +133,4 @@ th {
 .back-to-index:hover {
   background-color: #2ea043 !important;
   text-decoration: none;
-}
-
-/* Botón flotante automático para volver al índice */
-body::before {
-  content: "← Volver al Índice";
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: #238636 !important;
-  color: #ffffff !important;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 14px;
-  z-index: 9999;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  cursor: pointer;
 }
