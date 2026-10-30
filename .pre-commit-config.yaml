@@ -1,0 +1,25 @@
+# .pre-commit-config.yaml
+repos:
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.9.1
+    hooks:
+      - id: nbstripout
+
+  - repo: local
+    hooks:
+      - id: nbconvert-md
+        name: Generate Markdown in docs/corrections
+        entry: >
+          bash -c '
+            for nb in "$@"; do
+              base=$(basename "$nb" .ipynb)
+              jupyter nbconvert --to markdown --template lab "$nb" --output docs/corrections/
+              if [ -d "${base}_files" ]; then
+                mv "${base}_files" "docs/corrections/${base}_files"
+              fi
+            done
+          '
+        files: ^notebooks/.*\.ipynb$
+        exclude: ^notebooks/00_template\.ipynb$
+        language: system
+        pass_filenames: true
