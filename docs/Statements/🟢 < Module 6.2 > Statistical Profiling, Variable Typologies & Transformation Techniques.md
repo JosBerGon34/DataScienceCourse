@@ -1,3 +1,6 @@
+[← Volver al Índice General](../index.md){: .back-to-index }
+
+
 ##### 🎯 Context & Objectives
 
 Data cleaning alone is not enough to prepare a dataset for modeling; a Data Scientist must understand the mathematical and structural nature of every feature. In this module, you will formally classify variables into **continuous, discrete, multinomial ordinal, and categorical**, master the transformation techniques required to bridge them (e.g., discretizing continuous metrics into ordinal bins, factorizing ordinal Likert scales into categorical classes, or mapping structural features), **apply standardization and rescaling transformations to continuous variables, and implement outlier detection and treatment strategies to ensure robust modeling inputs**. You will also build basic distribution visualizations to inspect skewness, modality, variance, **and tail behavior** before feature engineering.

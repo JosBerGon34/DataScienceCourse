@@ -1,3 +1,5 @@
+[← Volver al Índice General](../index.md){: .back-to-index }
+
 ### 🎯 Context & Objectives
 
 To build reliable statistical models on socio-economic datasets (such as Eurostat macro indicators or ESS survey metrics), a Data Scientist must master probability spaces, joint and conditional probabilities, and continuous vs. discrete distributions.

@@ -1,3 +1,5 @@
+[← Volver al Índice General](../index.md){: .back-to-index }
+
 ### 💻 Tu Reto (Escribe el código en tu cuaderno local):
 
 1. **Creación del dataset sintético:** Crea una lista de diccionarios llamada `registros_desempleo` con 4 registros basados en Eurostat:

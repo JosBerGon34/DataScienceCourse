@@ -1,3 +1,5 @@
+[← Volver al Índice General](../index.md){: .back-to-index }
+
 ### 🟢 Fortalezas y Aciertos Técnicos (Lo que está perfecto)
 
 1. **Arquitectura de Datos Fluida (DuckDB + Pandas):** El uso de DuckDB con la directiva `ATTACH` a PostgreSQL es brillante. Es la forma más eficiente de realizar un muestreo estratificado directo desde la base de datos sin colapsar la memoria de Pandas con un volcado total. Tu sintaxis de concatenación posterior usando `groupby('cntry')` asegura un balanceo rápido y determinista.

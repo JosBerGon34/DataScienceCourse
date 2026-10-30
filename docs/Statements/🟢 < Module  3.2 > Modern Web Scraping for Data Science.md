@@ -1,3 +1,5 @@
+[← Volver al Índice General](../index.md){: .back-to-index }
+
 ### 🎯 Context & Objectives
 
 Traditional HTTP clients (like `requests`) often fail on modern web portals due to dynamic JavaScript rendering, client-side hydration, or basic bot detection mechanisms.

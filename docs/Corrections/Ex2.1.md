@@ -1,3 +1,5 @@
+[← Volver al Índice General](../index.md){: .back-to-index }
+
 ### 💻 2. Applied Theory: Reference Implementation in Python / NumPy
 
 ```

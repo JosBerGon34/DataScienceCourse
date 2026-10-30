@@ -1,4 +1,5 @@
 🟢 < Module 4.1 > Probability Fundamentals, Random Variables & Analytical CDF-PDF
+[← Volver al Índice General](../index.md){: .back-to-index }
 
 ### 🎯 Context & Objectives
 

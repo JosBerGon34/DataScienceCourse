@@ -1,3 +1,5 @@
+[← Volver al Índice General](../index.md){: .back-to-index }
+
 3. Applied Data Science Level (Country Metadata Extraction)
 Extract demographic/cultural metadata for European countries to enrich our core project pipeline:
 

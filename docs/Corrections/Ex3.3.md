@@ -1,3 +1,5 @@
+[← Volver al Índice General](../index.md){: .back-to-index }
+
 First of all lets install via bash terminal in the root of
 repository all the libraries or enviroment needs to connect
 to our practice database in lan mode:

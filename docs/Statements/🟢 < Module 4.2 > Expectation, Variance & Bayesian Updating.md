@@ -1,3 +1,5 @@
+[← Volver al Índice General](../index.md){: .back-to-index }
+
 #### 🎯 Context & Objectives
 
 In advanced socio-economic modeling, understanding central tendencies and dispersion is not enough; Data Scientists must quantify the expected value and variance of discrete and continuous random variables. Furthermore, when new data arrives (e.g., updated Eurostat macroeconomic releases or sequential European Social Survey waves), we must update our prior beliefs using **Bayesian Updating**.

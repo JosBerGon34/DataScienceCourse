@@ -1,3 +1,5 @@
+[← Volver al Índice General](../index.md){: .back-to-index }
+
 ## 📘 Lesson 2.1: Vector Spaces, Distance Metrics & Feature Projections
 
 ### 📐 1. Syntactic-Algebraic Foundation

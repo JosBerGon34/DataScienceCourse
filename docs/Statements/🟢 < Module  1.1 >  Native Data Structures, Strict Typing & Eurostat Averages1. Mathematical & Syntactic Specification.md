@@ -1,3 +1,5 @@
+[← Volver al Índice General](../index.md){: .back-to-index }
+
 Given a finite tabular dataset represented as a sequence $D = \{r_1, r_2, \dots, r_n\}$, where each record $r_i$ is a key-value mapping (dictionary):
 
 $$r_i = \{ k_1: v_{i,1}, k_2: v_{i,2}, \dots, k_m: v_{i,m} \}$$

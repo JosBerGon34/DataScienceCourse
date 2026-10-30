@@ -1,4 +1,5 @@
 🟢 < Module 6.2 > Statistical Profiling, Variable Typologies & Transformation Techniques(Pre-EDA)
+[← Volver al Índice General](../index.md){: .back-to-index }
 
 I considered to put this excercise after Data cleaning because is the previous step before making the EDA.
 I added it on Module 4 on Readme.md index because it belongs realisticly to that concept area.

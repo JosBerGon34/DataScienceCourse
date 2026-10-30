@@ -1,3 +1,5 @@
+[← Volver al Índice General](../index.md){: .back-to-index }
+
 ##### 🎯 Context & Objectives
 
 In survey data engineering (such as the European Social Survey), failing to distinguish between **systematic non-response codes** (`66`, `77`, `88`, `99`) and **legitimate extreme scale values** (`0` and `10`) introduces catastrophic bias into machine learning models. Treating a valid response of `0` ("No trust at all") as a missing value deletes extreme opinions and artificially compresses the variance towards the mean.

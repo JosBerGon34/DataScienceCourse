@@ -1,3 +1,5 @@
+[← Volver al Índice General](../index.md){: .back-to-index }
+
 ### 🔍 1. Auditoría Técnica de la Solución (`Ex2.1.md`)
 
 #### 🟢 Puntos Fuertes (Aciertos)

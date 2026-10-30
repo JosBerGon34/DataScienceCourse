@@ -1,3 +1,5 @@
+[← Volver al Índice General](../index.md){: .back-to-index }
+
 ### 🎯 Context & Objectives
 
 In Data Science, version control is essential not only for managing code changes but also for **auditing experiments**, isolating feature engineering developments, and preventing large or sensitive raw datasets (e.g., raw `.csv` files or database credentials) from polluting the repository.

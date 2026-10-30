@@ -1,4 +1,7 @@
 🟢 < Module 5.1 > NumPy & Pandas — High-Performance Data Ingestion, Merging & Reshaping
+[← Volver al Índice General](../index.md){: .back-to-index }
+
+
 #### 🎯 Context & Objectives
 
 In real-world data science pipelines, analytical data arrives fragmented across multiple sources (macroeconomic files from Eurostat, individual survey microdata waves from the European Social Survey, and scraped categorical attributes). To feed downstream machine learning models without introducing memory leaks or data corruption, a Data Scientist must master vectorized data manipulation, memory-efficient type casting, and relational merging using NumPy and Pandas.
