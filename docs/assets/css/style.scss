@@ -1,67 +1,43 @@
----
----
-@import "{{ site.theme }}";
-
-/* 1. Aprovechar el ancho del monitor (Celdas estiradas) */
-#main_content_wrap, .container, .main-content {
-  max-width: 1400px !important;
-  width: 95% !important;
+/* 1. Fondo principal para el contenedor del documento (Markdown Body) */
+.markdown-body {
+  background-color: transparent !important;
+  color: #c9d1d9 !important; /* Texto gris claro, estilo GitHub Dark */
 }
 
-/* 2. Mayor grosor y legibilidad en las fuentes */
-body, p, li, td, th, a {
-  font-weight: 500 !important; /* Aumenta el grosor base */
-  font-size: 16px !important;
-}
-
-/* 2.1 Color de enlaces de alto contraste para fondos oscuros */
-a {
-  color: #4da6ff !important;
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
-}
-
-/* 3. Comportamiento de DataFrames y Celdas de Código */
-table {
-  display: block !important;
-  overflow-x: auto !important; /* Slider interno solo para tablas gigantes */
-  width: 100% !important;
-}
-
-pre, code {
-  font-weight: 600 !important; /* Código aún más grueso */
+/* 2. Código en línea (inline code - lo que ahora ves blanco/gris claro con letras negras) */
+.markdown-body code {
+  background-color: #2d333b !important; /* Gris oscuro */
+  color: #adbac7 !important; /* Texto claro */
+  padding: 0.2em 0.4em;
   border-radius: 6px;
-}
-/* 4. Forzar el modo oscuro dentro de los bloques de Jupyter renderizados */
-.markdown-body, 
-.markdown-body div, 
-.jp-Cell, 
-.jp-OutputArea-output, 
-.highlight pre {
-  background-color: transparent !important; /* Quita el fondo blanco forzado */
-  color: #e0e0e0 !important;                /* Texto claro */
+  border: 1px solid #444c56 !important;
 }
 
-/* 5. Asegurar que las celdas de código (In/Out) sean oscuras pero diferenciadas */
-.markdown-body pre, 
-.jp-CodeCell .jp-InputArea-editor, 
-code {
-  background-color: #1e1e1e !important;     /* Gris muy oscuro para el código */
-  border: 1px solid #333 !important;
-  color: #d4d4d4 !important;
+/* 3. Bloques de código (Code blocks completos) */
+.markdown-body pre {
+  background-color: #22272e !important;
+  border: 1px solid #444c56 !important;
+  color: #adbac7 !important;
 }
 
-/* Forzar color oscuro en las tablas de Pandas renderizadas en MD */
-.markdown-body table {
+/* 4. Fondos de citas (Blockquotes - las cajas que engloban los textos en tu captura) */
+.markdown-body blockquote {
+  color: #8b949e !important;
   background-color: #1e1e1e !important;
-  color: #e0e0e0 !important;
+  border-left: 0.25em solid #3b3b3b !important;
+  padding: 0 1em;
 }
-.markdown-body table th {
-  background-color: #2d2d2d !important;
-  color: #ffffff !important;
+
+/* 5. Cajas extra generadas por nbconvert o utilidades de Jupyter (Prompts, Outputs) */
+.jp-Cell, .jp-OutputArea, .jp-InputArea {
+  background-color: transparent !important;
 }
-.markdown-body table tr:nth-child(even) {
-  background-color: #252525 !important;
+.jp-RenderedText pre {
+  background-color: transparent !important;
+  color: #c9d1d9 !important;
+}
+
+/* 6. Corregir textos de énfasis o negritas que queden oscuros */
+.markdown-body strong, .markdown-body b {
+  color: #c9d1d9 !important;
 }
