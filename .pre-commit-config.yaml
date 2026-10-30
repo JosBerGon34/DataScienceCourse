@@ -1,0 +1,19 @@
+# .pre-commit-config.yaml (sin nbstripout)
+repos:
+  - repo: local
+    hooks:
+      - id: nbconvert-md
+        name: Generate Markdown in docs/Corrections
+        entry: >
+          bash -c '
+            for nb in "$@"; do
+              base=$(basename "$nb" .ipynb)
+              jupyter nbconvert --to markdown "$nb" --output-dir docs/Corrections/
+              git add "docs/Corrections/${base}.md"
+              git add "docs/Corrections/${base}_files" 2>/dev/null || true
+            done
+          '
+        files: ^notebooks/.*\.ipynb$
+        exclude: ^notebooks/00_template\.ipynb$
+        language: system
+        pass_filenames: true
