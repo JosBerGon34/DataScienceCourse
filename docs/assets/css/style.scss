@@ -3,27 +3,30 @@
 @import "{{ site.theme }}";
 
 /* ================================================================= *
- * 1. CONTENEDOR GENERAL Y ANCHO DE PÁGINA (1400px)                 *
+ * 1. ANCHO DE PÁGINA Y CONTENEDORES PRINCIPALES DE MIDNIGHT          *
  * ================================================================= */
 #main_content_wrap, 
 .container, 
 .main-content,
 #main_content,
-body {
+body,
+.inner {
     max-width: 1400px !important;
     width: 95% !important;
     margin: 0 auto !important;
+    box-sizing: border-box !important;
 }
 
 /* ================================================================= *
- * 2. MODO OSCURO GLOBAL Y CONTENEDOR MARKDOWN                      *
+ * 2. MODO OSCURO GLOBAL (Elimina cualquier fondo o residuo blanco)  *
  * ================================================================= */
-html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #main_content {
+html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #main_content, .inner {
     background-color: #0d1117 !important;
     color: #c9d1d9 !important;
 }
 
-.markdown-body {
+.markdown-body, 
+.wrapper {
     background-color: transparent !important;
     color: #c9d1d9 !important;
     font-size: 16px !important;
@@ -32,16 +35,16 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #mai
 }
 
 /* ================================================================= *
- * 3. TARJETAS DE TEXTO (Aprovechan el ancho completo)               *
+ * 3. TARJETAS DE TEXTO Y BLOQUES DEL MARKDOWN                       *
  * ================================================================= */
-.markdown-body > p,
-.markdown-body > ul,
-.markdown-body > ol,
-.markdown-body > h1,
-.markdown-body > h2,
-.markdown-body > h3,
-.markdown-body > h4,
-.markdown-body blockquote {
+#main_content > p,
+#main_content > ul,
+#main_content > ol,
+#main_content > h1,
+#main_content > h2,
+#main_content > h3,
+#main_content > h4,
+#main_content blockquote {
     background-color: #161b22 !important;
     border: 1px solid #30363d !important;
     border-radius: 8px;
@@ -53,11 +56,13 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #mai
 }
 
 /* ================================================================= *
- * 4. CELDAS DE CÓDIGO Y OUTPUTS (ANCHO TOTAL Y SIN SLIDERS INÚTILES) *
+ * 4. CELDAS DE CÓDIGO Y HIGHLIGHTER-ROUGE (ANCHO TOTAL REAL)        *
  * ================================================================= */
-.markdown-body .highlight,
-.markdown-body pre,
-.markdown-body pre:not(.highlight pre) {
+div.highlighter-rouge,
+.highlighter-rouge,
+.highlight,
+pre,
+pre:not(.highlight pre) {
     background-color: #0d1117 !important;
     border: 1px solid #30363d !important;
     border-radius: 8px !important;
@@ -70,7 +75,17 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #mai
     color: #c9d1d9 !important;
 }
 
-.markdown-body .highlight pre {
+div.highlighter-rouge div.highlight,
+.highlighter-rouge .highlight {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.highlight pre {
     background-color: transparent !important;
     border: none !important;
     padding: 0 !important;
@@ -79,7 +94,7 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #mai
 }
 
 /* Código en línea (inline code) */
-.markdown-body code {
+code {
     background-color: #21262d !important;
     color: #79c0ff !important;
     padding: 0.2em 0.4em;
@@ -88,10 +103,10 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #mai
 }
 
 /* ================================================================= *
- * 5. HIGHLIGHTING DE CÓDIGO (Comentarios y colores nítidos)         *
+ * 5. HIGHLIGHTING DE CÓDIGO (Colores y Comentarios Nítidos)         *
  * ================================================================= */
 .highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr {
-    color: #7ee787 !important; /* Palabras clave en verde */
+    color: #7ee787 !important; /* Verde brillante para palabras clave */
     font-weight: bold;
 }
 .highlight .n, .highlight .nx {
@@ -104,7 +119,7 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #mai
     color: #79c0ff !important;
 }
 
-/* Comentarios en celdas de código (Gris claro y legible en cursiva) */
+/* Comentarios en celdas de código (Gris claro legible en cursiva) */
 .highlight .c, .highlight .c1, .highlight .cm, .highlight span.c, .highlight span.c1, .highlight span.cm {
     color: #8b949e !important; 
     font-style: italic !important;
