@@ -147,8 +147,8 @@ code.highlighter-rouge,
 .jp-OutputArea-output table,
 div.output_subarea table {
     display: table !important;
-    width: 100% !important;
-    max-width: 100% !important;
+    width: auto !important;          /* Permite que la tabla se ajuste al contenido sin estirarse a la fuerza al 100% */
+    max-width: 100% !important;     /* Respeta estrictamente los límites del contenedor */
     overflow-x: auto !important;
     background-color: #161b22 !important;
     border-radius: 8px;
@@ -158,7 +158,7 @@ div.output_subarea table {
     margin-bottom: 16px !important;
 }
 
-/* Celdas unitarias compactas y proporcionales para outputs */
+/* Celdas unitarias compactas */
 .output table th, 
 .output table td,
 .output_area table th, 
