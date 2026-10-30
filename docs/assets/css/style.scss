@@ -3,7 +3,7 @@
 @import "{{ site.theme }}";
 
 /* ================================================================= *
- * 1. ANCHO DE PÁGINA TOTAL Y CONTENEDORES DE MIDNIGHT (1400px Max)  *
+ * 1. LIBERACIÓN DE ANCHO: Contenedores, Wrappers y <section> de 1400px *
  * ================================================================= */
 #main_content_wrap, 
 .container, 
@@ -11,7 +11,8 @@
 #main_content,
 body,
 .inner,
-.wrapper {
+.wrapper,
+section {
     max-width: 1400px !important;
     width: 95% !important;
     margin: 0 auto !important;
@@ -21,7 +22,7 @@ body,
 /* ================================================================= *
  * 2. MODO OSCURO GLOBAL Y LIMPIEZA DE FONDOS                        *
  * ================================================================= */
-html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #main_content, .inner, .wrapper {
+html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #main_content, .inner, .wrapper, section {
     background-color: #0d1117 !important;
     color: #c9d1d9 !important;
 }
@@ -112,7 +113,7 @@ code.highlighter-rouge,
  * 5. HIGHLIGHTING DE CÓDIGO (Colores y Comentarios Nítidos)         *
  * ================================================================= */
 .highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr {
-    color: #7ee787 !important; /* Verde brillante para palabras clave */
+    color: #7ee787 !important; /* Palabras clave en verde brillante */
     font-weight: bold;
 }
 .highlight .n, .highlight .nx {
