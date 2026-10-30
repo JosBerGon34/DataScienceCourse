@@ -4,40 +4,58 @@
   color: #c9d1d9 !important; /* Texto gris claro, estilo GitHub Dark */
 }
 
-/* 2. Código en línea (inline code - lo que ahora ves blanco/gris claro con letras negras) */
+/* 2. Código en línea (inline code) */
 .markdown-body code {
-  background-color: #2d333b !important; /* Gris oscuro */
-  color: #adbac7 !important; /* Texto claro */
+  background-color: #2d333b !important;
+  color: #adbac7 !important;
   padding: 0.2em 0.4em;
   border-radius: 6px;
   border: 1px solid #444c56 !important;
 }
 
-/* 3. Bloques de código (Code blocks completos) */
-.markdown-body pre {
+/* 3. Bloques de código completos y Cajas de Jupyter */
+.markdown-body pre, 
+.jp-Cell, .jp-OutputArea, .jp-InputArea, .jp-RenderedText pre {
   background-color: #22272e !important;
   border: 1px solid #444c56 !important;
   color: #adbac7 !important;
+  border-radius: 6px;
 }
 
-/* 4. Fondos de citas (Blockquotes - las cajas que engloban los textos en tu captura) */
+/* =========================================================
+   4. ROUGE SYNTAX HIGHLIGHTING (Estilo IDE / Jupyter Dark)
+   ========================================================= */
+.highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr {
+  color: #85e89d !important; /* Verde brillante para Keywords: import, from, as, def, class */
+  font-weight: bold;
+}
+.highlight .n, .highlight .nx {
+  color: #c9d1d9 !important; /* Variables estándar en gris claro */
+}
+.highlight .s, .highlight .s1, .highlight .s2 {
+  color: #96d0ff !important; /* Strings en azul claro */
+}
+.highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo, .highlight .m {
+  color: #79c0ff !important; /* Números en azul brillante */
+}
+.highlight .c, .highlight .c1, .highlight .cm {
+  color: #8b949e !important; /* Comentarios en gris verdoso apagado */
+  font-style: italic;
+}
+.highlight .ow, .highlight .o {
+  color: #f97583 !important; /* Operadores lógicos y matemáticos en rojizo */
+}
+.highlight .nb {
+  color: #d2a8ff !important; /* Funciones built-in (print, len) en morado */
+}
+
+/* 5. Cajas de citas y correcciones generales */
 .markdown-body blockquote {
   color: #8b949e !important;
   background-color: #1e1e1e !important;
   border-left: 0.25em solid #3b3b3b !important;
   padding: 0 1em;
 }
-
-/* 5. Cajas extra generadas por nbconvert o utilidades de Jupyter (Prompts, Outputs) */
-.jp-Cell, .jp-OutputArea, .jp-InputArea {
-  background-color: transparent !important;
-}
-.jp-RenderedText pre {
-  background-color: transparent !important;
-  color: #c9d1d9 !important;
-}
-
-/* 6. Corregir textos de énfasis o negritas que queden oscuros */
 .markdown-body strong, .markdown-body b {
   color: #c9d1d9 !important;
 }
