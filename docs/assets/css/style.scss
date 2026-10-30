@@ -34,3 +34,34 @@ pre, code {
   font-weight: 600 !important; /* Código aún más grueso */
   border-radius: 6px;
 }
+/* 4. Forzar el modo oscuro dentro de los bloques de Jupyter renderizados */
+.markdown-body, 
+.markdown-body div, 
+.jp-Cell, 
+.jp-OutputArea-output, 
+.highlight pre {
+  background-color: transparent !important; /* Quita el fondo blanco forzado */
+  color: #e0e0e0 !important;                /* Texto claro */
+}
+
+/* 5. Asegurar que las celdas de código (In/Out) sean oscuras pero diferenciadas */
+.markdown-body pre, 
+.jp-CodeCell .jp-InputArea-editor, 
+code {
+  background-color: #1e1e1e !important;     /* Gris muy oscuro para el código */
+  border: 1px solid #333 !important;
+  color: #d4d4d4 !important;
+}
+
+/* Forzar color oscuro en las tablas de Pandas renderizadas en MD */
+.markdown-body table {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+}
+.markdown-body table th {
+  background-color: #2d2d2d !important;
+  color: #ffffff !important;
+}
+.markdown-body table tr:nth-child(even) {
+  background-color: #252525 !important;
+}

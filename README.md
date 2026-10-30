@@ -58,9 +58,9 @@ The curriculum is structured into progressive modules moving from foundational c
 
 ---
 
-## 📖  Page Web Viewer:
+## 📖  Datascience Course Web Viewer:
 
-* [View full documentation](https://tu-usuario.github.io/tu-repo/)
+* [🗺️ Course Navigator Index](https://josbergon34.github.io/DataScienceCourse/)
 
 
 *Maintained and refactored by [JosBerGon34](https://github.com/JosBerGon34).*
