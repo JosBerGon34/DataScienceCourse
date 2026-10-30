@@ -111,3 +111,4 @@ configsql.cfg
 .env
 configsql.cfg
 *.cfg
+*.yaml
