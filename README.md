@@ -54,7 +54,7 @@ The curriculum is structured into progressive modules moving from foundational c
 ## 📍 Related Repositories
 
 * 📂 **Original Repository (4GA.DataScience):** [JosBerGon34/4GA.DataScience](https://github.com/JosBerGon34/4GA.DataScience)
-* 📂 **Remodeled Repository (DataScienceCourse):** Current repository.
+* 📂 **Remodeled Repository (DataScienceCourse):** [JosBerGon34/DataScienceCourse](https://github.com/JosBerGon34/DataScienceCourse) Current repository.
 
 ---
 *Maintained and refactored by [JosBerGon34](https://github.com/JosBerGon34).*
