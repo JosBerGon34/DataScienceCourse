@@ -1,136 +1,163 @@
----
----
 @import "{{ site.theme }}";
 
-/* 1. Aprovechar el ancho del monitor y centrar contenedor */
-#main_content_wrap, .container, .main-content {
-  max-width: 1400px !important;
-  width: 95% !important;
-  margin: 0 auto !important;
+/* ================================================================= *
+ * 1. ANCHO DE PÁGINA Y CONTENEDOR PRINCIPAL                         *
+ * ================================================================= */
+#main_content_wrap, 
+.container, 
+.main-content,
+#main_content {
+    max-width: 1600px !important;
+    width: 96% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
 }
 
-/* 2. Fondo general y legibilidad de fuentes */
-.markdown-body {
-  background-color: transparent !important;
-  color: #c9d1d9 !important;
-  font-weight: 500 !important;
-  font-size: 16px !important;
+/* ================================================================= *
+ * 2. FONDO GENERAL Y TIPOGRAFÍA GLOBAL (MODO OSCURO GITHUB)         *
+ * ================================================================= */
+body, .markdown-body {
+    background-color: #0d1117 !important;
+    color: #c9d1d9 !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
 }
 
-/* 3. CAPA INTERMEDIA: Tarjetas de contenido (Separa texto/celdas del fondo oscuro) */
-.markdown-body > p, 
-.markdown-body > ul, 
-.markdown-body > ol, 
-.markdown-body > h1, 
-.markdown-body > h2, 
-.markdown-body > h3, 
+/* Forzar que las tarjetas o bloques de texto tengan el tono de tarjeta GitHub */
+.markdown-body > p,
+.markdown-body > ul,
+.markdown-body > ol,
+.markdown-body > h1,
+.markdown-body > h2,
+.markdown-body > h3,
 .markdown-body > h4,
 .markdown-body blockquote {
-  background-color: #161b22 !important; /* Capa de tarjeta sutil */
-  border: 1px solid #30363d !important;
-  border-radius: 8px;
-  padding: 16px 20px;
-  margin-bottom: 16px;
+    background-color: #161b22 !important;
+    border: 1px solid #30363d !important;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    color: #c9d1d9 !important;
 }
 
-/* 4. Bloques de código (.highlight es lo que nbconvert genera) */
-.markdown-body .highlight {
-  background-color: #0d1117 !important;
-  border: 1px solid #30363d !important;
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 16px;
-  overflow-x: auto;
+/* ================================================================= *
+ * 3. BLOQUES DE CÓDIGO Y CELDAS (PROBLEMA A RESUELTO)               *
+ * ================================================================= */
+.markdown-body .highlight,
+.markdown-body pre,
+pre:not(.highlight pre) {
+    background-color: #0d1117 !important;
+    border: 1px solid #30363d !important;
+    border-radius: 8px !important;
+    padding: 16px !important;
+    margin-bottom: 16px !important;
+    color: #e6edf3 !important; /* Texto perfectamente legible */
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 .markdown-body .highlight pre {
-  background-color: transparent !important;
-  border: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    color: #e6edf3 !important;
 }
 
-/* 4b. Outputs de texto: <pre> sueltos que NO están dentro de .highlight */
-.markdown-body pre:not(.highlight pre) {
-  background-color: #0d1117 !important;
-  border: 1px solid #30363d !important;
-  border-radius: 8px;
-  padding: 16px;
-  color: #adbac7 !important;
-  overflow-x: auto;
-}   
-
-/* Outputs de texto (pre sueltos, sin .highlight) */
-.markdown-body pre:not(.highlight pre) {
-  background-color: #0d1117 !important;
-  border: 1px solid #30363d !important;
-  border-radius: 8px;
-  padding: 16px;
-  color: #adbac7 !important;
-}   
-/* 5. Código en línea (inline code) */
+/* Código en línea (inline code) */
 .markdown-body code {
-  background-color: #21262d !important;
-  color: #79c0ff !important;
-  padding: 0.2em 0.4em;
-  border-radius: 6px;
-  border: 1px solid #30363d !important;
+    background-color: rgba(110, 118, 129, 0.4) !important;
+    color: #79c0ff !important;
+    padding: 0.2em 0.4em;
+    border-radius: 6px;
+    border: 1px solid #30363d !important;
+    font-size: 85% !important;
 }
 
-/* 6. ROUGE SYNTAX HIGHLIGHTING (Estilo IDE / Jupyter Dark verde/azul) */
+/* ================================================================= *
+ * 4. ROUGE SYNTAX HIGHLIGHTING (COLORES DE CÓDIGO CLAROS)           *
+ * ================================================================= */
 .highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr {
-  color: #7ee787 !important; /* Verde brillante para import, from, as, def */
-  font-weight: bold;
+    color: #ff7b72 !important; /* Palabras clave */
+    font-weight: bold;
 }
 .highlight .n, .highlight .nx {
-  color: #c9d1d9 !important;
+    color: #e6edf3 !important;
 }
 .highlight .s, .highlight .s1, .highlight .s2 {
-  color: #a5d6ff !important; /* Strings en azul claro */
+    color: #a5d6ff !important; /* Strings en azul claro */
 }
 .highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo, .highlight .m {
-  color: #79c0ff !important;
+    color: #79c0ff !important;
 }
 .highlight .c, .highlight .c1, .highlight .cm {
-  color: #8b949e !important;
-  font-style: italic;
+    color: #8b949e !important; /* Comentarios */
+    font-style: italic;
 }
 .highlight .ow, .highlight .o {
-  color: #ff7b72 !important;
+    color: #ff7b72 !important;
 }
 .highlight .nb {
-  color: #d2a8ff !important; /* Funciones built-in (print, len) en morado */
+    color: #d2a8ff !important; /* Funciones built-in */
 }
 
-/* 7. Tablas de Pandas estiradas con scroll interno */
+/* ================================================================= *
+ * 5. TABLAS DE PANDAS Y ANCHO EXTENDIDO (PROBLEMA C RESUELTO)       *
+ * ================================================================= */
 table {
-  display: block !important;
-  overflow-x: auto !important;
-  width: 100% !important;
-  background-color: #161b22 !important;
-  border-radius: 8px;
-  padding: 8px;
-  border: 1px solid #30363d !important;
-}
-th {
-  background-color: #21262d !important;
-  color: #ffffff !important;
+    display: table !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    background-color: #161b22 !important;
+    border-radius: 8px;
+    border-collapse: collapse !important;
+    margin-bottom: 20px !important;
+    border: 1px solid #30363d !important;
 }
 
-/* 8. Estilo para el Botón de Retorno al Índice (Flotante o Superior) */
-.back-to-index {
-  display: inline-block;
-  background-color: #238636 !important; /* Verde GitHub */
-  color: #ffffff !important;
-  padding: 10px 18px;
-  border-radius: 6px;
-  font-weight: 600;
-  text-decoration: none;
-  margin-bottom: 20px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
-  transition: background-color 0.2s;
+th, td {
+    padding: 10px 14px !important;
+    border: 1px solid #30363d !important;
+    color: #c9d1d9 !important;
 }
+
+th {
+    background-color: hwb(212 13% 78%) !important;
+    color: #ffffff !important;
+}
+
+tr:nth-child(even) {
+    background-color: #11151c !important;
+}
+
+/* Asegurar que las imágenes y outputs aprovechen el ancho */
+.markdown-body img {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 6px;
+    display: block;
+    margin: 10px auto;
+}
+
+/* ================================================================= *
+ * 6. BOTÓN DE RETORNO AL ÍNDICE                                    *
+ * ================================================================= */
+.back-to-index {
+    display: inline-block;
+    background-color: #238636 !important;
+    color: #ffffff !important;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    transition: background-color 0.2s;
+}
+
 .back-to-index:hover {
-  background-color: #2ea043 !important;
-  text-decoration: none;
+    background-color: #2ea043 !important;
+    text-decoration: none;
 }
