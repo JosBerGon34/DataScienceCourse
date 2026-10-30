@@ -1,8 +1,10 @@
-theme: jekyll-theme-primer
+remote_theme: pages-themes/midnight@v0.2.0
+plugins:
+  - jekyll-remote-theme
+
 title: "JosBerGon34 Data Science Portfolio"
 description: "A comprehensive curriculum redesign and applied data science projects."
 
-# Evita que Jekyll pierda tiempo procesando carpetas que no son parte de la web
 exclude:
   - .venv/
   - node_modules/

@@ -1,7 +1,9 @@
+---
+---
 @import "{{ site.theme }}";
 
 /* ================================================================= *
- * 1. ANCHO DE PÁGINA Y CONTENEDOR PRINCIPAL                         *
+ * 1. ANCHO DE PÁGINA Y CONTENEDOR PRINCIPAL (Evita sliders y estira) *
  * ================================================================= */
 #main_content_wrap, 
 .container, 
@@ -14,9 +16,9 @@ body {
 }
 
 /* ================================================================= *
- * 2. FORZAR MODO OSCURO GLOBAL (ELIMINA EL FONDO BLANCO)             *
+ * 2. FORZAR MODO OSCURO GLOBAL (Elimina cualquier fondo blanco)      *
  * ================================================================= */
-html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap {
+html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #main_content {
     background-color: #0d1117 !important;
     color: #c9d1d9 !important;
 }
@@ -24,12 +26,11 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap {
 .markdown-body {
     background-color: transparent !important;
     color: #c9d1d9 !important;
-    font-weight: 500 !important;
     font-size: 16px !important;
 }
 
 /* ================================================================= *
- * 3. CAPA INTERMEDIA: Tarjetas de contenido                         *
+ * 3. TARJETAS DE CONTENIDO (Bloques de texto del Markdown)           *
  * ================================================================= */
 .markdown-body > p,
 .markdown-body > ul,
@@ -48,7 +49,7 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap {
 }
 
 /* ================================================================= *
- * 4. BLOQUES DE CÓDIGO Y COMENTARIOS (PROBLEMA DE GRISES RESUELTO)   *
+ * 4. CELDAS DE CÓDIGO Y OUTPUTS DE NBそこに                      *
  * ================================================================= */
 .markdown-body .highlight,
 .markdown-body pre,
@@ -69,7 +70,7 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap {
     margin: 0 !important;
 }
 
-/* Código en línea (inline code) */
+/* Código en línea */
 .markdown-body code {
     background-color: #21262d !important;
     color: #79c0ff !important;
@@ -79,10 +80,10 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap {
 }
 
 /* ================================================================= *
- * 5. ROUGE SYNTAX HIGHLIGHTING (ASEGURAR COMENTARIOS CLAROS)        *
+ * 5. HIGHLIGHTING DE CÓDIGO (Solución definitiva para comentarios)  *
  * ================================================================= */
 .highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr {
-    color: #7ee787 !important; /* Verde brillante para import, def, etc. */
+    color: #7ee787 !important; /* Palabras clave en verde */
     font-weight: bold;
 }
 .highlight .n, .highlight .nx {
@@ -94,20 +95,22 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap {
 .highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo, .highlight .m {
     color: #79c0ff !important;
 }
-/* Comentarios: Se cambia a un gris claro y nítido (#8b949e o #96a3b0) con buena visibilidad */
-.highlight .c, .highlight .c1, .highlight .cm {
-    color: #96a3b0 !important; 
+
+/* Comentarios en celdas de código (Gris legible y nítido) */
+.highlight .c, .highlight .c1, .highlight .cm, .highlight span.c, .highlight span.c1, .highlight span.cm {
+    color: #8b949e !important; 
     font-style: italic !important;
 }
+
 .highlight .ow, .highlight .o {
     color: #ff7b72 !important;
 }
 .highlight .nb {
-    color: #d2a8ff !important; /* Funciones built-in */
+    color: #d2a8ff !important;
 }
 
 /* ================================================================= *
- * 6. TABLAS DE PANDAS ESTIRADAS CON SCROLL INTERNO                  *
+ * 6. TABLAS DE PANDAS AMPLIADAS Y ADAPTADAS                         *
  * ================================================================= */
 table {
     display: block !important;
@@ -129,11 +132,11 @@ td {
 }
 
 /* ================================================================= *
- * 7. ESTILO PARA EL BOTÓN DE RETORNO AL ÍNDICE                      *
+ * 7. BOTÓN DE RETORNO AL ÍNDICE                                    *
  * ================================================================= */
 .back-to-index {
     display: inline-block;
-    background-color: #238636 !important; /* Verde GitHub */
+    background-color: #238636 !important;
     color: #ffffff !important;
     padding: 10px 18px;
     border-radius: 6px;
