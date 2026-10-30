@@ -3,7 +3,7 @@
 @import "{{ site.theme }}";
 
 /* ================================================================= *
- * 1. ANCHO DE PÁGINA Y CONTENEDOR PRINCIPAL (Evita sliders y estira) *
+ * 1. CONTENEDOR GENERAL Y ANCHO DE PÁGINA (1400px)                 *
  * ================================================================= */
 #main_content_wrap, 
 .container, 
@@ -16,7 +16,7 @@ body {
 }
 
 /* ================================================================= *
- * 2. FORZAR MODO OSCURO GLOBAL (Elimina cualquier fondo blanco)      *
+ * 2. MODO OSCURO GLOBAL Y CONTENEDOR MARKDOWN                      *
  * ================================================================= */
 html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #main_content {
     background-color: #0d1117 !important;
@@ -27,10 +27,12 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #mai
     background-color: transparent !important;
     color: #c9d1d9 !important;
     font-size: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
 }
 
 /* ================================================================= *
- * 3. TARJETAS DE CONTENIDO (Bloques de texto del Markdown)           *
+ * 3. TARJETAS DE TEXTO (Aprovechan el ancho completo)               *
  * ================================================================= */
 .markdown-body > p,
 .markdown-body > ul,
@@ -46,10 +48,12 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #mai
     padding: 16px 20px;
     margin-bottom: 16px;
     color: #c9d1d9 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 /* ================================================================= *
- * 4. CELDAS DE CÓDIGO Y OUTPUTS DE NBそこに                      *
+ * 4. CELDAS DE CÓDIGO Y OUTPUTS (ANCHO TOTAL Y SIN SLIDERS INÚTILES) *
  * ================================================================= */
 .markdown-body .highlight,
 .markdown-body pre,
@@ -59,6 +63,9 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #mai
     border-radius: 8px !important;
     padding: 16px !important;
     margin-bottom: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
     overflow-x: auto !important;
     color: #c9d1d9 !important;
 }
@@ -68,9 +75,10 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #mai
     border: none !important;
     padding: 0 !important;
     margin: 0 !important;
+    width: 100% !important;
 }
 
-/* Código en línea */
+/* Código en línea (inline code) */
 .markdown-body code {
     background-color: #21262d !important;
     color: #79c0ff !important;
@@ -80,7 +88,7 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #mai
 }
 
 /* ================================================================= *
- * 5. HIGHLIGHTING DE CÓDIGO (Solución definitiva para comentarios)  *
+ * 5. HIGHLIGHTING DE CÓDIGO (Comentarios y colores nítidos)         *
  * ================================================================= */
 .highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr {
     color: #7ee787 !important; /* Palabras clave en verde */
@@ -96,7 +104,7 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #mai
     color: #79c0ff !important;
 }
 
-/* Comentarios en celdas de código (Gris legible y nítido) */
+/* Comentarios en celdas de código (Gris claro y legible en cursiva) */
 .highlight .c, .highlight .c1, .highlight .cm, .highlight span.c, .highlight span.c1, .highlight span.cm {
     color: #8b949e !important; 
     font-style: italic !important;
@@ -110,16 +118,18 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #mai
 }
 
 /* ================================================================= *
- * 6. TABLAS DE PANDAS AMPLIADAS Y ADAPTADAS                         *
+ * 6. TABLAS DE PANDAS AMPLIADAS AL 100%                            *
  * ================================================================= */
 table {
-    display: block !important;
-    overflow-x: auto !important;
+    display: table !important;
     width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
     background-color: #161b22 !important;
     border-radius: 8px;
     padding: 8px;
     border: 1px solid #30363d !important;
+    box-sizing: border-box !important;
 } 
 
 th {
