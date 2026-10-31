@@ -3,10 +3,9 @@
  * CONTENEDOR FLOTANTE UNIFICADO DENTRO DE LA ZONA DE TRABAJO (1400px) *
  * ================================================================= */
 
-/* Contenedor que alinea ambos botones dentro del ancho máximo de trabajo */
 #header nav {
     position: relative !important;
-    max-width: 1400px !important;
+    max-width: min(1400px, 95vw) !important;
     width: 95% !important;
     margin: 0 auto !important;
 }
@@ -31,8 +30,7 @@
     background-color: #21262d !important;
     color: #c9d1d9 !important;
     border: 1px solid #30363d !important;
-    /* Calculamos la posición respecto al borde derecho de la pantalla considerando el ancho centrado de 1400px */
-    right: calc((100vw - 1400px) / 2 + 160px) !important;
+    right: calc((100vw - min(1400px, 95vw)) / 2 + 160px) !important;
 }
 
 #btn-index-course:hover {
@@ -49,7 +47,7 @@ a.btn.btn-github-fixed {
     background-color: #238636 !important;
     color: #ffffff !important;
     border: 1px solid rgba(240, 246, 252, 0.1) !important;
-    right: calc((100vw - 1400px) / 2 + 20px) !important;
+    right: calc((100vw - min(1400px, 95vw)) / 2 + 20px) !important;
 }
 
 #header .fork a:hover, 
@@ -60,7 +58,7 @@ a.btn.btn-github-fixed:hover {
     transform: translateY(-1px);
 }
 
-/* Ajuste dinámico para pantallas más estrechas donde 1400px supera el ancho de pantalla */
+/* Ajuste dinámico para pantallas más estrechas */
 @media (max-width: 1440px) {
     #btn-index-course {
         right: 175px !important;
