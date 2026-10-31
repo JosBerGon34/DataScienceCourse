@@ -1,0 +1,34 @@
+<script>
+(function () {
+  function configureHeaderNavigation() {
+    const navList = document.querySelector('#header nav ul');
+    const githubItem = document.querySelector('#header nav ul .fork');
+    const githubLink = document.querySelector('#header .fork a');
+
+    // Add the course index link once, immediately before the GitHub link.
+    if (navList && githubItem && !document.querySelector('#btn-index-course')) {
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+
+      link.href = 'https://josbergon34.github.io/DataScienceCourse/';
+      link.id = 'btn-index-course';
+      link.className = 'floating-nav-btn';
+      link.textContent = '🏠 Index Course';
+
+      item.appendChild(link);
+      navList.insertBefore(item, githubItem);
+    }
+
+    // Reuse the theme's original GitHub link; do not create a duplicate.
+    if (githubLink) {
+      githubLink.classList.add('floating-nav-btn', 'btn-github-fixed');
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', configureHeaderNavigation, { once: true });
+  } else {
+    configureHeaderNavigation();
+  }
+})();
+</script>

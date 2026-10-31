@@ -1,0 +1,361 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+/* =====================================================================
+   1. SISTEMA DE ANCHURA
+   1400px es el máximo del contenido, no el ancho del viewport.
+   En pantallas pequeñas el contenedor ocupa el 95% disponible.
+   ===================================================================== */
+:root {
+    --site-content-max: 1400px;
+    --site-content-width: 95%;
+    --site-background: #0d1117;
+    --site-text: #c9d1d9;
+    --site-heading: #f0f6fc;
+    --site-border: #30363d;
+    --site-panel: #161b22;
+    --site-green: #238636;
+    --site-green-hover: #2ea043;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    background-color: var(--site-background) !important;
+    color: var(--site-text) !important;
+}
+
+/* No limitar body, section ni wrappers globales a 1400px.
+   Solo se limita el contenido interior de cada zona del tema. */
+#header_wrap .inner,
+#main_content_wrap .inner,
+#footer_wrap .inner {
+    width: var(--site-content-width) !important;
+    max-width: var(--site-content-max) !important;
+    min-width: 0;
+    margin-inline: auto !important;
+    padding-inline: 0 !important;
+}
+
+#header_wrap,
+#main_content_wrap,
+#footer_wrap {
+    width: 100%;
+    min-width: 0;
+    background-color: var(--site-background) !important;
+    color: var(--site-text) !important;
+}
+
+/* =====================================================================
+   2. CABECERA Y NAVEGACIÓN
+   ===================================================================== */
+#header_wrap {
+    position: relative;
+    z-index: 10;
+    padding: 2rem 0 !important;
+    background: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+#header_wrap .inner,
+#header {
+    background: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+#header {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0;
+    height: auto !important;
+    margin: 0 auto !important;
+}
+
+#header nav {
+    position: relative;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.floating-nav-btn {
+    position: fixed !important;
+    top: 20px !important;
+    z-index: 9999 !important;
+    display: inline-block !important;
+    max-width: calc(50vw - 18px);
+    padding: 10px 14px !important;
+    border: 1px solid rgba(240, 246, 252, 0.12) !important;
+    border-radius: 6px !important;
+    color: #ffffff !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    text-align: center;
+    text-decoration: none !important;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
+    transition: background-color 0.2s ease, transform 0.1s ease !important;
+}
+
+/* Index Course: a la izquierda del botón GitHub en escritorio. */
+#btn-index-course {
+    right: calc((100vw - min(var(--site-content-max), 95vw)) / 2 + 160px) !important;
+    background-color: #21262d !important;
+    color: var(--site-text) !important;
+    border-color: var(--site-border) !important;
+}
+
+#btn-index-course:hover {
+    background-color: #30363d !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+}
+
+/* Solo se estiliza el enlace GitHub original, no todos los .btn del sitio. */
+#header .fork a.btn-github-fixed {
+    right: calc((100vw - min(var(--site-content-max), 95vw)) / 2 + 20px) !important;
+    background-color: var(--site-green) !important;
+}
+
+#header .fork a.btn-github-fixed:hover {
+    background-color: var(--site-green-hover) !important;
+    transform: translateY(-1px);
+}
+
+/* En móvil se anclan a extremos opuestos para evitar solapamientos
+   causados por cálculos de posición basados en el ancho de escritorio. */
+@media (max-width: 600px) {
+    #header_wrap {
+        padding-top: 3.5rem !important;
+    }
+
+    .floating-nav-btn {
+        top: 10px !important;
+        max-width: calc(50vw - 18px);
+        padding: 8px 9px !important;
+        font-size: 11px !important;
+    }
+
+    #btn-index-course {
+        right: auto !important;
+        left: 12px !important;
+    }
+
+    #header .fork a.btn-github-fixed {
+        right: 12px !important;
+        left: auto !important;
+    }
+}
+
+/* =====================================================================
+   3. CONTENIDO MARKDOWN Y ELEMENTOS HIJOS
+   ===================================================================== */
+#main_content_wrap,
+#main_content,
+.markdown-body {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    background-color: transparent !important;
+    color: var(--site-text) !important;
+}
+
+.markdown-body {
+    font-size: clamp(0.9rem, 1vw, 1rem) !important;
+    overflow-wrap: anywhere;
+}
+
+.markdown-body img,
+.markdown-body video,
+.markdown-body iframe,
+.markdown-body svg {
+    max-width: 100%;
+}
+
+.markdown-body img,
+.markdown-body video {
+    height: auto;
+}
+
+.markdown-body p,
+.markdown-body ul,
+.markdown-body ol,
+.markdown-body li {
+    max-width: 100%;
+    min-width: 0;
+    background-color: transparent !important;
+    border-color: transparent;
+    color: var(--site-text) !important;
+    line-height: 1.6 !important;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4 {
+    max-width: 100%;
+    color: var(--site-heading) !important;
+    border-bottom: 1px solid var(--site-border);
+    padding-bottom: 0.3em;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.markdown-body blockquote {
+    max-width: 100%;
+    margin: 1rem 0;
+    padding: 0.75rem 1rem;
+    color: #8b949e !important;
+    background-color: var(--site-panel) !important;
+    border-left: 4px solid var(--site-border) !important;
+    border-radius: 0 8px 8px 0;
+}
+
+/* =====================================================================
+   4. BLOQUES DE CÓDIGO: el bloque no crece; su contenido puede desplazarse.
+   ===================================================================== */
+div.highlighter-rouge,
+.highlighter-rouge,
+.highlight,
+pre,
+pre:not(.highlight pre) {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin-bottom: 1rem;
+    padding: 1rem !important;
+    overflow-x: auto !important;
+    color: var(--site-text) !important;
+    background-color: var(--site-panel) !important;
+    border: 1px solid var(--site-border) !important;
+    border-radius: 8px !important;
+}
+
+div.highlighter-rouge div.highlight,
+.highlighter-rouge .highlight,
+.highlight pre {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    background: transparent !important;
+    border: 0 !important;
+}
+
+pre code,
+code.highlighter-rouge,
+.highlight code {
+    color: #79c0ff !important;
+    background: transparent !important;
+    border: 0 !important;
+    padding: 0 !important;
+}
+
+/* Rouge syntax highlighting. */
+.highlight .k,
+.highlight .kd,
+.highlight .kn,
+.highlight .kp,
+.highlight .kr {
+    color: #7ee787 !important;
+    font-weight: bold;
+}
+
+.highlight .n,
+.highlight .nx { color: #c9d1d9 !important; }
+.highlight .s,
+.highlight .s1,
+.highlight .s2 { color: #a5d6ff !important; }
+.highlight .mf,
+.highlight .mh,
+.highlight .mi,
+.highlight .mo,
+.highlight .m { color: #79c0ff !important; }
+.highlight .c,
+.highlight .c1,
+.highlight .cm,
+.highlight span.c,
+.highlight span.c1,
+.highlight span.cm {
+    color: #8b949e !important;
+    font-style: italic !important;
+}
+.highlight .ow,
+.highlight .o { color: #ff7b72 !important; }
+.highlight .nb { color: #d2a8ff !important; }
+
+/* =====================================================================
+   5. TABLAS: anchura limitada al documento y scroll horizontal interno.
+   ===================================================================== */
+.markdown-body table,
+.markdown-body .output table,
+.markdown-body .output_area table,
+.markdown-body .jp-OutputArea-output table,
+.markdown-body div.output_subarea table {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    overflow-x: auto;
+    background-color: var(--site-panel) !important;
+    border: 1px solid var(--site-border) !important;
+    border-radius: 8px !important;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.85rem !important;
+    white-space: nowrap;
+    border-top: 1px solid var(--site-border) !important;
+}
+
+.markdown-body table th {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    background-color: #21262d !important;
+    border-bottom: 2px solid var(--site-border) !important;
+}
+
+.markdown-body table tr:nth-child(even) {
+    background-color: #11151c !important;
+}
+
+/* =====================================================================
+   6. BOTÓN DE RETORNO AL ÍNDICE
+   ===================================================================== */
+.back-to-index {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 1.25rem;
+    padding: 0.6rem 1.2rem;
+    color: #ffffff !important;
+    font-weight: 600;
+    text-decoration: none;
+    background-color: var(--site-green) !important;
+    border-radius: 6px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.2s;
+}
+
+.back-to-index:hover {
+    background-color: var(--site-green-hover) !important;
+    text-decoration: none;
+}
