@@ -24,33 +24,33 @@ section {
  * 2. CABECERA TRANSPARENTE Y BOTONERA FLOTANTE PROPORCIONAL         *
  * ================================================================= */
 #header_wrap {
-    background: transparent !important;
-    background-image: none !important;
-    box-shadow: none !important;
-    border-bottom: none !important;
-    padding: 2rem 0 !important;
-    position: relative;
-    z-index: 10;
+background: transparent !important;
+background-image: none !important;
+box-shadow: none !important;
+border-bottom: none !important;
+padding: 2rem 0 !important;
+position: relative;
+z-index: 10;
 }
 
 #header_wrap .inner {
-    background: transparent !important;
-    background-image: none !important;
-    max-width: min(1400px, 95vw) !important;
-    width: 95% !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
-    box-shadow: none !important;
+background: transparent !important;
+background-image: none !important;
+max-width: min(1400px, 95vw) !important;
+width: 95% !important;
+margin: 0 auto !important;
+padding: 0 !important;
+box-shadow: none !important;
 }
 
 #header {
-    background: transparent !important;
-    max-width: min(1400px, 95vw) !important;
-    width: 100% !important;
-    margin: 0 auto !important;
-    box-sizing: border-box !important;
-    position: relative !important;
-    height: auto !important;
+background: transparent !important;
+max-width: min(1400px, 95vw) !important;
+width: 100% !important;
+margin: 0 auto !important;
+box-sizing: border-box !important;
+position: relative !important;
+height: auto !important;
 }
 
 /* Estilo unificado para los botones de la cabecera */

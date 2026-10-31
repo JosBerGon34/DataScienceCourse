@@ -4,7 +4,7 @@
 @import "{{ site.theme }}";
 
 /* ================================================================= *
- * 1. LIBERACIÓN DE ANCHO: Contenedores, Wrappers y <section> (1400px) *
+ * 1. LIBERACIÓN DE ANCHO Y PROPORCIÓN FLUIDA (Referencia 1400px)    *
  * ================================================================= */
 #main_content_wrap,
 .container,
@@ -21,7 +21,7 @@ section {
 }
 
 /* ================================================================= *
- * 2. CABECERA TRANSPARENTE Y BOTONERA FLOTANTE PROPORCIONAL         *
+ * 2. CABECERA Y BOTONERA PROPORCIONAL                               *
  * ================================================================= */
 #header_wrap {
 background: transparent !important;
@@ -77,7 +77,7 @@ a.btn:hover,
 }
 
 /* ================================================================= *
- * 3. MODO OSCURO GLOBAL Y LIMPIEZA DE FONDOS                        *
+ * 3. MODO OSCURO GLOBAL Y TEXTO LÍQUIDO                             *
  * ================================================================= */
 html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #main_content, .inner, .wrapper, section {
     background-color: #0d1117 !important;
@@ -87,14 +87,11 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #mai
 .markdown-body {
     background-color: transparent !important;
     color: #c9d1d9 !important;
-    font-size: clamp(0.9rem, 1vw, 1rem) !important;
+    font-size: 16px !important;
     width: 100% !important;
     max-width: 100% !important;
 }
 
-/* ================================================================= *
- * 4. TEXTO Y PÁRRAFOS DEL MARKDOWN                                  *
- * ================================================================= */
 .markdown-body p,
 .markdown-body ul,
 .markdown-body ol,
@@ -126,7 +123,7 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #mai
 }
 
 /* ================================================================= *
- * 5. CELDAS DE CÓDIGO Y OUTPUTS: ANCHO 100% REAL                    *
+ * 4. CELDAS DE CÓDIGO (Paneles oscuros con scroll seguro)           *
  * ================================================================= */
 div.highlighter-rouge,
 .highlighter-rouge,
@@ -165,35 +162,17 @@ code.highlighter-rouge,
     border: none !important;
 }
 
-/* ================================================================= *
- * 6. HIGHLIGHTING DE CÓDIGO                                         *
- * ================================================================= */
-.highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr {
-    color: #7ee787 !important;
-    font-weight: bold;
-}
-.highlight .n, .highlight .nx {
-    color: #c9d1d9 !important;
-}
-.highlight .s, .highlight .s1, .highlight .s2 {
-    color: #a5d6ff !important;
-}
-.highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo, .highlight .m {
-    color: #79c0ff !important;
-}
-.highlight .c, .highlight .c1, .highlight .cm, .highlight span.c, .highlight span.c1, .highlight span.cm {
-    color: #8b949e !important;
-    font-style: italic !important;
-}
-.highlight .ow, .highlight .o {
-    color: #ff7b72 !important;
-}
-.highlight .nb {
-    color: #d2a8ff !important;
-}
+/* Syntax Highlighting */
+.highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr { color: #7ee787 !important; font-weight: bold; }
+.highlight .n, .highlight .nx { color: #c9d1d9 !important; }
+.highlight .s, .highlight .s1, .highlight .s2 { color: #a5d6ff !important; }
+.highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo, .highlight .m { color: #79c0ff !important; }
+.highlight .c, .highlight .c1, .highlight .cm, .highlight span.c, .highlight span.c1, .highlight span.cm { color: #8b949e !important; font-style: italic !important; }
+.highlight .ow, .highlight .o { color: #ff7b72 !important; }
+.highlight .nb { color: #d2a8ff !important; }
 
 /* ================================================================= *
- * 7. CONTENEDOR MAESTRO DE TABLAS                                   *
+ * 5. CONTENEDOR MAESTRO DE TABLAS (Paneles con scroll horizontal)   *
  * ================================================================= */
 .markdown-body table,
 table,
@@ -238,7 +217,7 @@ table tr:nth-child(even) {
 }
 
 /* ================================================================= *
- * 8. BOTÓN DE RETORNO AL ÍNDICE                                    *
+ * 6. BOTÓN DE RETORNO AL ÍNDICE                                    *
  * ================================================================= */
 .back-to-index {
     display: inline-block;
@@ -256,4 +235,22 @@ table tr:nth-child(even) {
 .back-to-index:hover {
     background-color: #2ea043 !important;
     text-decoration: none;
+}
+
+/* ================================================================= *
+ * 7. PROTECCIÓN RESPONSIVE PARA MÓVILES                             *
+ * ================================================================= */
+@media (max-width: 768px) {
+    .floating-nav-btn {
+        position: static !important;
+        display: inline-block !important;
+        margin: 4px !important;
+        font-size: 11px !important;
+        padding: 6px 10px !important;
+    }
+    #header nav ul {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    }
 }
