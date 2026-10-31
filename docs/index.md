@@ -1,8 +1,4 @@
-{% for page in site.pages %}
-  {% if page.title and page.path != "index.md" %}
-    - [{{ page.title }}]({{ page.url }})
-  {% endif %}
-{% endfor %}
+
 
 # 🚀 DataScienceCourse: Course Remodel & Applied Refactoring
 
@@ -33,7 +29,7 @@ This repository contains a **comprehensive curriculum redesign (Remodel) and syn
 
 | Module | Applied Focus & Description | Statement (Enunciado) | Correction / Exercise |
 | :---: | :--- | :---: | :---: |
-| **1.1** | **Native Data Structures & Eurostat Averages** | <a href="Statements/Module_1.1_Native_Data_Structures.md" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [View Solution](Corrections/Ex1.1.md) |
+| **1.1** | **Native Data Structures & Eurostat Averages** | <a href="Statements/Module_1.1_Native_Data_Structures.html" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [View Solution](Corrections/Ex1.1.md) |
 | **1.2** | **Code Refactoring, Pipeline & Primality Testing** | <a href="Statements/Module_1.2_Code_Refactoring.md" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [View Solution](Corrections/Ex1.2.md) |
 | **2.1** | **Calculus & Linear Algebra for Machine Learning** | <a href="Statements/Module_2.1_Calculus_Linear_Algebra.md" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [View Solution](Corrections/Ex2.1.md) |
 | **2.2** | **Partial Derivatives & Gradient Optimization** | <a href="Statements/Module_2.2_Partial_Derivatives.md" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [View Solution](Corrections/Ex2.2.md) |
