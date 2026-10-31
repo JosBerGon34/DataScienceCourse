@@ -20,23 +20,22 @@ section {
 }
 
 /* ================================================================= *
- * 2. CABECERA FLOTANTE Y BOTONES DE ACCIÓN GLOBALES                 *
+ * 2. CABECERA Y BOTÓN FLOTANTE DE GITHUB                            *
  * ================================================================= */
-
-/* Desactivar la franja/barra sólida del header del tema Midnight */
 #header_wrap {
     background-color: #0d1117 !important;
     background-image: none !important;
     border-bottom: none !important;
     box-shadow: none !important;
-    padding: 20px 0 !important;
-    position: relative;
-    z-index: 10;
+    padding: 10px 0 !important;
+    position: relative !important;
+    z-index: 100;
 }
 
+/* Forzar que el contenedor del header sea flexible y no fije una altura rígida */
 #header {
     background: transparent !important;
-    border-bottom: none !important;
+    border: none !important;
     box-shadow: none !important;
     max-width: 1400px !important;
     width: 95% !important;
@@ -44,50 +43,44 @@ section {
     box-sizing: border-box !important;
     position: relative !important;
     height: auto !important;
+    min-height: 50px !important;
+    top: auto !important;
+    left: auto !important;
 }
 
 #header nav {
     background: transparent !important;
+    position: relative !important;
+    width: 100% !important;
 }
 
-/* ================================================================= *
- * REGLA UNIVERSAL PARA BOTONES (GitHub, Contact, Acciones, etc.)    *
- * ================================================================= */
-.btn, 
-a.btn, 
+/* Botón flotante de GitHub posicionado de forma limpia arriba a la derecha */
 #header .fork a, 
-.action-btn {
+#header .btn, 
+a.btn {
     display: inline-block !important;
-    background-color: #238636 !important; /* Verde corporativo GitHub */
+    position: absolute !important;
+    top: 10px !important;
+    right: 0 !important;
+    background-color: #238636 !important;
     color: #ffffff !important;
-    padding: 10px 18px !important;
+    padding: 8px 16px !important;
     border: 1px solid rgba(240, 246, 252, 0.1) !important;
     border-radius: 6px !important;
     font-weight: 600 !important;
+    font-size: 13px !important;
     text-decoration: none !important;
     box-shadow: 0 3px 6px rgba(0,0,0,0.3) !important;
     transition: background-color 0.2s ease, transform 0.1s ease !important;
+    z-index: 101;
 }
 
-.btn:hover, 
-a.btn:hover, 
 #header .fork a:hover, 
-.action-btn:hover {
+#header .btn:hover, 
+a.btn:hover {
     background-color: #2ea043 !important;
     text-decoration: none !important;
     transform: translateY(-1px);
-}
-
-/* Variante secundaria opcional (ej. para botones de contacto o info) */
-.btn-secondary, 
-a.btn-secondary {
-    background-color: #21262d !important;
-    border-color: #30363d !important;
-}
-
-.btn-secondary:hover, 
-a.btn-secondary:hover {
-    background-color: #30363d !important;
 }
 
 /* ================================================================= *
