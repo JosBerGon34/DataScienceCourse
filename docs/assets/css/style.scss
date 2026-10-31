@@ -20,26 +20,39 @@ section {
 }
 
 /* ================================================================= *
- * 2. CORRECCIÓN DE CABECERA Y SOLAPAMIENTO (Header Wrap & GitHub Btn) *
+ * 2. CORRECCIÓN TOTAL DE CABECERA (Header Wrap & View on GitHub)     *
  * ================================================================= */
 #header_wrap {
-background-color: #0d1117 !important;
-background-image: none !important;
-border-bottom: 1px solid #30363d !important;
-padding-top: 30px;
-padding-bottom: 20px;
-position: relative;
-z-index: 10;
+    background: #0d1117 !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid #30363d !important;
+    padding: 40px 0 !important;
+    position: relative;
+    z-index: 10;
+}
+
+/* Neutralizar el contenedor .inner exclusivo del header */
+#header_wrap .inner {
+    background: transparent !important;
+    background-image: none !important;
+    max-width: 1400px !important;
+    width: 95% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    box-shadow: none !important;
 }
 
 #header {
-max-width: 1400px !important;
-width: 95% !important;
-margin: 0 auto !important;
-box-sizing: border-box !important;
+    background: transparent !important;
+    max-width: 1400px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
 }
 
-#header .btn,
+/* Estilo impecable para el botón de GitHub en la cabecera */
+#header .btn, 
 a.btn {
     background-color: #238636 !important;
     color: #ffffff !important;
@@ -50,7 +63,7 @@ a.btn {
     transition: background-color 0.2s ease;
 }
 
-#header .btn:hover,
+#header .btn:hover, 
 a.btn:hover {
     background-color: #2ea043 !important;
     text-decoration: none !important;
