@@ -1,0 +1,55 @@
+<style>
+/* ================================================================= *
+ * BOTONES FLOTANTES SUPERIORES (Index Course & View on GitHub)      *
+ * ================================================================= */
+
+/* Estilo y posicionamiento fijo para el botón de Index Course */
+#header .index-course-btn {
+    position: fixed !important;
+    top: 20px !important;
+    right: 180px !important; /* Situado a la izquierda del botón de GitHub */
+    background-color: #21262d !important;
+    color: #c9d1d9 !important;
+    padding: 10px 16px !important;
+    border: 1px solid #30363d !important;
+    border-radius: 6px !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    text-decoration: none !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
+    transition: background-color 0.2s ease, transform 0.1s ease !important;
+    z-index: 9999 !important;
+    display: inline-block !important;
+}
+
+#header .index-course-btn:hover {
+    background-color: #30363d !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    transform: translateY(-1px);
+}
+
+/* Posicionamiento fijo para el botón original de GitHub a la extrema derecha */
+#header .fork a {
+    position: fixed !important;
+    top: 20px !important;
+    right: 30px !important;
+    z-index: 9999 !important;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const navUl = document.querySelector('#header nav ul');
+
+    // Inyectar el botón "Index Course" de forma automática si no existe
+    if (navUl && !document.querySelector('.index-course-btn')) {
+        const githubLi = document.querySelector('#header nav ul .fork');
+        if (githubLi) {
+            const indexLi = document.createElement('li');
+            indexLi.innerHTML = '<a href="https://josbergon34.github.io/DataScienceCourse/" class="index-course-btn">🏠 Index Course</a>';
+            navUl.insertBefore(indexLi, githubLi);
+        }
+    }
+});
+</script>
