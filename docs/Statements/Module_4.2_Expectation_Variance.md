@@ -1,4 +1,3 @@
-'''Markdown
 
 🟢 < Module 4.2 > Expectation, Variance & Bayesian Updating
 
@@ -54,5 +53,3 @@ Apply Bayesian inference to real survey microdata proportions:
     
 
 💻 **Your Challenge:** Create the notebook `notebooks/04_2_expectation_bayes.ipynb` in your local environment, run the analytical expectations and Bayesian updating steps, and paste your code/results here when ready.
-
-'''

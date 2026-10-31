@@ -1,4 +1,4 @@
-'''Markdown
+
 
 🟢 < Module 6.2 > Statistical Profiling, Variable Typologies & Transformation Techniques
 
@@ -100,4 +100,3 @@ Create a Python notebook (`notebooks/06_2_variable_profiling_transformations.ipy
 
 💻 **Your Challenge:** Create the notebook `notebooks/06_2_variable_profiling_transformations.ipynb`, build the statistical profiling summary table, apply the transformation techniques (binning, factorization, **log/Box-Cox, z-score**), **detect and treat outliers with documented justification**, generate the distribution plots for your cleaned dataset, **and produce the before/after comparison tables for both transformations and outlier treatments**. ¡Cuando estés listo, comparte tus resultados o código aquí para revisarlo! 🚀📊
 
-'''

@@ -1,4 +1,4 @@
-'''Markdown
+
 
 🟢 < Module 7.1 > Exploratory Data Analysis (EDA), Stratified Distributions & Correlation Diagnostics
 
@@ -56,4 +56,3 @@ Evaluate how macroeconomic country clusters modulate individual behaviors:
 
 💻 **Your Challenge:** Create the notebook `notebooks/07_1_exploratory_data_analysis.ipynb` in your local environment, run the stratified descriptive statistics and correlation heatmaps, and share your code or key findings here when ready for review! 🚀📊
 
-'''

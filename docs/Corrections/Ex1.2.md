@@ -1,4 +1,4 @@
-[← Volver al Índice General](../index.md){: .back-to-index }
+🟢 < Module  1.2 > Code Refactoring, Pipeline Optimization & Primality Testing1. Context & Problem Statement
 
 You are reviewing a legacy script designed to process an integer list, filter specific elements, compute their total sum, and check if the result is a prime number:
 

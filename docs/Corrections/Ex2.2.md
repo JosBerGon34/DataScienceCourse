@@ -1,6 +1,6 @@
-[← Volver al Índice General](../index.md){: .back-to-index }
+🟢 < Module  2.2 >  Partial Derivatives, Loss Functions & Gradient Optimization
 
-📘 Lesson 2.2: Partial Derivatives, Loss Functions & Gradient Optimization.
+
 
 Example Structure Data:
 '''

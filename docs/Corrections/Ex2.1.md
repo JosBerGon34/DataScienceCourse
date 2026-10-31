@@ -1,4 +1,4 @@
-[← Volver al Índice General](../index.md){: .back-to-index }
+🟢 < Module  2.1 > Calculus & Linear Algebra for Machine Learning
 
 ### 💻 2. Applied Theory: Reference Implementation in Python / NumPy
 

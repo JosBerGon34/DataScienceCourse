@@ -1,5 +1,5 @@
 🟢 < Module 5.1 > NumPy & Pandas — High-Performance Data Ingestion, Merging & Reshaping
-[← Volver al Índice General](../index.md){: .back-to-index }
+
 
 
 #### 🎯 Context & Objectives

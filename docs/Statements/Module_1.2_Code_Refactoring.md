@@ -1,4 +1,4 @@
-'''Markdown
+
 
 🟢 < Module  1.2 > Code Refactoring, Pipeline Optimization & Primality Testing1. Context & Problem Statement
 
@@ -35,4 +35,3 @@ To optimize pipeline performance for large data streams, memory-efficient genera
 ---
 > 💻 **Your Challenge:** Refactor your local script, implement strict type checking, and test your optimization before moving on to Module 2.1! 🚀📊
 
-'''

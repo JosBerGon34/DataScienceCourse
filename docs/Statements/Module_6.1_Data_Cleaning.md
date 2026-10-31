@@ -1,4 +1,4 @@
-'''Markdown
+
 
 🟢 < Module 6.1 > Data Cleaning & Imputation — Advanced Survey Non-Response Codes & Imputation Strategies
 
@@ -64,4 +64,3 @@ Apply these transformations to your merged master dataset (`master_country_featu
 
 💻 **Tu Desafío:** Crea el cuaderno `notebooks/06_1_data_cleaning_imputation.ipynb` en tu entorno local. Implementa el mapeo explícito de códigos (`77`, `88`, `99` $\rightarrow$ `NaN`) respetando los extremos válidos `0` y `10`, aplica `IterativeImputer` y compara las distribuciones resultantes[cite: 4, 6, 7].
 
-'''

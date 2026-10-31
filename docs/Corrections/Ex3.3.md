@@ -1,4 +1,4 @@
-[← Volver al Índice General](../index.md){: .back-to-index }
+# 🟢 < Module 3.3 > Relational Persistence with SQLAlchemy Core & DuckDB-SQLite
 
 First of all lets install via bash terminal in the root of
 repository all the libraries or enviroment needs to connect

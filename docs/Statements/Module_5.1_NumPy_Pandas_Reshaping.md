@@ -1,4 +1,4 @@
-'''Markdown
+
 
 🟢 < Module 5.1 > NumPy & Pandas — High-Performance Data Ingestion, Merging & Reshaping
 
@@ -54,4 +54,3 @@ Apply advanced Pandas joining techniques to your project datasets:
 
 💻 **Your Challenge:** Crea el cuaderno `notebooks/05_1_numpy_pandas_operations.ipynb` en tu entorno local, ejecuta las transformaciones y fusiones de alto rendimiento con tus datasets, y pásame tu código o resultados cuando estés listo para avanzar al Módulo 6 (Data Cleaning & Imputation).
 
-'''

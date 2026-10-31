@@ -1,4 +1,4 @@
-[← Volver al Índice General](../index.md){: .back-to-index }
+🟢 < MODULE 1.1 >  Native Data Structures, Strict Typing & Eurostat Averages1. Mathematical & Syntactic Specification
 
 ### 💻 Tu Reto (Escribe el código en tu cuaderno local):
 

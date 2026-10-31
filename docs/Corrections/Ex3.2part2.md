@@ -1,4 +1,4 @@
-[← Volver al Índice General](../index.md){: .back-to-index }
+🟢 < Module  3.2 > Modern Web Scraping for Data Science
 
 3. Applied Data Science Level (Country Metadata Extraction)
 Extract demographic/cultural metadata for European countries to enrich our core project pipeline:

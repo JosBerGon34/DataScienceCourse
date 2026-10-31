@@ -1,5 +1,5 @@
 🟢 < Module 4.2 > Expectation, Variance & Bayesian Updating
-[← Volver al Índice General](../index.md){: .back-to-index }
+
 
 
 #### 🎯 Context & Objectives
