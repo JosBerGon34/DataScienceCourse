@@ -1,6 +1,4 @@
-
-
-🟢 < Module  1.2 > Code Refactoring, Pipeline Optimization & Primality Testing1. Context & Problem Statement
+# 🟢 < Module  1.2 > Code Refactoring, Pipeline Optimization & Primality Testing1. Context & Problem Statement
 
 ## 🎯 Context & Objectives
 In professional Data Science and software engineering, writing functional code is only the first step. Code must be clean, modular, highly performant, and compliant with PEP 8 standards. 

@@ -1,5 +1,4 @@
-
-🟢 < Module 4.2 > Expectation, Variance & Bayesian Updating
+# 🟢 < Module 4.2 > Expectation, Variance & Bayesian Updating
 
 
 #### 🎯 Context & Objectives

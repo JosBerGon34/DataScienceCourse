@@ -1,5 +1,4 @@
-
-🟢 < Module 3.1 > Standard Version Control & Git Flow for Data Science
+# 🟢 < Module 3.1 > Standard Version Control & Git Flow for Data Science
 
 ## 🎯 Context & Objectives
 In Data Science, version control is essential not only for managing code changes but also for **auditing experiments**, isolating feature engineering developments, and preventing large or sensitive raw datasets (e.g., raw `.csv` files or database credentials) from polluting the repository.

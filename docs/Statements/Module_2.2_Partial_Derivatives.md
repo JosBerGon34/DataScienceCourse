@@ -1,5 +1,3 @@
-
-
 # 🟢 < Module 2.2 > Partial Derivatives & Gradient Optimization
 
 ## 🎯 Context & Objectives
