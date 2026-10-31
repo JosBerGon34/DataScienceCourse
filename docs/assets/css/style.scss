@@ -20,61 +20,54 @@ section {
 }
 
 /* ================================================================= *
- * 2. CABECERA Y BOTÓN FLOTANTE DE GITHUB                            *
+ * CABECERA TRANSPARENTE Y BOTÓN DE GITHUB                           *
  * ================================================================= */
 #header_wrap {
-    background-color: #0d1117 !important;
+    background: transparent !important;
     background-image: none !important;
-    border-bottom: none !important;
     box-shadow: none !important;
-    padding: 10px 0 !important;
-    position: relative !important;
-    z-index: 100;
+    border-bottom: none !important;
+    padding: 30px 0 !important;
+    position: relative;
+    z-index: 10;
 }
 
-/* Forzar que el contenedor del header sea flexible y no fije una altura rígida */
-#header {
+/* Neutralizar el contenedor .inner exclusivo del header */
+#header_wrap .inner {
     background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
+    background-image: none !important;
     max-width: 1400px !important;
     width: 95% !important;
     margin: 0 auto !important;
-    box-sizing: border-box !important;
-    position: relative !important;
-    height: auto !important;
-    min-height: 50px !important;
-    top: auto !important;
-    left: auto !important;
+    padding: 0 !important;
+    box-shadow: none !important;
 }
 
-#header nav {
+#header {
     background: transparent !important;
-    position: relative !important;
+    max-width: 1400px !important;
     width: 100% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
 }
 
-/* Botón flotante de GitHub posicionado de forma limpia arriba a la derecha */
-#header .fork a, 
+/* Estilo impecable para el botón de GitHub en la cabecera */
 #header .btn, 
 a.btn {
-    display: inline-block !important;
-    position: absolute !important;
-    top: 10px !important;
-    right: 0 !important;
     background-color: #238636 !important;
     color: #ffffff !important;
-    padding: 8px 16px !important;
     border: 1px solid rgba(240, 246, 252, 0.1) !important;
     border-radius: 6px !important;
     font-weight: 600 !important;
-    font-size: 13px !important;
-    text-decoration: none !important;
     box-shadow: 0 3px 6px rgba(0,0,0,0.3) !important;
-    transition: background-color 0.2s ease, transform 0.1s ease !important;
-    z-index: 101;
+    transition: background-color 0.2s ease;
 }
 
+#header .btn:hover, 
+a.btn:hover {
+    background-color: #2ea043 !important;
+    text-decoration: none !important;
+}
 #header .fork a:hover, 
 #header .btn:hover, 
 a.btn:hover {
