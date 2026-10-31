@@ -1,3 +1,9 @@
+{% for page in site.pages %}
+  {% if page.title and page.path != "index.md" %}
+    - [{{ page.title }}]({{ page.url }})
+  {% endif %}
+{% endfor %}
+
 # 🚀 DataScienceCourse: Course Remodel & Applied Refactoring
 
 > **Original Repository:** [https://github.com/JosBerGon34/4GA.DataScience](https://github.com/JosBerGon34/4GA.DataScience)
