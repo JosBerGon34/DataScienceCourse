@@ -1,9 +1,8 @@
 ---
----
 @import "{{ site.theme }}";
 
 /* ================================================================= *
- * 1. LIBERACIÓN DE ANCHO: Contenedores, Wrappers y <section> de 1400px *
+ * 1. LIBERACIÓN DE ANCHO Y PROPORCIÓN FLUIDA (Referencia 1400px)    *
  * ================================================================= */
 #main_content_wrap,
 .container,
@@ -13,30 +12,29 @@ body,
 .inner,
 .wrapper,
 section {
-    max-width: 1400px !important;
+    max-width: min(1400px, 95vw) !important;
     width: 95% !important;
     margin: 0 auto !important;
     box-sizing: border-box !important;
 }
 
 /* ================================================================= *
- * CABECERA TRANSPARENTE Y BOTÓN DE GITHUB                           *
+ * 2. CABECERA Y BOTONERA PROPORCIONAL                               *
  * ================================================================= */
 #header_wrap {
     background: transparent !important;
     background-image: none !important;
     box-shadow: none !important;
     border-bottom: none !important;
-    padding: 30px 0 !important;
+    padding: 2rem 0 !important;
     position: relative;
     z-index: 10;
 }
 
-/* Neutralizar el contenedor .inner exclusivo del header */
 #header_wrap .inner {
     background: transparent !important;
     background-image: none !important;
-    max-width: 1400px !important;
+    max-width: min(1400px, 95vw) !important;
     width: 95% !important;
     margin: 0 auto !important;
     padding: 0 !important;
@@ -45,35 +43,12 @@ section {
 
 #header {
     background: transparent !important;
-    max-width: 1400px !important;
+    max-width: min(1400px, 95vw) !important;
     width: 100% !important;
     margin: 0 auto !important;
     box-sizing: border-box !important;
-}
-
-/* Estilo impecable para el botón de GitHub en la cabecera */
-#header .btn, 
-a.btn {
-    background-color: #238636 !important;
-    color: #ffffff !important;
-    border: 1px solid rgba(240, 246, 252, 0.1) !important;
-    border-radius: 6px !important;
-    font-weight: 600 !important;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.3) !important;
-    transition: background-color 0.2s ease;
-}
-
-#header .btn:hover, 
-a.btn:hover {
-    background-color: #2ea043 !important;
-    text-decoration: none !important;
-}
-#header .fork a:hover, 
-#header .btn:hover, 
-a.btn:hover {
-    background-color: #2ea043 !important;
-    text-decoration: none !important;
-    transform: translateY(-1px);
+    position: relative !important;
+    height: auto !important;
 }
 
 /* ================================================================= *
@@ -87,13 +62,13 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #mai
 .markdown-body {
     background-color: transparent !important;
     color: #c9d1d9 !important;
-    font-size: 16px !important;
+    font-size: clamp(0.9rem, 1vw, 1rem) !important; /* Escala tipográfica fluida según pantalla */
     width: 100% !important;
     max-width: 100% !important;
 }
 
 /* ================================================================= *
- * 4. TEXTO Y PÁRRAFOS DEL MARKDOWN (Texto plano sin artefactos)     *
+ * 4. TEXTO Y PÁRRAFOS DEL MARKDOWN                                  *
  * ================================================================= */
 .markdown-body p,
 .markdown-body ul,
@@ -111,22 +86,22 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #mai
     color: #f0f6fc !important;
     border-bottom: 1px solid #30363d;
     padding-bottom: 0.3em;
-    margin-top: 24px;
-    margin-bottom: 16px;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
     width: 100% !important;
 }
 
 .markdown-body blockquote {
     background-color: #161b22 !important;
     border-left: 4px solid #30363d !important;
-    padding: 12px 16px;
-    margin: 16px 0;
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
     color: #8b949e !important;
     border-radius: 0 8px 8px 0;
 }
 
 /* ================================================================= *
- * 5. CELDAS DE CÓDIGO Y OUTPUTS: ANCHO 100% REAL DE LADO A LADO     *
+ * 5. CELDAS DE CÓDIGO Y OUTPUTS: ANCHO 100% RESPONSIVE              *
  * ================================================================= */
 div.highlighter-rouge,
 .highlighter-rouge,
@@ -136,8 +111,8 @@ pre:not(.highlight pre) {
     background-color: #161b22 !important;
     border: 1px solid #30363d !important;
     border-radius: 8px !important;
-    padding: 16px !important;
-    margin-bottom: 16px !important;
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
@@ -166,36 +141,7 @@ code.highlighter-rouge,
 }
 
 /* ================================================================= *
- * 6. HIGHLIGHTING DE CÓDIGO (Colores y Comentarios Nítidos)         *
- * ================================================================= */
-.highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr {
-    color: #7ee787 !important;
-    font-weight: bold;
-}
-.highlight .n, .highlight .nx {
-    color: #c9d1d9 !important;
-}
-.highlight .s, .highlight .s1, .highlight .s2 {
-    color: #a5d6ff !important;
-}
-.highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo, .highlight .m {
-    color: #79c0ff !important;
-}
-
-.highlight .c, .highlight .c1, .highlight .cm, .highlight span.c, .highlight span.c1, .highlight span.cm {
-    color: #8b949e !important;
-    font-style: italic !important;
-}
-
-.highlight .ow, .highlight .o {
-    color: #ff7b72 !important;
-}
-.highlight .nb {
-    color: #d2a8ff !important;
-}
-
-/* ================================================================= *
- * 7. CONTENEDOR MAESTRO DE TABLAS (Integradas en Output Cells)      *
+ * 6. TABLAS ADAPTATIVAS Y CONTENEDORES MAESTROS                     *
  * ================================================================= */
 .markdown-body table,
 table,
@@ -207,34 +153,27 @@ div.output_subarea table {
     width: 100% !important;
     max-width: 100% !important;
     overflow-x: auto !important;
-
     background-color: #161b22 !important;
     border: 1px solid #30363d !important;
     border-radius: 8px !important;
-    padding: 16px !important;
-    margin-bottom: 16px !important;
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
     box-sizing: border-box !important;
 }
 
 .markdown-body table th,
 .markdown-body table td,
 table th,
-table td,
-.output table th,
-.output table td,
-div.output_subarea table th,
-div.output_subarea table td {
-    padding: 6px 10px !important;
-    font-size: 11px !important;
+table td {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.85rem !important;
     box-sizing: border-box !important;
     white-space: nowrap !important;
     border-top: 1px solid #30363d !important;
 }
 
 .markdown-body table th,
-table th,
-.output table th,
-div.output_subarea table th {
+table th {
     background-color: #21262d !important;
     color: #ffffff !important;
     font-weight: 600 !important;
@@ -242,24 +181,22 @@ div.output_subarea table th {
 }
 
 .markdown-body table tr:nth-child(even),
-table tr:nth-child(even),
-.output table tr:nth-child(even),
-div.output_subarea table tr:nth-child(even) {
+table tr:nth-child(even) {
     background-color: #11151c !important;
 }
 
 /* ================================================================= *
- * 8. BOTÓN DE RETORNO AL ÍNDICE                                    *
+ * 7. BOTÓN DE RETORNO AL ÍNDICE                                    *
  * ================================================================= */
 .back-to-index {
     display: inline-block;
     background-color: #238636 !important;
     color: #ffffff !important;
-    padding: 10px 18px;
+    padding: 0.6rem 1.2rem;
     border-radius: 6px;
     font-weight: 600;
     text-decoration: none;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
     box-shadow: 0 3px 6px rgba(0,0,0,0.3);
     transition: background-color 0.2s;
 }
@@ -267,23 +204,4 @@ div.output_subarea table tr:nth-child(even) {
 .back-to-index:hover {
     background-color: #2ea043 !important;
     text-decoration: none;
-}
-
-/* ================================================================= *
- * ELIMINACIÓN DE LA LÍNEA GRIS / FRANJA DEL HEADER (Midnight Theme) *
- * ================================================================= */
-#header {
-    background: transparent !important;
-    background-image: none !important;
-    border-bottom: none !important;
-    box-shadow: none !important;
-    height: auto !important;
-    position: fixed !important;
-}
-
-#header_wrap {
-    background: transparent !important;
-    background-image: none !important;
-    border-bottom: none !important;
-    box-shadow: none !important;
 }
