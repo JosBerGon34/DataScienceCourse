@@ -20,53 +20,74 @@ section {
 }
 
 /* ================================================================= *
- * 2. CORRECCIÓN TOTAL DE CABECERA (Header Wrap & View on GitHub)     *
+ * 2. CABECERA FLOTANTE Y BOTONES DE ACCIÓN GLOBALES                 *
  * ================================================================= */
+
+/* Desactivar la franja/barra sólida del header del tema Midnight */
 #header_wrap {
-    background: #0d1117 !important;
+    background-color: #0d1117 !important;
     background-image: none !important;
+    border-bottom: none !important;
     box-shadow: none !important;
-    border-bottom: 1px solid #30363d !important;
-    padding: 40px 0 !important;
+    padding: 20px 0 !important;
     position: relative;
     z-index: 10;
 }
 
-/* Neutralizar el contenedor .inner exclusivo del header */
-#header_wrap .inner {
+#header {
     background: transparent !important;
-    background-image: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
     max-width: 1400px !important;
     width: 95% !important;
     margin: 0 auto !important;
-    padding: 0 !important;
-    box-shadow: none !important;
-}
-
-#header {
-    background: transparent !important;
-    max-width: 1400px !important;
-    width: 100% !important;
-    margin: 0 auto !important;
     box-sizing: border-box !important;
+    position: relative !important;
+    height: auto !important;
 }
 
-/* Estilo impecable para el botón de GitHub en la cabecera */
-#header .btn, 
-a.btn {
-    background-color: #238636 !important;
+#header nav {
+    background: transparent !important;
+}
+
+/* ================================================================= *
+ * REGLA UNIVERSAL PARA BOTONES (GitHub, Contact, Acciones, etc.)    *
+ * ================================================================= */
+.btn, 
+a.btn, 
+#header .fork a, 
+.action-btn {
+    display: inline-block !important;
+    background-color: #238636 !important; /* Verde corporativo GitHub */
     color: #ffffff !important;
+    padding: 10px 18px !important;
     border: 1px solid rgba(240, 246, 252, 0.1) !important;
     border-radius: 6px !important;
     font-weight: 600 !important;
+    text-decoration: none !important;
     box-shadow: 0 3px 6px rgba(0,0,0,0.3) !important;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.1s ease !important;
 }
 
-#header .btn:hover, 
-a.btn:hover {
+.btn:hover, 
+a.btn:hover, 
+#header .fork a:hover, 
+.action-btn:hover {
     background-color: #2ea043 !important;
     text-decoration: none !important;
+    transform: translateY(-1px);
+}
+
+/* Variante secundaria opcional (ej. para botones de contacto o info) */
+.btn-secondary, 
+a.btn-secondary {
+    background-color: #21262d !important;
+    border-color: #30363d !important;
+}
+
+.btn-secondary:hover, 
+a.btn-secondary:hover {
+    background-color: #30363d !important;
 }
 
 /* ================================================================= *
