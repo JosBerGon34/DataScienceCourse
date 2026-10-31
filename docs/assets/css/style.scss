@@ -268,3 +268,22 @@ div.output_subarea table tr:nth-child(even) {
     background-color: #2ea043 !important;
     text-decoration: none;
 }
+
+/* ================================================================= *
+ * ELIMINACIÓN DE LA LÍNEA GRIS / FRANJA DEL HEADER (Midnight Theme) *
+ * ================================================================= */
+#header {
+    background: transparent !important;
+    background-image: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    height: auto !important;
+    position: relative !important;
+}
+
+#header_wrap {
+    background: transparent !important;
+    background-image: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
