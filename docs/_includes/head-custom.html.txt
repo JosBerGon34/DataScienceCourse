@@ -1,44 +1,36 @@
 <style>
 /* ================================================================= *
- * BOTONERA PROPORCIONAL Y ADAPTATIVA (Zona de trabajo 1400px)       *
+ * CONTENEDOR FLOTANTE UNIFICADO DENTRO DE LA ZONA DE TRABAJO (1400px) *
  * ================================================================= */
 
-/* Hacemos que el contenedor #header de 1400px sea la referencia absoluta */
-#header {
+#header nav {
     position: relative !important;
-    max-width: 1400px !important;
+    max-width: min(1400px, 95vw) !important;
     width: 95% !important;
     margin: 0 auto !important;
-    height: 0 !important; /* Evita que rompa el flujo vertical del título */
 }
 
-#header nav {
-    position: static !important;
-    width: 100% !important;
-}
-
-/* Clases unificadas y proporcionales para los botones flotantes */
+/* Reglas comunes para los dos botones flotantes fijos */
 .floating-nav-btn {
-    position: absolute !important;
-    top: -3.5rem !important; /* Flotan elegantemente sobre el margen superior del título */
-    padding: 0.5rem 1rem !important;
+    position: fixed !important;
+    top: 20px !important;
+    padding: 10px 16px !important;
     border-radius: 6px !important;
     font-weight: 600 !important;
-    font-size: 0.85rem !important;
+    font-size: 13px !important;
     text-decoration: none !important;
     box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
     transition: background-color 0.2s ease, transform 0.1s ease !important;
     z-index: 9999 !important;
     display: inline-block !important;
-    white-space: nowrap !important;
 }
 
-/* 1. Botón "Index Course" (ubicado justo a la izquierda del de GitHub) */
+/* 1. Botón de Index Course (a la izquierda del de GitHub) */
 #btn-index-course {
     background-color: #21262d !important;
     color: #c9d1d9 !important;
     border: 1px solid #30363d !important;
-    right: 11.5rem !important; /* Proporción exacta para dejar espacio al botón contiguo */
+    right: calc((100vw - min(1400px, 95vw)) / 2 + 160px) !important;
 }
 
 #btn-index-course:hover {
@@ -48,14 +40,14 @@
     transform: translateY(-1px);
 }
 
-/* 2. Botón "View on GitHub" (pegado al extremo derecho de los 1400px) */
+/* 2. Botón de View on GitHub (a la extrema derecha del contenedor) */
 #header .fork a,
 #header .btn,
 a.btn.btn-github-fixed {
     background-color: #238636 !important;
     color: #ffffff !important;
     border: 1px solid rgba(240, 246, 252, 0.1) !important;
-    right: 0rem !important; /* Anclado al borde derecho exacto del contenedor */
+    right: calc((100vw - min(1400px, 95vw)) / 2 + 20px) !important;
 }
 
 #header .fork a:hover,
@@ -66,19 +58,15 @@ a.btn.btn-github-fixed:hover {
     transform: translateY(-1px);
 }
 
-/* Adaptabilidad para pantallas más pequeñas (móviles y tablets) */
-@media (max-width: 768px) {
-    .floating-nav-btn {
-        position: static !important;
-        display: block !important;
-        margin-bottom: 0.5rem !important;
-        text-align: center !important;
-        right: auto !important;
-        top: auto !important;
+/* Ajuste dinámico para pantallas más estrechas */
+@media (max-width: 1440px) {
+    #btn-index-course {
+        right: 175px !important;
     }
-    #header {
-        height: auto !important;
-        margin-bottom: 2rem !important;
+    #header .fork a,
+    #header .btn,
+    a.btn.btn-github-fixed {
+        right: 20px !important;
     }
 }
 </style>

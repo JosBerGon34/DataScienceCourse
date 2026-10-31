@@ -5,7 +5,7 @@ plugins:
 title: "JosBerGon34 Data Science Portfolio"
 description: "A comprehensive curriculum redesign and applied data science projects."
 
-# Configuración avanzada de Kramdown para permitir atributos en enlaces Markdown
+# Configuración de Kramdown para permitir atributos en enlaces Markdown.
 kramdown:
   parse_block_html: true
   syntax_highlighter: rouge
