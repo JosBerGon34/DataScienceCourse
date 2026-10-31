@@ -8,6 +8,7 @@ description: "A comprehensive curriculum redesign and applied data science proje
 kramdown:
   parse_block_html: true
   syntax_highlighter: rouge
+  math_engine: mathjax
 
 exclude:
   - .venv/
@@ -21,3 +22,6 @@ defaults:
       type: "pages"
     values:
       layout: "default"
+
+optional_front_matter:
+  remove_originals: true
