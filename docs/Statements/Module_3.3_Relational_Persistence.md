@@ -1,6 +1,4 @@
----
-layout: default
----
+'''Markdown
 
 # 🟢 < Module 3.3 > Relational Persistence with SQLAlchemy Core & DuckDB-SQLite
 
@@ -74,4 +72,4 @@ Consolidate the multi-source dataset into a master feature table for downstream 
 > 💻 **Your Challenge:** Implement the SQLAlchemy Core pipeline locally, ingest your relational tables, and generate your unified master CSV before moving on to Module 4.1! 🚀📊
 
 
-
+'''

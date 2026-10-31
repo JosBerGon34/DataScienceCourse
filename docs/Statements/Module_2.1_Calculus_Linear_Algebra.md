@@ -1,6 +1,4 @@
----
-layout: default
----
+'''Markdown
 
 🟢 < Module 2.1 > Calculus & Linear Algebra for Machine Learning
 
@@ -35,3 +33,5 @@ Write a Python function `compute_vector_metrics(u: np.ndarray, v: np.ndarray) ->
 
 ---
 > 💻 **Your Challenge:** Implement the script locally, compute the geometric metrics, and verify your vector projections before moving on to Module 2.2! 🚀📊
+
+'''

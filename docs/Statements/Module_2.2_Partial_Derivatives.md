@@ -1,6 +1,4 @@
----
-layout: default
----
+'''Markdown
 
 # 🟢 < Module 2.2 > Partial Derivatives & Gradient Optimization
 
@@ -44,3 +42,5 @@ Write a Python script using NumPy that performs the following tasks[cite: 20]:
 
 ---
 > 💻 **Your Challenge:** Implement the gradient descent optimization engine locally, track your loss reduction across epochs, and verify your optimized weights before moving on to Module 3.1! 🚀📊
+
+'''

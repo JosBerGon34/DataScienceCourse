@@ -1,6 +1,4 @@
----
-layout: default
----
+'''Markdown
 
 🟢 < Module  1.1 >  Native Data Structures, Strict Typing & Eurostat Averages1. Mathematical & Syntactic Specification
 
@@ -33,3 +31,5 @@ where $D' = \{ r_i \in D \mid g(r_i, k_{\text{target}}) \in \mathbb{R} \}$ is th
     - Prints a console warning identifying discarded invalid/missing records (e.g., country code `"IT"`).
         
     - Returns the mean value formatted as an f-string rounded to 2 decimal places.
+
+'''

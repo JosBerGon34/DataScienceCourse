@@ -1,6 +1,4 @@
----
-layout: default
----
+'''Markdown
 
 # 🟢 < Module 4.1 > Probability Fundamentals, Random Variables & Analytical CDF-PDF
 
@@ -47,3 +45,5 @@ Evaluate whether your merged master dataset's economic metrics follow standard c
 
 ---
 > 💻 **Your Challenge:** Create the notebook `notebooks/04_1_probability_distributions.ipynb` locally, run the SciPy analytical computations and empirical KS-test, and verify your distributions before moving on to Module 4.2! 🚀📊[cite: 13]
+
+'''

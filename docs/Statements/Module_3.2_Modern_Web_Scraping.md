@@ -1,6 +1,4 @@
----
-layout: default
----
+'''Markdown
 
 # 🟢 < Module  3.2 > Modern Web Scraping for Data Science
 
@@ -38,3 +36,5 @@ When extracting data from HTML trees, target specific DOM elements using CSS sel
 
 ---
 > 💻 **Your Challenge:** Build and execute your web scraper locally, ensure polite rate limiting, and save your processed dataset before moving on to Module 3.3! 🚀📊
+
+'''

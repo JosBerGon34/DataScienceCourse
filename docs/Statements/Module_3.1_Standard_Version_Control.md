@@ -1,6 +1,4 @@
----
-layout: default
----
+'''Markdown
 
 🟢 < Module 3.1 > Standard Version Control & Git Flow for Data Science
 
@@ -84,3 +82,5 @@ Apply these operations directly to your project workspace:
     
 
 > 💻 **Your Challenge**: Execute this workflow on your terminal and set up your repository layout. When you are ready, let me know to move on to **Module 3.2: Modern Web Scraping for Data Science**! 🚀📊
+
+'''
