@@ -1,3 +1,6 @@
+---
+layout: default
+---
 
 # 🟢 < Module 3.3 > Relational Persistence with SQLAlchemy Core & DuckDB-SQLite
 

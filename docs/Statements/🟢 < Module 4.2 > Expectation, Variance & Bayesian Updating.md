@@ -1,3 +1,7 @@
+---
+layout: default
+---
+🟢 < Module 4.2 > Expectation, Variance & Bayesian Updating
 
 
 #### 🎯 Context & Objectives

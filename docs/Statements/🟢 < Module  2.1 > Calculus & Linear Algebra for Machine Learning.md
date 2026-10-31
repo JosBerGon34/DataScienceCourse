@@ -1,4 +1,9 @@
+---
+layout: default
+---
+
 🟢 < Module 2.1 > Calculus & Linear Algebra for Machine Learning
+
 ## 🎯 Context & Objectives
 In quantitative sociology and comparative political economy, country profiles are represented as continuous feature vectors derived from aggregated survey microdata (e.g., European Social Survey). Distance metrics determine cluster membership (e.g., $k$-means), while orthogonal projections isolate specific sub-dimensional influences.
 

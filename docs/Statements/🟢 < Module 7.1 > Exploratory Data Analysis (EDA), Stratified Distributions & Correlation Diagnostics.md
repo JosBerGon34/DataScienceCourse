@@ -1,3 +1,8 @@
+---
+layout: default
+---
+
+🟢 < Module 7.1 > Exploratory Data Analysis (EDA), Stratified Distributions & Correlation Diagnostics
 
 ##### 🎯 Context & Objectives
 

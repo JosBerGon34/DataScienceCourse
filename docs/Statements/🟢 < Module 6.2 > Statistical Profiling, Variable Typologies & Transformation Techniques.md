@@ -1,5 +1,9 @@
+---
+layout: default
+---
 
 
+🟢 < Module 6.2 > Statistical Profiling, Variable Typologies & Transformation Techniques
 
 ##### 🎯 Context & Objectives
 

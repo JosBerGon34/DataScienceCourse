@@ -1,5 +1,8 @@
+---
+layout: default
+---
 
-
+🟢 < Module 5.1 > NumPy & Pandas — High-Performance Data Ingestion, Merging & Reshaping
 
 #### 🎯 Context & Objectives
 

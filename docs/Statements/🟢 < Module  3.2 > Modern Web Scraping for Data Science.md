@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # 🟢 < Module  3.2 > Modern Web Scraping for Data Science
 
 ## 🎯 Context & Objectives
