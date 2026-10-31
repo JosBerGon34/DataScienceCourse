@@ -1,84 +1,36 @@
-[← Volver al Índice General](../index.md){: .back-to-index }
+# 🟢 < Module  3.2 > Modern Web Scraping for Data Science
 
-### 🎯 Context & Objectives
+## 🎯 Context & Objectives
+In modern Data Science, structured data is not always neatly packaged in CSVs or SQL databases. Often, valuable macroeconomic or sociological indicators must be harvested directly from live web pages or dynamic REST APIs.
 
-Traditional HTTP clients (like `requests`) often fail on modern web portals due to dynamic JavaScript rendering, client-side hydration, or basic bot detection mechanisms.
+In this exercise, you will build an ethical, robust web scraping pipeline using `BeautifulSoup` and `requests`, adhering to `robots.txt` guidelines and implementing rate limiting and error handling.
 
-In this exercise, you will build a modern, robust web scraping pipeline using **Playwright** (Python API) combined with **Parsel** or **pandas** for structural parsing. You will also set up an isolated virtual environment using **`uv`**, perfectly tailored for your CachyOS Linux system.
+---
 
-```
-uv add playwright parsel pandas
-uv run playwright install chromium
-```
-1. **Execution Context**:
-    
-    - Ensure your VS Code / VSCodium workspace selects the Python interpreter created within `.venv` by `uv`.
-        
+## 📑 Exercise Instructions
 
-#### 2. Syntactic / Algorithmic Level (Async Playwright & Dynamic Scraping)
+### 1. Architectural & Syntactic Specification
+When extracting data from HTML trees, target specific DOM elements using CSS selectors:
+* Use `requests.get(url, headers=headers)` with custom User-Agent strings to mimic legitimate browser requests.
+* Parse the raw text content via `BeautifulSoup(html_content, 'html.parser')`.
+* Implement polite scraping practices (e.g., `time.sleep(sec)`) to prevent server overloading.
 
-In your local script or notebook (`notebooks/03_2_web_scraping.ipynb`), implement the following technical architecture:
+---
 
-1. **Headless Browser Initialization**:
-    
-    - Launch a Playwright Chromium browser instance using the asynchronous API (`async play_wright()`) or synchronous context manager (`sync_api`).
-        
-    - Configure custom viewport dimensions and a modern User-Agent string within `browser.new_context()`.
-        
-2. **DOM Navigation & Element Waiting**:
-    
-    - Navigate to the target web page using `page.goto(url, wait_until="domcontentloaded")`.
-        
-    - Explicitly wait for the target data table or container element to render using `page.wait_for_selector("table")`.
-        
-3. **DOM Content Retrieval & Parsing**:
-    
-    - Extract rendered HTML content using `page.content()`.
-        
-    - Pass the raw HTML to **Parsel** (`parsel.Selector(text=html)`) or **pandas** (`pd.read_html(html)`) to retrieve tabular records cleanly using CSS or XPath selectors.
-        
+## 2. Practical Task
 
-#### 3. Applied Data Science Level (Country Metadata Extraction)
+1. **Target Identification**: Select a public target page containing tabular statistical data or indicators.
+2. **Scraper Implementation**: Write a Python script or notebook that:
+   * Sends an HTTP GET request with robust error handling (`try-except`, checking status codes `200`, `403`, `404`).
+   * Extracts target table rows and columns using BeautifulSoup selectors.
+   * Cleans and structures the extracted text into a pandas DataFrame.
+3. **Persistence**: Export the scraped dataset cleanly to `data/processed/scraped_data.csv`.
 
-Extract demographic/cultural metadata for European countries to enrich our core project pipeline:
+---
 
-1. **Target Data Source**:
-    
-    - Scrape tabular data from an open web source containing European nation details (e.g., Wikipedia/EU portal tables).
-        
-    - Extract at least 3 structural variables per country:
-        
-        - Country Name / ISO Code (e.g., `ES`, `DE`, `FR`).
-            
-        - Primary Official Language or Capital City.
-            
-        - Geographic / Cultural Region (e.g., Western Europe, Southern Europe, Nordic).
-            
-2. **Data Cleaning & Export**:
-    
-    - Strip reference markers (e.g., `[1]`, `[note A]`) using regular expressions (`re.sub(r'\[.*?\]', '', text)`).
-        
-    - Align country names or codes to match the standard `geo` / `CNTRY` keys used in Eurostat and ESS microdata.
-        
-    - Export the cleaned DataFrame to `data/processed/scraped_country_metadata.csv`.
-        
+## 🌐 Official References & Documentation
+* **Requests Library**: [Requests: HTTP for Humans™](https://requests.readthedocs.io/)
+* **Beautiful Soup Documentation**: [Beautiful Soup 4 Documentation](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 
-### 🌐 Official References for Documentation
-
-- **Playwright for Python Official Docs**: [Playwright Python API](https://playwright.dev/python/docs/intro)
-    
-- **Parsel Selector Library**: [Parsel Documentation](https://parsel.readthedocs.io/en/latest/)
-    
-- **`uv` Fast Python Package Manager**: [Astral `uv` Documentation](https://www.google.com/search?q=%5Bhttps://docs.astral.sh/uv/%5D\(https://docs.astral.sh/uv/\))
-    
-
-### 📚 Recommended Manuals & CheatSheets
-
-- **Playwright Cheat Sheet**: [ScrapingBee Playwright Python Guide](https://www.google.com/search?q=https://www.scrapingbee.com/blog/playwright-python/)
-    
-- **Parsel XPath/CSS Selectors**: [Scrapy & Parsel Selectors Guide](https://docs.scrapy.org/en/latest/topics/selectors.html)
-    
-
-💻 **Your Challenge**: Set up `uv`, install Playwright browser binaries, run the scraper script in your local environment, and export `scraped_country_metadata.csv`.
-
-When you complete it, let me know to proceed to **Exercise 3.3: SQL Database Persistence & Custom CSV Export**.
+---
+> 💻 **Your Challenge:** Build and execute your web scraper locally, ensure polite rate limiting, and save your processed dataset before moving on to Module 3.3! 🚀📊

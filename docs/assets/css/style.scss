@@ -24,37 +24,36 @@ section {
  * 2. CABECERA Y BOTONERA PROPORCIONAL                               *
  * ================================================================= */
 #header_wrap {
-background: transparent !important;
-background-image: none !important;
-box-shadow: none !important;
-border-bottom: none !important;
-padding: 2rem 0 !important;
-position: relative;
-z-index: 10;
+    background: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border-bottom: none !important;
+    padding: 2rem 0 !important;
+    position: relative;
+    z-index: 10;
 }
 
 #header_wrap .inner {
-background: transparent !important;
-background-image: none !important;
-max-width: min(1400px, 95vw) !important;
-width: 95% !important;
-margin: 0 auto !important;
-padding: 0 !important;
-box-shadow: none !important;
+    background: transparent !important;
+    background-image: none !important;
+    max-width: min(1400px, 95vw) !important;
+    width: 95% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    box-shadow: none !important;
 }
 
 #header {
-background: transparent !important;
-max-width: min(1400px, 95vw) !important;
-width: 100% !important;
-margin: 0 auto !important;
-box-sizing: border-box !important;
-position: relative !important;
-height: auto !important;
+    background: transparent !important;
+    max-width: min(1400px, 95vw) !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    height: auto !important;
 }
 
-/* Estilo unificado para los botones de la cabecera */
-#header .btn,
+#header .btn, 
 a.btn,
 .floating-nav-btn {
     background-color: #238636 !important;
@@ -68,7 +67,7 @@ a.btn,
     text-decoration: none !important;
 }
 
-#header .btn:hover,
+#header .btn:hover, 
 a.btn:hover,
 .floating-nav-btn:hover {
     background-color: #2ea043 !important;
@@ -77,7 +76,7 @@ a.btn:hover,
 }
 
 /* ================================================================= *
- * 3. MODO OSCURO GLOBAL Y TEXTO LÍQUIDO                             *
+ * 3. MODO OSCURO GLOBAL Y LIMPIEZA DE FONDOS                        *
  * ================================================================= */
 html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #main_content, .inner, .wrapper, section {
     background-color: #0d1117 !important;
@@ -87,11 +86,14 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #mai
 .markdown-body {
     background-color: transparent !important;
     color: #c9d1d9 !important;
-    font-size: 16px !important;
+    font-size: clamp(0.9rem, 1vw, 1rem) !important;
     width: 100% !important;
     max-width: 100% !important;
 }
 
+/* ================================================================= *
+ * 4. TEXTO Y PÁRRAFOS DEL MARKDOWN                                  *
+ * ================================================================= */
 .markdown-body p,
 .markdown-body ul,
 .markdown-body ol,
@@ -123,7 +125,7 @@ html, body, header, footer, #header_wrap, #footer_wrap, #main_content_wrap, #mai
 }
 
 /* ================================================================= *
- * 4. CELDAS DE CÓDIGO (Paneles oscuros con scroll seguro)           *
+ * 5. CELDAS DE CÓDIGO Y OUTPUTS: ANCHO 100% RESPONSIVE              *
  * ================================================================= */
 div.highlighter-rouge,
 .highlighter-rouge,
@@ -162,17 +164,8 @@ code.highlighter-rouge,
     border: none !important;
 }
 
-/* Syntax Highlighting */
-.highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr { color: #7ee787 !important; font-weight: bold; }
-.highlight .n, .highlight .nx { color: #c9d1d9 !important; }
-.highlight .s, .highlight .s1, .highlight .s2 { color: #a5d6ff !important; }
-.highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo, .highlight .m { color: #79c0ff !important; }
-.highlight .c, .highlight .c1, .highlight .cm, .highlight span.c, .highlight span.c1, .highlight span.cm { color: #8b949e !important; font-style: italic !important; }
-.highlight .ow, .highlight .o { color: #ff7b72 !important; }
-.highlight .nb { color: #d2a8ff !important; }
-
 /* ================================================================= *
- * 5. CONTENEDOR MAESTRO DE TABLAS (Paneles con scroll horizontal)   *
+ * 6. TABLAS ADAPTATIVAS Y CONTENEDORES MAESTROS                     *
  * ================================================================= */
 .markdown-body table,
 table,
@@ -217,7 +210,7 @@ table tr:nth-child(even) {
 }
 
 /* ================================================================= *
- * 6. BOTÓN DE RETORNO AL ÍNDICE                                    *
+ * 7. BOTÓN DE RETORNO AL ÍNDICE                                    *
  * ================================================================= */
 .back-to-index {
     display: inline-block;
@@ -235,22 +228,4 @@ table tr:nth-child(even) {
 .back-to-index:hover {
     background-color: #2ea043 !important;
     text-decoration: none;
-}
-
-/* ================================================================= *
- * 7. PROTECCIÓN RESPONSIVE PARA MÓVILES                             *
- * ================================================================= */
-@media (max-width: 768px) {
-    .floating-nav-btn {
-        position: static !important;
-        display: inline-block !important;
-        margin: 4px !important;
-        font-size: 11px !important;
-        padding: 6px 10px !important;
-    }
-    #header nav ul {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    }
 }

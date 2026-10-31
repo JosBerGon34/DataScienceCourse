@@ -1,40 +1,33 @@
-[← Volver al Índice General](../index.md){: .back-to-index }
 
-You are reviewing a legacy script designed to process an integer list, filter specific elements, compute their total sum, and check if the result is a prime number:
+## 🎯 Context & Objectives
+In professional Data Science and software engineering, writing functional code is only the first step. Code must be clean, modular, highly performant, and compliant with PEP 8 standards. 
 
+In this exercise, you will refactor legacy procedural scripts into modular Python functions, optimize pipeline execution speeds using generators and efficient looping structures, and implement an optimized primality testing algorithm to filter mathematical properties in numerical datasets.
 
-```
-# Inefficient original script
-numeros = [12, 15, 7, 22, 19, 30, 11, 4, 8, 17]
+---
 
-# 1. Filter even numbers
-pares = []
-for n in numeros:
-    if n % 2 == 0:
-        pares.append(n)
+## 📑 Exercise Instructions
 
-# 2. Manual summation
-suma_total = 0
-for p in pares:
-    suma_total = suma_total + p
+### 1. Mathematical & Syntactic Specification
+Let $N$ be a set of integers. A primality test function $isPrime(n)$ determines whether an integer $n > 1$ is a prime number by checking divisibility up to $\lfloor\sqrt{n}\rfloor$:
 
-# 3. Inefficient primality test
-def es_primo(numero):
-    if numero < 2:
-        return False
-    for i in range(2, numero):
-        if numero % i == 0:
-            return False
-    return True
+$$\forall d \in \{2, 3, \dots, \lfloor\sqrt{n}\rfloor\}, \quad n \pmod{d} \neq 0$$
 
-print(f"Resultado: {suma_total}, ¿Primo? {'Sí' if es_primo(suma_total) else 'No'}")
-```
+To optimize pipeline performance for large data streams, memory-efficient generators (`yield`) should be preferred over static list allocations when processing sequences of numbers.
 
+---
 
-#### **2. Refactoring Directives**
+### 2. Practical Task
 
-1. **Eliminate Redundant Iterations**: Avoid multiple manual `for` loops by unifying filtering and summation into built-in Python expressions (e.g., generator expressions with `sum()`).
-    
-2. **Mathematical Primality Optimization**: Reduce time complexity of the prime test from $O(N)$ to $O(\sqrt{N})$ by evaluating odd factors only up to $\lfloor\sqrt{N}\rfloor$.
-    
-3. **Software Design & Modularity**: Encapsulate the refactored pipeline into modular, type-hinted functions with clean docstrings.
+1. **Refactoring Legacy Code**: Take a procedural script containing repetitive loops and global variables, and refactor it into pure, modular functions with type hints (`int`, `float`, `list`) and docstrings.
+2. **Optimized Primality Function**: Write an efficient Python function `es_primo(n: int) -> bool` that implements the square-root trial division check.
+3. **Pipeline Stream Processing**: Create a generator function `generador_primos(n: int)` that yields prime numbers up to $n$, ensuring minimal memory footprint.
+
+---
+
+## 🌐 Official References & Documentation
+* **Python PEP 8 Style Guide**: [PEP 8 – Style Guide for Python Code](https://peps.python.org/pep-0008/)
+* **Python Efficiency & Generators**: [Python Iterators & Generators Guide](https://docs.python.org/3/tutorial/classes.html#iterators)
+
+---
+> 💻 **Your Challenge:** Refactor your local script, implement strict type checking, and test your optimization before moving on to Module 2.1! 🚀📊

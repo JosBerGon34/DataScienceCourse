@@ -1,4 +1,4 @@
-[← Volver al Índice General](../index.md){: .back-to-index }
+
 
 ##### 🎯 Context & Objectives
 

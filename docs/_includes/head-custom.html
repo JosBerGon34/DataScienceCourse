@@ -26,8 +26,8 @@
     right: calc((100vw - min(1400px, 95vw)) / 2 + 160px) !important;
 }
 
-#header .fork a,
-#header .btn,
+#header .fork a, 
+#header .btn, 
 a.btn.btn-github-fixed {
     background-color: #238636 !important;
     color: #ffffff !important;
@@ -46,8 +46,8 @@ a.btn.btn-github-fixed {
     #btn-index-course {
         right: auto !important;
     }
-    #header .fork a,
-    #header .btn,
+    #header .fork a, 
+    #header .btn, 
     a.btn.btn-github-fixed {
         right: auto !important;
     }
@@ -71,7 +71,6 @@ document.addEventListener("DOMContentLoaded", function() {
         githubLink.classList.add('floating-nav-btn', 'btn-github-fixed');
     }
 
-    // Forzar apertura en nueva pestaña para los enunciados
     const statementLinks = document.querySelectorAll('a[href*="Statements/"]');
     statementLinks.forEach(link => {
         link.setAttribute('target', '_blank');
