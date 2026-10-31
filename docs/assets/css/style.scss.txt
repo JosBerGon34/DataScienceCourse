@@ -23,36 +23,36 @@ section {
  * CABECERA TRANSPARENTE Y BOTÓN DE GITHUB                           *
  * ================================================================= */
 #header_wrap {
-background: transparent !important;
-background-image: none !important;
-box-shadow: none !important;
-border-bottom: none !important;
-padding: 30px 0 !important;
-position: relative;
-z-index: 10;
+    background: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border-bottom: none !important;
+    padding: 30px 0 !important;
+    position: relative;
+    z-index: 10;
 }
 
 /* Neutralizar el contenedor .inner exclusivo del header */
 #header_wrap .inner {
-background: transparent !important;
-background-image: none !important;
-max-width: 1400px !important;
-width: 95% !important;
-margin: 0 auto !important;
-padding: 0 !important;
-box-shadow: none !important;
+    background: transparent !important;
+    background-image: none !important;
+    max-width: 1400px !important;
+    width: 95% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    box-shadow: none !important;
 }
 
 #header {
-background: transparent !important;
-max-width: 1400px !important;
-width: 100% !important;
-margin: 0 auto !important;
-box-sizing: border-box !important;
+    background: transparent !important;
+    max-width: 1400px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
 }
 
 /* Estilo impecable para el botón de GitHub en la cabecera */
-#header .btn,
+#header .btn, 
 a.btn {
     background-color: #238636 !important;
     color: #ffffff !important;
@@ -63,13 +63,13 @@ a.btn {
     transition: background-color 0.2s ease;
 }
 
-#header .btn:hover,
+#header .btn:hover, 
 a.btn:hover {
     background-color: #2ea043 !important;
     text-decoration: none !important;
 }
-#header .fork a:hover,
-#header .btn:hover,
+#header .fork a:hover, 
+#header .btn:hover, 
 a.btn:hover {
     background-color: #2ea043 !important;
     text-decoration: none !important;
@@ -273,17 +273,17 @@ div.output_subarea table tr:nth-child(even) {
  * ELIMINACIÓN DE LA LÍNEA GRIS / FRANJA DEL HEADER (Midnight Theme) *
  * ================================================================= */
 #header {
-background: transparent !important;
-background-image: none !important;
-border-bottom: none !important;
-box-shadow: none !important;
-height: auto !important;
-position: fixed !important;
+    background: transparent !important;
+    background-image: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    height: auto !important;
+    position: fixed !important;
 }
 
 #header_wrap {
-background: transparent !important;
-background-image: none !important;
-border-bottom: none !important;
-box-shadow: none !important;
+    background: transparent !important;
+    background-image: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
 }
