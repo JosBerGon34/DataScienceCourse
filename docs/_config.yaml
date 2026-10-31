@@ -14,3 +14,10 @@ exclude:
   - node_modules/
   - Scripts/
   - .env
+
+defaults:
+  - scope:
+      path: "" 
+      type: "pages"
+    values:
+      layout: "default"
