@@ -1,17 +1,21 @@
 <style>
 /* ================================================================= *
- * BOTONES FLOTANTES SUPERIORES (Index Course & View on GitHub)      *
+ * CONTENEDOR FLOTANTE UNIFICADO DENTRO DE LA ZONA DE TRABAJO (1400px) *
  * ================================================================= */
 
-/* Estilo y posicionamiento fijo para el botón de Index Course */
-#header .index-course-btn {
+/* Contenedor que alinea ambos botones dentro del ancho máximo de trabajo */
+#header nav {
+    position: relative !important;
+    max-width: 1400px !important;
+    width: 95% !important;
+    margin: 0 auto !important;
+}
+
+/* Reglas comunes para los dos botones flotantes fijos */
+.floating-nav-btn {
     position: fixed !important;
     top: 20px !important;
-    right: 180px !important; /* Situado a la izquierda del botón de GitHub */
-    background-color: #21262d !important;
-    color: #c9d1d9 !important;
     padding: 10px 16px !important;
-    border: 1px solid #30363d !important;
     border-radius: 6px !important;
     font-weight: 600 !important;
     font-size: 13px !important;
@@ -22,34 +26,71 @@
     display: inline-block !important;
 }
 
-#header .index-course-btn:hover {
+/* 1. Botón de Index Course (a la izquierda del de GitHub) */
+#btn-index-course {
+    background-color: #21262d !important;
+    color: #c9d1d9 !important;
+    border: 1px solid #30363d !important;
+    /* Calculamos la posición respecto al borde derecho de la pantalla considerando el ancho centrado de 1400px */
+    right: calc((100vw - 1400px) / 2 + 160px) !important;
+}
+
+#btn-index-course:hover {
     background-color: #30363d !important;
     color: #ffffff !important;
     text-decoration: none !important;
     transform: translateY(-1px);
 }
 
-/* Posicionamiento fijo para el botón original de GitHub a la extrema derecha */
-#header .fork a {
-    position: fixed !important;
-    top: 20px !important;
-    right: 30px !important;
-    z-index: 9999 !important;
+/* 2. Botón de View on GitHub (a la extrema derecha del contenedor) */
+#header .fork a, 
+#header .btn, 
+a.btn.btn-github-fixed {
+    background-color: #238636 !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(240, 246, 252, 0.1) !important;
+    right: calc((100vw - 1400px) / 2 + 20px) !important;
+}
+
+#header .fork a:hover, 
+#header .btn:hover, 
+a.btn.btn-github-fixed:hover {
+    background-color: #2ea043 !important;
+    text-decoration: none !important;
+    transform: translateY(-1px);
+}
+
+/* Ajuste dinámico para pantallas más estrechas donde 1400px supera el ancho de pantalla */
+@media (max-width: 1440px) {
+    #btn-index-course {
+        right: 175px !important;
+    }
+    #header .fork a, 
+    #header .btn, 
+    a.btn.btn-github-fixed {
+        right: 20px !important;
+    }
 }
 </style>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const navUl = document.querySelector('#header nav ul');
-
+    
     // Inyectar el botón "Index Course" de forma automática si no existe
-    if (navUl && !document.querySelector('.index-course-btn')) {
+    if (navUl && !document.querySelector('#btn-index-course')) {
         const githubLi = document.querySelector('#header nav ul .fork');
         if (githubLi) {
             const indexLi = document.createElement('li');
-            indexLi.innerHTML = '<a href="https://josbergon34.github.io/DataScienceCourse/" class="index-course-btn">🏠 Index Course</a>';
+            indexLi.innerHTML = '<a href="https://josbergon34.github.io/DataScienceCourse/" id="btn-index-course" class="floating-nav-btn">🏠 Index Course</a>';
             navUl.insertBefore(indexLi, githubLi);
         }
+    }
+
+    // Asegurar clases en el botón de GitHub original
+    const githubLink = document.querySelector('#header .fork a');
+    if (githubLink && !githubLink.classList.contains('floating-nav-btn')) {
+        githubLink.classList.add('floating-nav-btn', 'btn-github-fixed');
     }
 });
 </script>
