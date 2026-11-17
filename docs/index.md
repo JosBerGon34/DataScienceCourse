@@ -42,7 +42,7 @@ This repository contains a **comprehensive curriculum redesign (Remodel) and syn
 | **6.1** | **Data Cleaning & Non-Response Code Strategies** | <a href="Statements/Module_6.1_Data_Cleaning.html" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [View Solution](Corrections/Ex6.1.md) |
 | **6.2** | **Statistical Profiling & Typologies** | <a href="Statements/Module_6.2_Statistical_Profiling.html" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [View Solution](Corrections/Ex6.2.md) |
 | **7.1** | **Exploratory Data Analysis (EDA) & Correlation** | <a href="Statements/Module_7.1_EDA_Correlation.html" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [View Solution](Corrections/Ex7.1.md) |
-| **8.1** | **Feature Engineering, PCA & Calibrated SMOTE** | *Coming Soon* | *Coming Soon* |
+| **8.1** | **Feature Engineering, PCA & Calibrated SMOTE** | <a href="Statements/Module_8.1_PCA_Calibrated_Resampling.html" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [View Solution](Corrections/Ex8.1.md) |
 | **9.1** | **Predictive Modeling & GroupKFold Validation** | *Coming Soon* | *Coming Soon* |
 | **10.1** | **Flask Deployment & Client Integration** | *Coming Soon* | *Coming Soon* |
 
