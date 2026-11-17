@@ -1,0 +1,32 @@
+# ==========================================================
+# KnowledgeDome - Core Workspace Profile (ReqJupCore.txt)
+# ==========================================================
+
+# --- 1. JupyterLab IDE & Kernel ---
+jupyterlab
+notebook
+ipykernel
+ipywidgets
+
+# --- 2. GitHub Integration & Notebook Diffs ---
+jupyterlab-git
+nbdime
+
+# --- 3. Data Science File Viewers & Editor LSP ---
+ipydatagrid
+jupyterlab_latex
+jupyterlab-lsp
+python-lsp-server
+
+# --- 4. Core Data, SQL & Environment ---
+numpy
+pandas
+pyarrow
+duckdb
+psycopg2-binary
+python-dotenv
+
+# --- 5. Core Visualization ---
+matplotlib
+seaborn
+plotly
