@@ -374,178 +374,120 @@ print(X_train_final.head(),'\n', X_test_final.head())
 
 
 ```python
-# Step 2, generating train data using SMOTE technique, in our case wi wont  use any macro region or economic clustering, just calculating euclidian distances
+# Step 2, generating train data using SMOTE technique, in our case we wont  use any macro region or economic clustering, just calculating euclidian distances
 # with our cntry variable.
 # Calibrated SMOTE oversampling (strictly on training set)
+
+# 1. Classify numeric cols and cntry group categorical col for SMOTE processing
+X_train_numeric = X_train_final.drop(columns=["cntry"], errors="ignore") if "cntry" in X_train_final.columns else X_train_final.copy()
+train_countries_orig = X_train_final["cntry"].values if "cntry" in X_train_final.columns else df81c.iloc[train_idx]["cntry"].values
+
+# 2. Apply Smote on numeric cols.
 smote = SMOTE(random_state=42)
-X_train_res, y_train_res = smote.fit_resample(X_train_final, y_train)
+X_train_res_num, y_train_res = smote.fit_resample(X_train_numeric, y_train)
 
-# Post-synthesis rounding for discrete/ordinal variables to remove synthetic floats
+# 3. Rounding values on discrete vars
 discrete_cols = ["lrscale", "n_nonresp", "has_nonresp"]
-print("Before rounding (synthetic sample check):")
-print(X_train_res[discrete_cols].tail(3))
-
 for col in discrete_cols:
-    if col in X_train_res.columns:
-        X_train_res[col] = X_train_res[col].round().astype(int)
+    if col in X_train_res_num.columns:
+        X_train_res_num[col] = X_train_res_num[col].round().astype(int)
 
-print("\nAfter rounding:")
-print(X_train_res[discrete_cols].tail(3))
-print(f"\nTrain class distribution post-SMOTE:\n{y_train_res.value_counts()}")
-print(f"Test set preserved intact: {X_test_final.shape}")
+# 4. Unify train, test tagging the rows wich are train , test and original or synthetic.
+n_orig = len(X_train_numeric)
+n_total = len(X_train_res_num)
+n_synth = n_total - n_orig
+
+df_train_sql = X_train_res_num.copy()
+df_train_sql["happy_high"] = y_train_res.values
+
+# Banderas de auditoría independientes
+df_train_sql["is_test"] = 0
+df_train_sql["is_synthetic"] = ([0] * n_orig) + ([1] * n_synth)
+
+# Inherit the country: the originals preserve their country; Synthetics inherit the country from the first n_orig records (or a neighbor mapping)
+# (For synthetic ones you can repeat the country of the base neighbor or assign them the country of origin directly)
+synthetic_countries = train_countries_orig[:n_synth] # or a neighbor allocation strategy
+df_train_sql["cntry"] = list(train_countries_orig) + list(synthetic_countries)
+
+# 5. Prepare the Test block intact
+df_test_sql = X_test_final.drop(columns=["cntry"], errors="ignore") if "cntry" in X_test_final.columns else X_test_final.copy()
+df_test_sql["happy_high"] = y_test.values
+df_test_sql["is_test"] = 1
+df_test_sql["is_synthetic"] = 0
+df_test_sql["cntry"] = df81c.iloc[test_idx]["cntry"].values
+
+# 6. Unify in the master table
+df_split_master = pd.concat([df_train_sql, df_test_sql], ignore_index=True)
 ```
-
-    Before rounding (synthetic sample check):
-           lrscale  n_nonresp  has_nonresp
-    43991      5.0          0            0
-    43992      8.0          0            0
-    43993      0.0          0            0
-    
-    After rounding:
-           lrscale  n_nonresp  has_nonresp
-    43991        5          0            0
-    43992        8          0            0
-    43993        0          0            0
-    
-    Train class distribution post-SMOTE:
-    happy_high
-    1    21997
-    0    21997
-    Name: count, dtype: int64
-    Test set preserved intact: (8064, 4)
-
 
 
 ```python
 # Lets compare our main columns, before and after with easy check of our statistical shape.
 # for example in the feature 'lrscale'
-print(X_train_final['lrscale'].describe(),'\n',X_train_res['lrscale'].describe())
+print('Before Smote dataframe:',df81c['lrscale'].describe(),'\n','Post Smote dataframe:',df_split_master['lrscale'].describe(),'\n Before Smote dataframe:',df81c.info(),'\n Post Smote dataframe:',df_split_master.info())
 ```
 
-    count    29435.000000
-    mean         5.058128
-    std          2.269095
+    <class 'pandas.DataFrame'>
+    RangeIndex: 37499 entries, 0 to 37498
+    Data columns (total 8 columns):
+     #   Column       Non-Null Count  Dtype  
+    ---  ------       --------------  -----  
+     0   lrscale      33057 non-null  float64
+     1   happy        37389 non-null  float64
+     2   trstprl      36805 non-null  float64
+     3   trstlgl      36843 non-null  float64
+     4   cntry        37499 non-null  str    
+     5   n_nonresp    37499 non-null  int64  
+     6   has_nonresp  37499 non-null  int64  
+     7   happy_high   37499 non-null  int64  
+    dtypes: float64(4), int64(3), str(1)
+    memory usage: 2.4 MB
+    <class 'pandas.DataFrame'>
+    RangeIndex: 52058 entries, 0 to 52057
+    Data columns (total 8 columns):
+     #   Column                     Non-Null Count  Dtype  
+    ---  ------                     --------------  -----  
+     0   lrscale                    52058 non-null  float64
+     1   n_nonresp                  52058 non-null  int64  
+     2   has_nonresp                52058 non-null  int64  
+     3   institutional_trust_index  52058 non-null  float64
+     4   happy_high                 52058 non-null  int64  
+     5   is_test                    52058 non-null  int64  
+     6   is_synthetic               52058 non-null  int64  
+     7   cntry                      52058 non-null  str    
+    dtypes: float64(2), int64(5), str(1)
+    memory usage: 3.3 MB
+    Before Smote dataframe: count    33057.000000
+    mean         5.063073
+    std          2.248181
     min          0.000000
     25%          4.000000
     50%          5.000000
     75%          7.000000
     max         10.000000
     Name: lrscale, dtype: float64 
-     count    43994.000000
-    mean         4.995181
-    std          2.270548
+     Post Smote dataframe: count    52058.000000
+    mean         5.007645
+    std          2.256915
     min          0.000000
     25%          4.000000
     50%          5.000000
     75%          6.000000
     max         10.000000
-    Name: lrscale, dtype: float64
+    Name: lrscale, dtype: float64 
+     Before Smote dataframe: None 
+     Post Smote dataframe: None
 
-
-
-```python
-# Lets view the changes, using our drawing function from EDA exercise.
-import matplotlib.pyplot as plt
-import seaborn as sns
-import pandas as pd
-
-def multivariate_plot(df, study_col, group_cols):
-
-
-    for group_col in group_cols:
-        groups = sorted(df[group_col].dropna().unique())
-        n_groups = len(groups)
-
-        fig, axes = plt.subplots(2, n_groups, figsize=(3 * n_groups, 7))
-        if n_groups == 1:
-            axes = axes[:, np.newaxis]  # asegurar 2D
-
-        for j, g in enumerate(groups):
-            subset = df[df[group_col] == g][study_col].dropna()
-
-            # --- Fila 0: Bar plot ---
-            ax_bar = axes[0, j]
-            counts = subset.value_counts().sort_index()
-            ax_bar.bar(counts.index.astype(str), counts.values, color='steelblue', edgecolor='white')
-            ax_bar.set_title(f"{study_col} | {group_col}={g}\n(n={len(subset)})", fontsize=8)
-            ax_bar.set_xlabel("")
-            ax_bar.set_ylabel("Frecuencia")
-
-            # --- Fila 1: Violin + box inner ---
-            ax_violin = axes[1, j]
-            sns.violinplot(y=subset, ax=ax_violin, inner='box',
-                           color='steelblue', cut=0, bw_adjust=0.7)
-            ax_violin.set_title(f"{study_col} | {group_col}={g}\n(n={len(subset)})", fontsize=8)
-            ax_violin.set_xlabel("")
-            ax_violin.set_ylabel("")
-
-        plt.suptitle(f"{study_col} × {group_col}", fontsize=12, y=1.02)
-        plt.tight_layout()
-        plt.show()
-
-```
 
 
 ```python
 #Lets prepare the data, converting again the split function(series data) in to dataframe. Making 2 different study blocks, pre Smote and post Smote.
-df_pre = X_train_final[["lrscale", "institutional_trust_index"]].copy()
-df_pre["Stage"] = "1_Pre_SMOTE"
-
-df_post = X_train_res[["lrscale", "institutional_trust_index"]].copy()
-df_post["Stage"] = "2_Post_SMOTE"
-
-df_smote_audit = pd.concat([df_pre, df_post], ignore_index=True)
-
-
-multivariate_plot(df_smote_audit, study_col="lrscale", group_cols=["Stage"])
-
-```
-
-
-    
-![png](Ex8.1_files/Ex8.1_14_0.png)
-    
-
-
-
-    
-![png](Ex8.1_files/Ex8.1_14_1.png)
-    
-
-
-
-```python
-# The  bar plot from a continuous variable "institutional_trust_index" wont be painted, anyways,  we can observe how varies the statistical shape of our features using smote
-# due balancing the multivariate classes, making more complex and capable our train data, to our future predictive model.
-# In conclusion, this asymetric method of sinthetically create more samples of our minority classes, help us to capture better the intervariable relations we need to
-# balance our data before applying machine learning.
-# Lets store our data in an unified table in to our local sql server:
 import os
 import pandas as pd
 import sqlalchemy
 from dotenv import load_dotenv
 
 load_dotenv()
-
-# 1. prepare our train data block (Smote and rounded values)
-df_train_sql = X_train_res.copy()
-df_train_sql["happy_high"] = y_train_res.values
-df_train_sql["split_set"] = "train"
-# the original rows are not marked with "synthetic"
-orig_countries = df81c.iloc[train_idx]["cntry"].tolist()
-n_synth = len(df_train_sql) - len(orig_countries)
-df_train_sql["cntry"] = orig_countries + ["SYNTHETIC"] * n_synth
-
-# 2. Preparing test data block (100% non processed)
-df_test_sql = X_test_final.copy()
-df_test_sql["happy_high"] = y_test.values
-df_test_sql["split_set"] = "test"
-df_test_sql["cntry"] = df81c.iloc[test_idx]["cntry"].values
-
-# 3. Unify all the data in one relational table.
-df_split_master = pd.concat([df_train_sql, df_test_sql], ignore_index=True)
-
-# 4. Upload to our local sql database, using our credentials on ".env" file.
 db_uri = (
     f"postgresql+psycopg2://{os.getenv('PGUSER')}:{os.getenv('PGPASSWORD')}"
     f"@{os.getenv('PGHOST')}:{os.getenv('PGPORT')}/{os.getenv('PGDATABASE')}"
@@ -556,6 +498,8 @@ table_name = "ess_ex81_smote_split"
 df_split_master.to_sql(table_name, con=engine, if_exists="replace", index=False)
 
 print(f"✅ Tabla '{table_name}' persistida en PostgreSQL ({len(df_split_master)} filas).")
+
+
 ```
 
     ✅ Tabla 'ess_ex81_smote_split' persistida en PostgreSQL (52058 filas).
@@ -563,5 +507,6 @@ print(f"✅ Tabla '{table_name}' persistida en PostgreSQL ({len(df_split_master)
 
 
 ```python
-#Our synthetic train data doesnt have cntry key value,it wasnt necesary saving the group variable value as an exercise.
+# In conclusion, this asymetric method of sinthetically create more samples of our minority classes, help us to capture better the intervariable relations we need to
+# balance our data before applying machine learning. its important to remember that the synth data cant be in our test split, thats why we tagged them with audit variables.
 ```
