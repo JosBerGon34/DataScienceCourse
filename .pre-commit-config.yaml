@@ -1,4 +1,3 @@
-# .pre-commit-config.yaml (sin nbstripout)
 repos:
   - repo: local
     hooks:
@@ -6,13 +5,19 @@ repos:
         name: Generate Markdown in docs/Corrections
         entry: >
           bash -c '
+            set -e
+            mkdir -p docs/Corrections
+            JUPYTER_BIN="./.venv-core/bin/jupyter"
+            [ -x "$JUPYTER_BIN" ] || JUPYTER_BIN="jupyter"
             for nb in "$@"; do
               base=$(basename "$nb" .ipynb)
-              jupyter nbconvert --to markdown "$nb" --output-dir docs/Corrections/
+              "$JUPYTER_BIN" nbconvert --to markdown "$nb" --output-dir docs/Corrections/
               git add "docs/Corrections/${base}.md"
-              git add "docs/Corrections/${base}_files" 2>/dev/null || true
+              if [ -d "docs/Corrections/${base}_files" ]; then
+                git add "docs/Corrections/${base}_files"
+              fi
             done
-          '
+          ' --
         files: ^notebooks/.*\.ipynb$
         exclude: ^notebooks/00_template\.ipynb$
         language: system
