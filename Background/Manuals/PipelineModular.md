@@ -1,14 +1,16 @@
+# Custom wrapper+Imblearn pipeline
 from dataclasses import dataclass, field
 from enum import Enum
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.cluster import KMeans
-from sklearn.model_selection import GroupKFold, GridSearchCV, cross_validate
-from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier, HistGradientBoostingClassifier
 from sklearn.naive_bayes import GaussianNB
+from sklearn.linear_model import LogisticRegression
 from sklearn.dummy import DummyClassifier
-from sklearn.metrics import classification_report, roc_auc_score, f1_score, balanced_accuracy_score
+from sklearn.model_selection import GroupKFold, GridSearchCV, cross_validate
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from sklearn.metrics import roc_auc_score, f1_score, balanced_accuracy_score
 from imblearn.over_sampling import SMOTE
 from imblearn.pipeline import Pipeline as ImbPipeline
 
@@ -110,18 +112,27 @@ def run_model(
         "dummy": DummyClassifier(strategy="most_frequent"),
         "logistic": LogisticRegression(solver="saga", max_iter=1000, random_state=seed),
         "nb": GaussianNB(),
+        "rf": RandomForestClassifier(n_estimators=200, random_state=seed, n_jobs=1),
+        "gb": HistGradientBoostingClassifier(random_state=seed),
     }
     GRIDS = {
-        "logistic": {"model__C": [0.01, 0.1, 1.0, 10.0], "model__penalty": ["l1", "l2"]},
+        "logistic": {"model__C": [0.01, 0.1, 1.0, 10.0], "model__l1_ratio": [0.0, 1.0]},
         "nb": {"model__var_smoothing": [1e-9, 1e-7, 1e-5]},
+        "rf": {"model__max_depth": [4, 8, None], "model__min_samples_leaf": [5, 15]},
+        "gb": {"model__max_depth": [3, 6], "model__learning_rate": [0.03, 0.1]},
     }
 
-    # Build dynamic pipeline steps based on switches
+    if model_type not in MODELS:
+        raise ValueError(f"Unsupported model_type '{model_type}'. Available: {list(MODELS.keys())}")
+
+    # 1. Build dynamic pipeline steps (skip scaling for tree-based models)
     steps = []
-    if output.spec.scaler_type == "standard":
-        steps.append(("scaler", StandardScaler()))
-    elif output.spec.scaler_type == "minmax":
-        steps.append(("scaler", MinMaxScaler(feature_range=(0, 10))))
+    tree_models = {"rf", "gb", "dummy"}
+    if model_type not in tree_models:
+        if output.spec.scaler_type == "standard":
+            steps.append(("scaler", StandardScaler()))
+        elif output.spec.scaler_type == "minmax":
+            steps.append(("scaler", MinMaxScaler(feature_range=(0, 10))))
 
     if use_smote and model_type != "dummy":
         steps.append(("smote", SMOTE(random_state=seed)))
@@ -129,36 +140,48 @@ def run_model(
     steps.append(("model", MODELS[model_type]))
     pipe = ImbPipeline(steps)
 
+    # 2. Precompute GroupKFold splits (avoids ImbPipeline groups routing conflicts)
     gkf = GroupKFold(n_splits=n_splits)
+    cv_splits = list(gkf.split(output.X_train, output.y_train, output.groups_train))
     metrics_summary = {}
 
-    # 1. Optional Hyperparameter Tuning (only if grid_search=True)
+    # 3. Optional Hyperparameter Tuning
     if grid_search and model_type in GRIDS:
-        search = GridSearchCV(pipe, GRIDS[model_type], cv=gkf, scoring="roc_auc", n_jobs=-1)
-        search.fit(output.X_train, output.y_train, groups=output.groups_train)
+        search = GridSearchCV(
+            pipe,
+            GRIDS[model_type],
+            cv=cv_splits,
+            scoring="roc_auc",
+            n_jobs=1,
+            error_score="raise",
+        )
+        search.fit(output.X_train, output.y_train)
         best_estimator = search.best_estimator_
         metrics_summary["best_params"] = search.best_params_
     else:
         best_estimator = pipe
 
-    # 2. Optional GroupKFold Cross-Validation (SMOTE & Scaler run strictly inside each fold)
+    # 4. Optional GroupKFold Cross-Validation
     if use_cv:
         cv_res = cross_validate(
             best_estimator,
             output.X_train,
             output.y_train,
-            groups=output.groups_train,
-            cv=gkf,
+            cv=cv_splits,
             scoring=["roc_auc", "f1_macro", "balanced_accuracy"],
         )
         metrics_summary["cv_roc_auc"] = f"{cv_res['test_roc_auc'].mean():.4f} ± {cv_res['test_roc_auc'].std():.4f}"
         metrics_summary["cv_f1_macro"] = f"{cv_res['test_f1_macro'].mean():.4f} ± {cv_res['test_f1_macro'].std():.4f}"
         metrics_summary["cv_bal_acc"] = f"{cv_res['test_balanced_accuracy'].mean():.4f} ± {cv_res['test_balanced_accuracy'].std():.4f}"
 
-    # 3. Final fit on full train & evaluation on pristine test
+    # 5. Final fit on full train & evaluation on pristine test
     best_estimator.fit(output.X_train, output.y_train)
     y_pred = best_estimator.predict(output.X_test)
-    y_prob = best_estimator.predict_proba(output.X_test)[:, 1] if hasattr(best_estimator, "predict_proba") else y_pred
+    y_prob = (
+        best_estimator.predict_proba(output.X_test)[:, 1]
+        if hasattr(best_estimator, "predict_proba")
+        else y_pred
+    )
 
     metrics_summary["test_roc_auc"] = round(roc_auc_score(output.y_test, y_prob), 4)
     metrics_summary["test_f1_macro"] = round(f1_score(output.y_test, y_pred, average="macro"), 4)
@@ -175,14 +198,14 @@ def run_model(
 micro_cols = [
     ColumnSpec("lrscale",                   VarType.DISCRETE,   transform=Transform.IDENTITY),
     ColumnSpec("institutional_trust_index", VarType.CONTINUOUS, transform=Transform.IDENTITY),
-    ColumnSpec("n_nonresp",                 VarType.DISCRETE,   transform=Transform.IDENTITY),
-    ColumnSpec("has_nonresp",               VarType.DISCRETE,   transform=Transform.IDENTITY),
+    #ColumnSpec("n_nonresp",                 VarType.DISCRETE,   transform=Transform.IDENTITY),
+    #ColumnSpec("has_nonresp",               VarType.DISCRETE,   transform=Transform.IDENTITY),
 ]
 
 macro_cols = [
-    ColumnSpec("gdp_growth",   VarType.CONTINUOUS, transform=Transform.IDENTITY),
-    ColumnSpec("inflation",    VarType.CONTINUOUS, transform=Transform.REVERSE),  # Linear inversion (safe for negatives)
-    ColumnSpec("unemployment", VarType.CONTINUOUS, transform=Transform.REVERSE),  # Linear inversion
+    ColumnSpec("gdpcapitapct",   VarType.CONTINUOUS, transform=Transform.IDENTITY),
+    ColumnSpec("inflationpct",    VarType.CONTINUOUS, transform=Transform.REVERSE),  # Linear inversion (safe for negatives)
+    ColumnSpec("unemploymentpct", VarType.CONTINUOUS, transform=Transform.REVERSE),  # Linear inversion
 ]
 
 audit_cols = [
@@ -206,7 +229,7 @@ SPEC_REGISTRY = {
         columns=macro_cols + audit_cols,
         target="happy_high",
         group="cntry",
-        cluster_cols=["gdp_growth", "inflation", "unemployment"],
+        cluster_cols=["gdpcapitapct", "inflationpct", "unemploymentpct"],
         n_clusters=3,
         use_clustering=True,        # Generates KMeans macro_cluster on train
         scaler_type="standard",
@@ -215,7 +238,7 @@ SPEC_REGISTRY = {
         columns=micro_cols + macro_cols + audit_cols,
         target="happy_high",
         group="cntry",
-        cluster_cols=["gdp_growth", "inflation", "unemployment"],
+        cluster_cols=["gdpcapitapct", "inflationpct", "unemploymentpct"],
         n_clusters=3,
         use_clustering=True,        # Combines micro + macro + KMeans cluster
         scaler_type="standard",
@@ -274,7 +297,7 @@ for exp in EXPERIMENTS:
     spec = SPEC_REGISTRY[exp["spec_key"]]
     
     # Layer 1: Immutable feature preparation
-    prep_out = prepare_features(df91, spec=spec, seed=42)
+    prep_out = prepare_features(df912, spec=spec, seed=42)
     
     # Layer 2: Configurable ImbPipeline execution
     pipe, metrics = run_model(
