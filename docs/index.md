@@ -43,7 +43,7 @@ This repository contains a **comprehensive curriculum redesign (Remodel) and syn
 | **6.2** | **Statistical Profiling & Typologies** | <a href="Statements/Module_6.2_Statistical_Profiling.html" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [View Solution](Corrections/Ex6.2.md) |
 | **7.1** | **Exploratory Data Analysis (EDA) & Correlation** | <a href="Statements/Module_7.1_EDA_Correlation.html" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [View Solution](Corrections/Ex7.1.md) |
 | **8.1** | **Feature Engineering, PCA & Calibrated SMOTE** | <a href="Statements/Module_8.1_PCA_Calibrated_Resampling.html" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [View Solution](Corrections/Ex8.1.md) |
-| **9.1** | **Predictive Modeling & GroupKFold Validation** | <a href="Statements/Module_9.1_Predictive_Modeling_Cross-Validation.html" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [View Solution pt1](Corrections/Ex9.1.md)[View Solution pt2](Corrections/Ex9.12.md) |
+| **9.1** | **Predictive Modeling & GroupKFold Validation** | [View Statement ↗](Statements/Module_9.1_Predictive_Modeling_Cross-Validation.html) | [Part 1 (Corrections)](Corrections/Ex9.1.md)  •  [Part 2 (Corrections)](Corrections/Ex9.12.md) |
 | **10.1** | **Flask Deployment & Client Integration** | *Coming Soon* | *Coming Soon* |
 
 ---
