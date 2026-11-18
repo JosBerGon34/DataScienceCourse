@@ -1,5 +1,3 @@
-```python
------------------------------------------------------------------------------
 DataScienceCourse/
 ├── notebooks/
 │   ├── 00_template.ipynb           # Template, for copying and having relative paths functional.
@@ -14,9 +12,6 @@ DataScienceCourse/
         "DATA": DATA_DIR,
         "TABLES": TABLES_DIR,
         "PROCESSED": PROCESSED_DATA_DIR
------------------------------------------------------------------------------
-```
-
 
 ```python
 %load_ext autoreload
@@ -36,10 +31,10 @@ from src import setup_workspace, query_to_df, ds3on1
 paths = setup_workspace()
 
 # 2. Consultar directamente a PostgreSQL (vía DuckDB ATTACH)
-# df = query_to_df("SELECT * FROM db.EuInfo;")
+#df = query_to_df("SELECT * FROM db.surveys;")
 
 # 3. Análisis univariable 3-en-1
-# ds3on1(df, 'happy', Desc=True, Stat=True, Graph=True)
+#ds3on1(df, 'happy', Desc=True, Stat=True, Graph=True)
 ```
 
     ✅ Workspace anclado en: /home/josu/Documentos/DataScienceCourse
@@ -236,7 +231,7 @@ def clean_and_count(df: pd.DataFrame):
     df["has_nonresp"] = (df["n_nonresp"] > 0).astype(int)
     return df
 
-# 2. Declare asymmetric Hot-deck imputation using isolated Generator (PCG64)
+# 2. Declare asymmetric Hot-deck imputation using isolated Generator (PCG64)[cite: 7]
 def hot_deck_impute_split(X_train: pd.DataFrame, X_test: pd.DataFrame, seed: int = SEED):
     rng = np.random.default_rng(seed)
     X_tr, X_te = X_train.copy(), X_test.copy()
@@ -309,15 +304,19 @@ df81c['happy_high'].describe()
 
 ```python
 del df81
-
 ```
 
 
 ```python
 # Step 1.2, Lets declare the variable groups for a clean split train/test function.
+
 groups= df81c["cntry"]
 X= df81c[["lrscale", "trstprl", "trstlgl", "n_nonresp", "has_nonresp"]].copy()
 y= df81c["happy_high"].copy()
+```
+
+
+```python
 # Step 1.2, before dimensionality reduction and artifically sampled by smote our train group, we will have to hot-deck impute on our X train test  data, filling NAN values
 # Group train/test split by country
 gss = GroupShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
@@ -332,127 +331,221 @@ X_train_imp, X_test_imp, = hot_deck_impute_split(X_train, X_test, seed=42)
 
 
 ```python
+# Step 1.3: Apply PCA (Principal Component Analysis) to fuse features that measure
+# the same underlying construct (institutional trust) and show strong collinearity
+# (e.g., |r| >= 0.7), condensing their shared variance into a single continuous index
+# fitted strictly on X_train to prevent data leakage.
+
+# Dimensionality reduction on institutional trust block (fit on train only)
 trust_cols = ["trstprl", "trstlgl"]
-
-# --- Fit the scaler ONLY ONCE in train ---
 scaler = StandardScaler()
-X_tr_scaled = scaler.fit_transform(X_train_imp[trust_cols])
-X_te_scaled = scaler.transform(X_test_imp[trust_cols])
-
-# --- PCA (fit only in train) ---
 pca = PCA(n_components=1, random_state=42)
-X_train_imp["institutional_trust_index"] = pca.fit_transform(X_tr_scaled)
-X_test_imp["institutional_trust_index"] = pca.transform(X_te_scaled)
 
-# --- Arithmetic mean (same standardized basis) ---
-X_train_imp["trust_mean"] = X_tr_scaled.mean(axis=1)
-X_test_imp["trust_mean"] = X_te_scaled.mean(axis=1)
+X_train_imp["institutional_trust_index"] = pca.fit_transform(
+    scaler.fit_transform(X_train_imp[trust_cols])
+)
+X_test_imp["institutional_trust_index"] = pca.transform(
+    scaler.transform(X_test_imp[trust_cols])
+)
 
-# --- Comparison of variance explained ---
-var_total = X_tr_scaled.var(axis=0).sum() # ← axis=0 (per column)
+print(f"Explained variance by PC1: {pca.explained_variance_ratio_[0]:.2%}")
 
-var_pca = pca.explained_variance_ratio_[0] * var_total
-var_mean = X_tr_scaled.mean(axis=1).var()
+# Drop raw trust features after combining
+X_train_final = X_train_imp.drop(columns=trust_cols)
+X_test_final = X_test_imp.drop(columns=trust_cols)
 
-print(f"Total block variance: {var_total:.4f}")
-print(f"Variance explained by PCA (PC1): {var_pca:.4f} ({var_pca/var_total:.2%})")
-print(f"Variance explained by mean: {var_mean:.4f} ({var_mean/var_total:.2%})")
-print(f"Difference: PCA captures {(var_pca-var_mean)/var_total:.2%} more than average")
-
-# --- Drop raw features + trust_mean, keep only the PCA index ---
-X_train_final = X_train_imp.drop(columns=trust_cols + ["trust_mean"])
-X_test_final = X_test_imp.drop(columns=trust_cols + ["trust_mean"])
+print(X_train_final.head(),'\n', X_test_final.head())
 ```
 
-    Total block variance: 2.0000
-    Variance explained by PCA (PC1): 1.6256 (81.28%)
-    Variance explained by mean: 0.8128 (40.64%)
-    Difference: PCA captures 40.64% more than average
+    Explained variance by PC1: 81.28%
+       lrscale  n_nonresp  has_nonresp  institutional_trust_index
+    0      3.0          0            0                  -1.599663
+    1      8.0          0            0                  -1.332600
+    2      5.0          0            0                  -0.292122
+    3      5.0          0            0                  -1.593491
+    4      3.0          0            0                  -1.596577 
+         lrscale  n_nonresp  has_nonresp  institutional_trust_index
+    13     10.0          0            0                   0.238918
+    17      5.0          0            0                  -2.649398
+    21      9.0          0            0                  -1.338772
+    32      5.0          0            0                  -1.599663
+    42      3.0          0            0                  -1.599663
 
 
 
 ```python
------------------------------------------------------------------------------
-# As we can see, our method using PCA1, normalizing with standard scaler for our new variable is way better than doing the mean.
-# Also hot-deck helped us to not deviate our statistical shape, it take count about the original distribution.
------------------------------------------------------------------------------
-```
+# Step 2, generating train data using SMOTE technique, in our case wi wont  use any macro region or economic clustering, just calculating euclidian distances
+# with our cntry variable.
+# Calibrated SMOTE oversampling (strictly on training set)
+smote = SMOTE(random_state=42)
+X_train_res, y_train_res = smote.fit_resample(X_train_final, y_train)
 
-
-```python
-# Step 2: Calibrated SMOTE oversampling (strictly on training set)
-# SMOTENC is used, which adapts to these types of datasets: 
-# it interpolates numerical features using Euclidean distance 
-# and assigns the categorical value (cntry) as the mode of the k nearest neighbors."
-
-from imblearn.over_sampling import SMOTENC
-
-# 1. Re-attach cntry to the features DataFrame (only for SMOTENC)
-X_train_with_cntry = X_train_final.copy()
-X_train_with_cntry["cntry"] = df81c.iloc[train_idx]["cntry"].values
-
-#2. SMOTENC: cntry is the last column (index -1 or its position)
-categorical_idx = list(X_train_with_cntry.columns).index("cntry")
-smote_nc = SMOTENC(categorical_features=[categorical_idx], random_state=42)
-X_train_res, y_train_res = smote_nc.fit_resample(X_train_with_cntry, y_train)
-
-#3. Rounding of discrete variables
+# Post-synthesis rounding for discrete/ordinal variables to remove synthetic floats
 discrete_cols = ["lrscale", "n_nonresp", "has_nonresp"]
+print("Before rounding (synthetic sample check):")
+print(X_train_res[discrete_cols].tail(3))
+
 for col in discrete_cols:
     if col in X_train_res.columns:
         X_train_res[col] = X_train_res[col].round().astype(int)
 
-# 4. Separate cntry from features (not predictor, only audit)
-train_countries_res = X_train_res.pop("cntry") # removes and returns the column
-
-#5. Audit flags
-n_orig = len(X_train_final)
-n_synth = len(X_train_res) - n_orig
-
-df_train_sql = X_train_res.copy()
-df_train_sql["happy_high"] = y_train_res.values
-df_train_sql["is_test"] = 0
-df_train_sql["is_synthetic"] = ([0] * n_orig) + ([1] * n_synth)
-df_train_sql["cntry"] = train_countries_res.values
-
-#6. Test intact
-df_test_sql = X_test_final.copy()
-df_test_sql["happy_high"] = y_test.values
-df_test_sql["is_test"] = 1
-df_test_sql["is_synthetic"] = 0
-df_test_sql["cntry"] = df81c.iloc[test_idx]["cntry"].values
-
-#7. Unify
-df_split_master = pd.concat([df_train_sql, df_test_sql], ignore_index=True)   
+print("\nAfter rounding:")
+print(X_train_res[discrete_cols].tail(3))
+print(f"\nTrain class distribution post-SMOTE:\n{y_train_res.value_counts()}")
+print(f"Test set preserved intact: {X_test_final.shape}")
 ```
 
-
-```python
-#Lets check how many NAN values has the cntry variable when is_synthethic is 1.
-
-print("NaN in cntry (synthetic rows):", df_split_master.loc[df_split_master["is_synthetic"] == 1, "cntry"].isna().sum())  
-```
-
-    NaN in cntry (synthetic rows): 0
+    Before rounding (synthetic sample check):
+           lrscale  n_nonresp  has_nonresp
+    43991      5.0          0            0
+    43992      8.0          0            0
+    43993      0.0          0            0
+    
+    After rounding:
+           lrscale  n_nonresp  has_nonresp
+    43991        5          0            0
+    43992        8          0            0
+    43993        0          0            0
+    
+    Train class distribution post-SMOTE:
+    happy_high
+    1    21997
+    0    21997
+    Name: count, dtype: int64
+    Test set preserved intact: (8064, 4)
 
 
 
 ```python
------------------------------------------------------------------------------
+# Lets compare our main columns, before and after with easy check of our statistical shape.
+# for example in the feature 'lrscale'
+print(X_train_final['lrscale'].describe(),'\n',X_train_res['lrscale'].describe())
+```
+
+    count    29435.000000
+    mean         5.058128
+    std          2.269095
+    min          0.000000
+    25%          4.000000
+    50%          5.000000
+    75%          7.000000
+    max         10.000000
+    Name: lrscale, dtype: float64 
+     count    43994.000000
+    mean         4.995181
+    std          2.270548
+    min          0.000000
+    25%          4.000000
+    50%          5.000000
+    75%          6.000000
+    max         10.000000
+    Name: lrscale, dtype: float64
+
+
+
+```python
+# Lets view the changes, using our drawing function from EDA exercise.
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+
+def multivariate_plot(df, study_col, group_cols):
+
+
+    for group_col in group_cols:
+        groups = sorted(df[group_col].dropna().unique())
+        n_groups = len(groups)
+
+        fig, axes = plt.subplots(2, n_groups, figsize=(3 * n_groups, 7))
+        if n_groups == 1:
+            axes = axes[:, np.newaxis]  # asegurar 2D
+
+        for j, g in enumerate(groups):
+            subset = df[df[group_col] == g][study_col].dropna()
+
+            # --- Fila 0: Bar plot ---
+            ax_bar = axes[0, j]
+            counts = subset.value_counts().sort_index()
+            ax_bar.bar(counts.index.astype(str), counts.values, color='steelblue', edgecolor='white')
+            ax_bar.set_title(f"{study_col} | {group_col}={g}\n(n={len(subset)})", fontsize=8)
+            ax_bar.set_xlabel("")
+            ax_bar.set_ylabel("Frecuencia")
+
+            # --- Fila 1: Violin + box inner ---
+            ax_violin = axes[1, j]
+            sns.violinplot(y=subset, ax=ax_violin, inner='box',
+                           color='steelblue', cut=0, bw_adjust=0.7)
+            ax_violin.set_title(f"{study_col} | {group_col}={g}\n(n={len(subset)})", fontsize=8)
+            ax_violin.set_xlabel("")
+            ax_violin.set_ylabel("")
+
+        plt.suptitle(f"{study_col} × {group_col}", fontsize=12, y=1.02)
+        plt.tight_layout()
+        plt.show()
+
+```
+
+
+```python
+#Lets prepare the data, converting again the split function(series data) in to dataframe. Making 2 different study blocks, pre Smote and post Smote.
+df_pre = X_train_final[["lrscale", "institutional_trust_index"]].copy()
+df_pre["Stage"] = "1_Pre_SMOTE"
+
+df_post = X_train_res[["lrscale", "institutional_trust_index"]].copy()
+df_post["Stage"] = "2_Post_SMOTE"
+
+df_smote_audit = pd.concat([df_pre, df_post], ignore_index=True)
+
+
+multivariate_plot(df_smote_audit, study_col="lrscale", group_cols=["Stage"])
+
+```
+
+
+    
+![png](Ex8.1_files/Ex8.1_14_0.png)
+    
+
+
+
+    
+![png](Ex8.1_files/Ex8.1_14_1.png)
+    
+
+
+
+```python
+# The  bar plot from a continuous variable "institutional_trust_index" wont be painted, anyways,  we can observe how varies the statistical shape of our features using smote
+# due balancing the multivariate classes, making more complex and capable our train data, to our future predictive model.
 # In conclusion, this asymetric method of sinthetically create more samples of our minority classes, help us to capture better the intervariable relations we need to
-# balance our data before applying machine learning. its important to remember that the synth data cant be in our test split, thats why we tagged them with audit variables.
-# Now let's store this table in to local sql server.
------------------------------------------------------------------------------
-```
-
-
-```python
+# balance our data before applying machine learning.
+# Lets store our data in an unified table in to our local sql server:
 import os
 import pandas as pd
 import sqlalchemy
 from dotenv import load_dotenv
 
 load_dotenv()
+
+# 1. prepare our train data block (Smote and rounded values)
+df_train_sql = X_train_res.copy()
+df_train_sql["happy_high"] = y_train_res.values
+df_train_sql["split_set"] = "train"
+# the original rows are not marked with "synthetic"
+orig_countries = df81c.iloc[train_idx]["cntry"].tolist()
+n_synth = len(df_train_sql) - len(orig_countries)
+df_train_sql["cntry"] = orig_countries + ["SYNTHETIC"] * n_synth
+
+# 2. Preparing test data block (100% non processed)
+df_test_sql = X_test_final.copy()
+df_test_sql["happy_high"] = y_test.values
+df_test_sql["split_set"] = "test"
+df_test_sql["cntry"] = df81c.iloc[test_idx]["cntry"].values
+
+# 3. Unify all the data in one relational table.
+df_split_master = pd.concat([df_train_sql, df_test_sql], ignore_index=True)
+
+# 4. Upload to our local sql database, using our credentials on ".env" file.
 db_uri = (
     f"postgresql+psycopg2://{os.getenv('PGUSER')}:{os.getenv('PGPASSWORD')}"
     f"@{os.getenv('PGHOST')}:{os.getenv('PGPORT')}/{os.getenv('PGDATABASE')}"
@@ -470,5 +563,5 @@ print(f"✅ Tabla '{table_name}' persistida en PostgreSQL ({len(df_split_master)
 
 
 ```python
-
+#Our synthetic train data doesnt have cntry key value,it wasnt necesary saving the group variable value as an exercise.
 ```
