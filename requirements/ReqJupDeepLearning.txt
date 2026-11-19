@@ -1,0 +1,9 @@
+# ==========================================================
+# KnowledgeDome - Deep Learning & Big Data (ReqJupDeepLearning.txt)
+# ==========================================================
+-r ReqJupML.txt
+
+torch
+torchvision
+tensorflow
+pyspark

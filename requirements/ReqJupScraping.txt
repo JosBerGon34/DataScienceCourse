@@ -1,0 +1,11 @@
+# ==========================================================
+# KnowledgeDome - Web Scraping Profile (ReqJupScraping.txt)
+# ==========================================================
+-r ReqJupCore.txt
+
+beautifulsoup4
+lxml
+playwright
+aiohttp
+httpx
+requests
