@@ -44,7 +44,7 @@ This repository contains a **comprehensive curriculum redesign (Remodel) and syn
 | **7.1** | **Exploratory Data Analysis (EDA) & Correlation** | <a href="Statements/Module_7.1_EDA_Correlation.html" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [View Solution](Corrections/Ex7.1.md) |
 | **8.1** | **Feature Engineering, PCA & Calibrated SMOTE** | <a href="Statements/Module_8.1_PCA_Calibrated_Resampling.html" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [View Solution](Corrections/Ex8.1.md) |
 | **9.1** | **Predictive Modeling & GroupKFold Validation** | [View Statement ↗](Statements/Module_9.1_Predictive_Modeling_Cross-Validation.html) | [Part 1 (Corrections)](Corrections/Ex9.1.md)  •  [Part 2 (Corrections)](Corrections/Ex9.12.md) |
-| **10.1** | **Flask Deployment & Client Integration** | [View Statement ↗](Statements/Module10.1_Model_Serialization_REST_API_Backend_(Flask)_Standalone_HTML<>JS_Client.html) | [Notebook(Wrap+Pipeline)](Corrections/Ex10.1.md)  •  [Live App (Web)](apps/HappyPredict.html)  •  [Flask API (`src/app.py`)](https://github.com/JosBerGon34/DataScienceCourse/blob/main/src/app.py) |
+| **10.1** | **Flask Deployment & Client Integration** | [View Statement ↗](Statements/Module10.1_Model_Serialization_REST_API_Backend_(Flask)_Standalone_HTML_JS_Client.html) | [Notebook(Wrap+Pipeline)](Corrections/Ex10.1.md)  •  [Live App (Web)](apps/HappyPredict.html)  •  [Flask API (`src/app.py`)](https://github.com/JosBerGon34/DataScienceCourse/blob/main/src/app.py) |
 
 ---
 
