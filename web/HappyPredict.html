@@ -49,9 +49,10 @@ h1 { font-size: 1.4rem; margin-bottom: 0.3rem; }
 .pizza-container {
     display: flex;
     justify-content: center;
-    margin: 1.5rem 0;
+    margin: 1.5rem 0 0.8rem 0;
 }
 .pizza-container svg { width: 280px; height: 280px; }
+.pizza-container.disabled { opacity: 0.35; pointer-events: none; }
 .slice { cursor: pointer; transition: opacity 0.2s, stroke-width 0.2s; }
 .slice:hover { opacity: 1 !important; }
 .slice.selected { stroke: #fff; stroke-width: 3; }
@@ -60,14 +61,28 @@ h1 { font-size: 1.4rem; margin-bottom: 0.3rem; }
     font-size: 1rem;
     font-weight: 600;
     color: var(--accent);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
+.pizza-na {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+}
+.pizza-na label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+}
+.pizza-na input[type="checkbox"] { accent-color: var(--warn); }
 
 /* Feature rows */
 .feature-block { margin-bottom: 1.2rem; }
 .feature-row {
     display: grid;
-    grid-template-columns: 140px 1fr 55px;
+    grid-template-columns: 140px 1fr 130px;
     align-items: center;
     gap: 0.8rem;
     margin-bottom: 0.4rem;
@@ -83,12 +98,19 @@ h1 { font-size: 1.4rem; margin-bottom: 0.3rem; }
     border-radius: 4px;
     font-size: 0.85rem;
 }
-.feature-row .val { font-size: 0.85rem; font-weight: 600; color: var(--accent); text-align: right; }
+.feature-row .val { font-size: 0.82rem; font-weight: 600; color: var(--accent); text-align: right; }
+
+.slider-pair {
+    display: grid;
+    grid-template-columns: 1fr 62px;
+    gap: 0.5rem;
+    align-items: center;
+}
 
 /* Checkbox NA */
 .na-row {
     display: grid;
-    grid-template-columns: 140px 1fr 55px;
+    grid-template-columns: 140px 1fr 130px;
     gap: 0.8rem;
     margin-bottom: 1rem;
 }
@@ -101,17 +123,6 @@ h1 { font-size: 1.4rem; margin-bottom: 0.3rem; }
     cursor: pointer;
 }
 .na-row input[type="checkbox"] { accent-color: var(--warn); }
-
-/* Selects (gndr, mnactic) */
-select {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 0.3rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.85rem;
-    width: 100%;
-}
 
 /* Actions */
 .actions { display: flex; gap: 1rem; margin: 1.5rem 0; }
@@ -143,7 +154,7 @@ button:hover { opacity: 0.85; }
 .percentiles {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
+    gap: 0.6rem;
     font-size: 0.85rem;
 }
 .percentiles .p-label { color: var(--muted); }
@@ -169,10 +180,16 @@ button:hover { opacity: 0.85; }
     <span id="badge" class="badge badge-err">CONNECTING...</span>
 
     <!-- Pizza -->
-    <div class="pizza-container">
+    <div class="pizza-container" id="pizza-container">
         <svg viewBox="0 0 300 300" id="pizza-svg"></svg>
     </div>
     <div class="cntry-label" id="cntry-label">Selecciona país</div>
+    <div class="pizza-na">
+        <label>
+            <input type="checkbox" id="na_cntry" onchange="toggleCountryNA()">
+            No responde país / región (Hot-Deck impute, n_resp +1)
+        </label>
+    </div>
 
     <!-- Features -->
     <div id="features"></div>
@@ -199,48 +216,50 @@ const API = "http://127.0.0.1:5000";
 let selectedCntry = null;
 let backendLive = false;
 
-// Country data (from encodings)
+// Country data (aligned with CNTRYFC_MAP & REGIONFC_MAP)
 const COUNTRIES = [
-    {code:"HU", fc:0, region:"eastern",  rfc:0},
-    {code:"IL", fc:1, region:"eastern",  rfc:0},
-    {code:"PL", fc:2, region:"eastern",  rfc:0},
-    {code:"SK", fc:3, region:"eastern",  rfc:0},
-    {code:"BG", fc:4, region:"eastern",  rfc:0},
-    {code:"AT", fc:10, region:"western", rfc:1},
-    {code:"BE", fc:11, region:"western", rfc:1},
-    {code:"CH", fc:12, region:"western", rfc:1},
-    {code:"DE", fc:13, region:"western", rfc:1},
-    {code:"FR", fc:14, region:"western", rfc:1},
-    {code:"GB", fc:15, region:"western", rfc:1},
-    {code:"IE", fc:16, region:"western", rfc:1},
-    {code:"NL", fc:17, region:"western", rfc:1},
-    {code:"EE", fc:20, region:"northern", rfc:2},
-    {code:"FI", fc:21, region:"northern", rfc:2},
-    {code:"NO", fc:22, region:"northern", rfc:2},
-    {code:"SE", fc:23, region:"northern", rfc:2},
-    {code:"ES", fc:30, region:"southern", rfc:3},
-    {code:"GR", fc:31, region:"southern", rfc:3},
-    {code:"HR", fc:32, region:"southern", rfc:3},
-    {code:"IT", fc:33, region:"southern", rfc:3},
-    {code:"PT", fc:34, region:"southern", rfc:3},
-    {code:"RS", fc:35, region:"southern", rfc:3},
-    {code:"SI", fc:36, region:"southern", rfc:3},
+    {code:"HU", name:"Hungary",        fc:0,  region:"eastern",  rfc:0},
+    {code:"IL", name:"Israel",         fc:1,  region:"eastern",  rfc:0},
+    {code:"PL", name:"Poland",         fc:2,  region:"eastern",  rfc:0},
+    {code:"SK", name:"Slovakia",       fc:3,  region:"eastern",  rfc:0},
+    {code:"AT", name:"Austria",        fc:10, region:"western",  rfc:1},
+    {code:"BE", name:"Belgium",        fc:11, region:"western",  rfc:1},
+    {code:"CH", name:"Switzerland",    fc:12, region:"western",  rfc:1},
+    {code:"DE", name:"Germany",        fc:13, region:"western",  rfc:1},
+    {code:"FR", name:"France",         fc:14, region:"western",  rfc:1},
+    {code:"GB", name:"United Kingdom", fc:15, region:"western",  rfc:1},
+    {code:"IE", name:"Ireland",        fc:16, region:"western",  rfc:1},
+    {code:"NL", name:"Netherlands",    fc:17, region:"western",  rfc:1},
+    {code:"EE", name:"Estonia",        fc:20, region:"northern", rfc:2},
+    {code:"FI", name:"Finland",        fc:21, region:"northern", rfc:2},
+    {code:"NO", name:"Norway",         fc:22, region:"northern", rfc:2},
+    {code:"SE", name:"Sweden",         fc:23, region:"northern", rfc:2},
+    {code:"ES", name:"Spain",          fc:30, region:"southern", rfc:3},
+    {code:"GR", name:"Greece",         fc:31, region:"southern", rfc:3},
+    {code:"HR", name:"Croatia",        fc:32, region:"southern", rfc:3},
+    {code:"IT", name:"Italy",          fc:33, region:"southern", rfc:3},
+    {code:"PT", name:"Portugal",       fc:34, region:"southern", rfc:3},
+    {code:"RS", name:"Serbia",         fc:35, region:"southern", rfc:3},
+    {code:"SI", name:"Slovenia",       fc:36, region:"southern", rfc:3},
+    {code:"BG", name:"Bulgaria",       fc:37, region:"southern", rfc:3},
 ];
 
 const REGION_COLORS = { eastern:"#f85149", western:"#3fb950", northern:"#58a6ff", southern:"#d29922" };
 
 // Feature metadata
 const FEATURES = [
-    {name:"lrscale",    label:"Life Satisfaction", type:"slider", min:0, max:10, step:0.1, def:5},
-    {name:"rlgdgr",     label:"Religiosity",       type:"slider", min:0, max:10, step:0.1, def:3},
-    {name:"agea",       label:"Age",               type:"number", min:18, max:99, step:1, def:40},
-    {name:"hhmmb",      label:"Household Size",    type:"number", min:1, max:9,  step:1, def:2},
-    {name:"gndr",       label:"Gender",            type:"select", options:[{v:1,l:"Male"},{v:2,l:"Female"}], def:1},
-    {name:"mnactic",    label:"Main Activity",     type:"select", options:[
-        {v:1,l:"Paid work"},{v:2,l:"Education"},{v:3,l:"Unemployed (seeking)"},
-        {v:4,l:"Unemployed (not seeking)"},{v:5,l:"Sick/Disabled"},{v:6,l:"Retired"},
-        {v:7,l:"Military/Community"},{v:8,l:"Housework"},{v:9,l:"Other"}
-    ], def:1},
+    {name:"lrscale", label:"Left-Right Scale",   type:"slider", min:0, max:10, step:0.1, def:5.0},
+    {name:"rlgdgr",  label:"Religiosity",        type:"slider", min:0, max:10, step:0.1, def:3.0},
+    {name:"agea",    label:"Age (0–99)",         type:"number", min:0, max:99, step:1,   def:40},
+    {name:"hhmmb",   label:"Household (0–99)",   type:"number", min:0, max:99, step:1,   def:2},
+    {name:"gndr",    label:"Gender (2 pos)",     type:"discrete_slider", min:1, max:2, step:1, def:1,
+        labels:{1:"1: Male", 2:"2: Female"}},
+    {name:"mnactic", label:"Main Activity (9)",  type:"discrete_slider", min:1, max:9, step:1, def:1,
+        labels:{
+            1:"1: Paid work", 2:"2: Education", 3:"3: Unemployed (seeking)",
+            4:"4: Unemployed (not seeking)", 5:"5: Sick/Disabled", 6:"6: Retired",
+            7:"7: Military/Community", 8:"8: Housework", 9:"9: Other"
+        }},
 ];
 
 // --- Pizza rendering ---
@@ -265,12 +284,12 @@ function renderPizza() {
         path.setAttribute("stroke-width","1");
         path.setAttribute("opacity","0.7");
         path.setAttribute("class","slice");
+        path.innerHTML = `<title>${c.name} (${c.code}) — fc:${c.fc}, rfc:${c.rfc}</title>`;
         path.addEventListener("click", ()=> selectCountry(c, path));
         path.addEventListener("mouseenter", ()=> path.setAttribute("opacity","1"));
         path.addEventListener("mouseleave", ()=> { if(!path.classList.contains("selected")) path.setAttribute("opacity","0.7"); });
         svg.appendChild(path);
 
-        // Label
         const mid = a1 + angle/2;
         const lr = (r+ir)/2 + 12;
         const t = document.createElementNS("http://www.w3.org/2000/svg","text");
@@ -292,7 +311,20 @@ function selectCountry(c, path) {
     path.classList.add("selected");
     path.setAttribute("opacity","1");
     selectedCntry = c;
-    document.getElementById("cntry-label").textContent = `${c.code} (${c.region})`;
+    document.getElementById("cntry-label").textContent = `${c.name} [${c.code}] (${c.region} | fc=${c.fc}, rfc=${c.rfc})`;
+}
+
+function toggleCountryNA() {
+    const na = document.getElementById("na_cntry").checked;
+    const pizzaBox = document.getElementById("pizza-container");
+    pizzaBox.classList.toggle("disabled", na);
+    if (na) {
+        selectedCntry = null;
+        document.querySelectorAll(".slice").forEach(s => { s.classList.remove("selected"); s.setAttribute("opacity","0.7"); });
+        document.getElementById("cntry-label").textContent = "N/A (Hot-Deck impute cntryfc & regionfc)";
+    } else {
+        document.getElementById("cntry-label").textContent = "Selecciona país";
+    }
 }
 
 // --- Render features ---
@@ -300,25 +332,30 @@ function renderFeatures() {
     const container = document.getElementById("features");
     container.innerHTML = FEATURES.map(f => {
         let control = "";
+        let valText = f.def;
+
         if (f.type === "slider") {
-            control = `<input type="range" id="slider_${f.name}" min="${f.min}" max="${f.max}" step="${f.step}" value="${f.def}"
-                oninput="syncVal('${f.name}', this.value)">
+            control = `<div class="slider-pair">
+                <input type="range" id="slider_${f.name}" min="${f.min}" max="${f.max}" step="${f.step}" value="${f.def}"
+                    oninput="syncVal('${f.name}', this.value)">
                 <input type="number" id="input_${f.name}" min="${f.min}" max="${f.max}" step="${f.step}" value="${f.def}"
-                oninput="syncSlider('${f.name}', this.value)">`;
+                    oninput="syncSlider('${f.name}', this.value)">
+            </div>`;
         } else if (f.type === "number") {
-            control = `<input type="number" id="input_${f.name}" min="${f.min}" max="${f.max}" step="${f.step}" value="${f.def}"
-                oninput="syncVal('${f.name}', this.value)">`;
-        } else if (f.type === "select") {
-            const opts = f.options.map(o => `<option value="${o.v}" ${o.v===f.def?"selected":""}>${o.l}</option>`).join("");
-            control = `<select id="input_${f.name}" onchange="syncVal('${f.name}', this.value)">${opts}</select>`;
+            control = `<input type="number" id="input_${f.name}" min="0" max="99" step="1" maxlength="2" value="${f.def}"
+                oninput="sanitizeTwoDigitInt('${f.name}', this)">`;
+        } else if (f.type === "discrete_slider") {
+            valText = f.labels[f.def];
+            control = `<input type="range" id="slider_${f.name}" min="${f.min}" max="${f.max}" step="1" value="${f.def}"
+                oninput="syncDiscrete('${f.name}', this.value)">`;
         }
-        const valSpan = f.type === "select" ? "" : `<span class="val" id="val_${f.name}">${f.def}</span>`;
+
         return `
         <div class="feature-block">
             <div class="feature-row">
                 <label>${f.label}</label>
                 ${control}
-                ${valSpan}
+                <span class="val" id="val_${f.name}">${valText}</span>
             </div>
             <div class="na-row">
                 <span></span>
@@ -329,6 +366,20 @@ function renderFeatures() {
     }).join("");
 }
 
+function sanitizeTwoDigitInt(name, el) {
+    let raw = el.value.replace(/[^0-9]/g, "");
+    if (raw.length > 2) raw = raw.slice(0, 2);
+    const num = raw === "" ? 0 : Math.min(99, Math.max(0, parseInt(raw, 10)));
+    el.value = raw === "" ? "" : num;
+    document.getElementById(`val_${name}`).textContent = num;
+}
+
+function syncDiscrete(name, v) {
+    const f = FEATURES.find(item => item.name === name);
+    const val = document.getElementById(`val_${name}`);
+    if (val && f && f.labels) val.textContent = f.labels[parseInt(v, 10)];
+}
+
 function syncVal(name, v) {
     const s = document.getElementById(`slider_${name}`);
     const i = document.getElementById(`input_${name}`);
@@ -337,20 +388,31 @@ function syncVal(name, v) {
     if (i) i.value = v;
     if (val) val.textContent = v;
 }
+
 function syncSlider(name, v) {
     const s = document.getElementById(`slider_${name}`);
     const val = document.getElementById(`val_${name}`);
     if (s) s.value = v;
     if (val) val.textContent = v;
 }
+
 function toggleNA(name) {
     const na = document.getElementById(`na_${name}`).checked;
+    const f = FEATURES.find(item => item.name === name);
     const s = document.getElementById(`slider_${name}`);
     const i = document.getElementById(`input_${name}`);
     const val = document.getElementById(`val_${name}`);
     if (s) s.disabled = na;
     if (i) i.disabled = na;
-    if (val) val.textContent = na ? "N/A" : i.value;
+    if (val) {
+        if (na) {
+            val.textContent = "N/A";
+        } else if (f.type === "discrete_slider") {
+            val.textContent = f.labels[parseInt(s.value, 10)];
+        } else {
+            val.textContent = i.value;
+        }
+    }
 }
 
 function resetAll() {
@@ -361,36 +423,44 @@ function resetAll() {
         const na = document.getElementById(`na_${f.name}`);
         if (s) { s.value = f.def; s.disabled = false; }
         if (i) { i.value = f.def; i.disabled = false; }
-        if (val) val.textContent = f.def;
+        if (val) val.textContent = f.type === "discrete_slider" ? f.labels[f.def] : f.def;
         if (na) na.checked = false;
     });
+    document.getElementById("na_cntry").checked = false;
+    document.getElementById("pizza-container").classList.remove("disabled");
     selectedCntry = null;
     document.querySelectorAll(".slice").forEach(s => { s.classList.remove("selected"); s.setAttribute("opacity","0.7"); });
     document.getElementById("cntry-label").textContent = "Selecciona país";
     document.getElementById("result").classList.remove("visible");
+    document.getElementById("error").classList.remove("visible");
 }
 
 // --- Get features payload ---
 function getPayload() {
     const payload = {};
-    let n_resp = 0;
+    const naCntry = document.getElementById("na_cntry").checked;
 
-    // Country
-    if (selectedCntry) {
+    if (selectedCntry && !naCntry) {
         payload["cntry"] = selectedCntry.code;
+        payload["cntryfc"] = selectedCntry.fc;
+        payload["regionfc"] = selectedCntry.rfc;
     } else {
-        n_resp += 1; // cntryfc + regionfc imputed
+        payload["cntry"] = null;
+        payload["cntryfc"] = null;
+        payload["regionfc"] = null;
     }
 
-    // Features
     FEATURES.forEach(f => {
         const na = document.getElementById(`na_${f.name}`).checked;
         if (na) {
             payload[f.name] = null;
-            n_resp += 1;
+        } else if (f.type === "discrete_slider") {
+            payload[f.name] = parseInt(document.getElementById(`slider_${f.name}`).value, 10);
+        } else if (f.type === "number") {
+            const raw = document.getElementById(`input_${f.name}`).value;
+            payload[f.name] = raw === "" ? 0 : parseInt(raw, 10);
         } else {
-            const el = document.getElementById(`input_${f.name}`);
-            payload[f.name] = f.type === "number" || f.type === "select" ? parseInt(el.value) : parseFloat(el.value);
+            payload[f.name] = parseFloat(document.getElementById(`input_${f.name}`).value);
         }
     });
 
@@ -402,11 +472,12 @@ async function runPrediction() {
     const payload = getPayload();
     const resultBox = document.getElementById("result");
     const errorBox = document.getElementById("error");
+    const naCntry = document.getElementById("na_cntry").checked;
     resultBox.classList.remove("visible");
     errorBox.classList.remove("visible");
 
-    if (!selectedCntry) {
-        showError("Selecciona un país en la pizza.");
+    if (!selectedCntry && !naCntry) {
+        showError("Selecciona un país en la pizza o marca 'No responde país / región'.");
         return;
     }
 
@@ -418,7 +489,10 @@ async function runPrediction() {
         });
         const data = await res.json();
 
-        if (res.status === 400) { showError(data.error + (data.missing ? `: ${data.missing.join(", ")}` : "")); return; }
+        if (res.status === 400) {
+            showError(data.error + (data.missing ? `: ${data.missing.join(", ")}` : ""));
+            return;
+        }
         if (!res.ok) throw new Error(data.error || "Server error");
 
         setBadge("LIVE BACKEND", "badge-live");
@@ -431,6 +505,68 @@ async function runPrediction() {
 
 function simulate(payload) {
     // Fallback heuristic (transparent)
-    let score = 0;
+    let score = 7.4;
     if (payload.lrscale != null) score += (payload.lrscale - 5) * 0.05;
-    if (payload.rl   
+    if (payload.rlgdgr != null)  score += (payload.rlgdgr - 5) * 0.04;
+    if (payload.mnactic === 5)   score -= 1.1;
+    if (payload.regionfc === 2)  score += 0.5;
+    if (payload.regionfc === 0)  score -= 0.4;
+
+    const clamped = Math.max(0.0, Math.min(10.0, score));
+    const nResp = Object.entries(payload)
+        .filter(([k, v]) => k !== "cntry" && v === null).length;
+
+    return {
+        prediction: Number(clamped.toFixed(1)),
+        percentile_global:   Math.min(99, Math.max(1, Math.round(clamped * 9.5))),
+        percentile_region:   Math.min(99, Math.max(1, Math.round(clamped * 9.2))),
+        percentile_country:  Math.min(99, Math.max(1, Math.round(clamped * 9.0))),
+        percentile_multivar: Math.min(99, Math.max(1, Math.round(clamped * 9.4))),
+        n_resp: nResp
+    };
+}
+
+function showResult(data) {
+    document.getElementById("pred-val").textContent = Number(data.prediction).toFixed(1);
+    document.getElementById("pred-label").textContent = `Happiness Score (0-10) • Non-responses (n_resp): ${data.n_resp}`;
+    document.getElementById("percentiles").innerHTML = `
+        <div><span class="p-label">Global Dataset Percentile:</span> <span class="p-val">${data.percentile_global}%</span></div>
+        <div><span class="p-label">Region Hierarchical (regionfc):</span> <span class="p-val">${data.percentile_region}%</span></div>
+        <div><span class="p-label">Country Hierarchical (cntryfc):</span> <span class="p-val">${data.percentile_country}%</span></div>
+        <div><span class="p-label">Multivariable Profile (KNN):</span> <span class="p-val">${data.percentile_multivar}%</span></div>
+    `;
+    document.getElementById("result").classList.add("visible");
+}
+
+function showError(msg) {
+    const box = document.getElementById("error");
+    box.textContent = msg;
+    box.classList.add("visible");
+}
+
+function setBadge(text, cls) {
+    const b = document.getElementById("badge");
+    b.textContent = text;
+    b.className = `badge ${cls}`;
+}
+
+async function checkHealth() {
+    try {
+        const res = await fetch(`${API}/health`);
+        if (res.ok) {
+            backendLive = true;
+            setBadge("LIVE BACKEND", "badge-live");
+            return;
+        }
+    } catch (_) {}
+    backendLive = false;
+    setBadge("SIMULATION MODE", "badge-sim");
+}
+
+// Init
+renderPizza();
+renderFeatures();
+checkHealth();
+</script>
+</body>
+</html>

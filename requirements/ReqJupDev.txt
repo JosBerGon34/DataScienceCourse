@@ -1,0 +1,13 @@
+# ==========================================================
+# KnowledgeDome - Developer & QA Tools (ReqJupDev.txt)
+# ==========================================================
+-r ReqJupCore.txt
+
+nbstripout
+pre-commit
+black
+flake8
+pylint
+isort
+pytest
+mypy

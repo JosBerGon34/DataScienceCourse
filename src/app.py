@@ -6,6 +6,7 @@ predicts, and returns 4-level percentiles.
 import numpy as np
 import pandas as pd
 import joblib
+from flask import Flask, request, jsonify, send_from_directory
 from pathlib import Path
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -31,7 +32,10 @@ except Exception as e:
 
 model_step = pipe.named_steps["model"] if MODEL_LOADED else None
 EXPECTED_FEATURES = list(model_step.feature_names_in_) if MODEL_LOADED else []
-
+# --- 2.1. Open Html on executing app.py ---
+@app.route("/", methods=["GET"])
+def index():
+    return send_from_directory(ROOT / "web", "HappyPredict.html")
 
 # --- 3. GET /health ---
 @app.route("/health", methods=["GET"])
