@@ -528,12 +528,12 @@ function simulate(payload) {
 
 function showResult(data) {
     document.getElementById("pred-val").textContent = Number(data.prediction).toFixed(1);
-    document.getElementById("pred-label").textContent = `Happiness Score (0-10) • Non-responses (n_resp): ${data.n_resp}`;
+    document.getElementById("pred-label").textContent = `Índice de Bienestar Estimado (0-10) • Respuestas omitidas: ${data.n_resp}`;
     document.getElementById("percentiles").innerHTML = `
-        <div><span class="p-label">Global Dataset Percentile:</span> <span class="p-val">${data.percentile_global}%</span></div>
-        <div><span class="p-label">Region Hierarchical (regionfc):</span> <span class="p-val">${data.percentile_region}%</span></div>
-        <div><span class="p-label">Country Hierarchical (cntryfc):</span> <span class="p-val">${data.percentile_country}%</span></div>
-        <div><span class="p-label">Multivariable Profile (KNN):</span> <span class="p-val">${data.percentile_multivar}%</span></div>
+        <div><span class="p-label">Más feliz que el:</span> <span class="p-val">${data.percentile_global}% de toda Europa</span></div>
+        <div><span class="p-label">Más feliz que el:</span> <span class="p-val">${data.percentile_region}% de su macro-región</span></div>
+        <div><span class="p-label">Más feliz que el:</span> <span class="p-val">${data.percentile_country}% de su país</span></div>
+        <div><span class="p-label">Más feliz que el:</span> <span class="p-val">${data.percentile_multivar}% de perfiles similares (KNN)</span></div>
     `;
     document.getElementById("result").classList.add("visible");
 }
