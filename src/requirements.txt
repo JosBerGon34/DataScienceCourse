@@ -1,0 +1,8 @@
+dash
+plotly
+pandas
+numpy
+pyarrow
+joblib
+statsmodels
+scipy
