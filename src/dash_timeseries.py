@@ -18,26 +18,22 @@ from statsmodels.tsa.seasonal import seasonal_decompose
 # ==============================================================================
 
 
-RAW_BASE = "https://raw.githubusercontent.com/JosBerGon34/DataScienceCourse/Module10.2/"
-LOCAL_MODELS_DIR = Path(__file__).resolve().parent.parent / "models"
+RAW_BASE = "https://raw.githubusercontent.com/JosBerGon34/DataScienceCourse/Module10.2"
 
 
-def load_joblib_from_url_or_local(filename: str, url: str):
-    local_path = LOCAL_MODELS_DIR / filename
-    if local_path.is_file():
-        return joblib.load(local_path)
-
+def load_joblib_from_url(folder: str, filename: str):
+    clean_base = RAW_BASE.rstrip("/")
+    clean_folder = folder.strip("/")
+    url = f"{clean_base}/{clean_folder}/{filename}"
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(req, timeout=30) as resp:
         return joblib.load(io.BytesIO(resp.read()))
 
 
-# Ejemplo de uso apuntando a Module10.2
-dicts_url = urljoin(RAW_BASE, "models/ts_dicts_bundle.joblib")
-model_url = urljoin(RAW_BASE, "models/sarimax_spain_bundle.joblib")
+dicts_bundle = load_joblib_from_url("models", "ts_dicts_bundle.joblib")
+model_bundle = load_joblib_from_url("models", "sarimax_spain_bundle.joblib")
 
-dicts_bundle = load_joblib_from_url_or_local("ts_dicts_bundle.joblib", dicts_url)
-model_bundle = load_joblib_from_url_or_local("sarimax_spain_bundle.joblib", model_url)
+
 
 CONFIG_DICTS = dicts_bundle["config_dicts"]
 MULTIBAR_EDA = dicts_bundle["multibar_eda"]
