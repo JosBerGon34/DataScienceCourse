@@ -17,20 +17,23 @@ from statsmodels.tsa.seasonal import seasonal_decompose
 # ==============================================================================
 
 
-RAW_BASE = "https://raw.githubusercontent.com/JosBerGon34/DataScienceCourse/Module10.2/models"
+RAW_BASE = "https://raw.githubusercontent.com/JosBerGon34/DataScienceCourse/main/models"
+BASE_DIR = Path(__file__).resolve().parent
+CANDIDATE_MODEL_DIRS = [
+    BASE_DIR.parent / "models",  # works when script is inside src/
+    BASE_DIR / "models",         # works when script is at app root
+]
+
 
 def load_joblib_from_url_or_local(filename: str, url: str):
-    local_path = MODELS_DIR / filename
-    if local_path.exists():
-        return joblib.load(local_path)
+    for folder in CANDIDATE_MODEL_DIRS:
+        local_path = folder / filename
+        if local_path.is_file():
+            return joblib.load(local_path)
 
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(req, timeout=30) as resp:
-        data = resp.read()
-
-    # Optional: cache locally so subsequent restarts don't re-download
-    local_path.write_bytes(data)
-    return joblib.load(io.BytesIO(data))
+        return joblib.load(io.BytesIO(resp.read()))
 
 dicts_bundle = load_joblib_from_url_or_local(
     "ts_dicts_bundle.joblib",
