@@ -19,7 +19,7 @@ ROOT_DIR = Path(__file__).resolve().parents[1]
 MODELS_DIR = ROOT_DIR / "models"
 MODELS_DIR.mkdir(parents=True, exist_ok=True)
 
-RAW_BASE = "https://raw.githubusercontent.com/JosBerGon34/DataScienceCourse/main/models"
+RAW_BASE = "https://raw.githubusercontent.com/JosBerGon34/DataScienceCourse/Module10.2/models"
 
 def load_joblib_from_url_or_local(filename: str, url: str):
     local_path = MODELS_DIR / filename
