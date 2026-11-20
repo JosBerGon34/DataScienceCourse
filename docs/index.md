@@ -43,10 +43,12 @@ This repository contains a **comprehensive curriculum redesign (Remodel) and syn
 | **6.2** | **Statistical Profiling & Typologies** | <a href="Statements/Module_6.2_Statistical_Profiling.html" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [View Solution](Corrections/Ex6.2.md) |
 | **7.1** | **Exploratory Data Analysis (EDA) & Correlation** | <a href="Statements/Module_7.1_EDA_Correlation.html" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [View Solution](Corrections/Ex7.1.md) |
 | **8.1** | **Feature Engineering, PCA & Calibrated SMOTE** | <a href="Statements/Module_8.1_PCA_Calibrated_Resampling.html" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [View Solution](Corrections/Ex8.1.md) |
-| **9.1** | **Predictive Modeling & GroupKFold Validation** | <a href="Statements/Module_9.1_Predictive_Modeling_Cross-Validation.html" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [Part 1](Corrections/Ex9.1.md)  •  [Part 2](Corrections/Ex9.12.md) | 
-| **10.1** | **Flask Deployment & Client Integration** |  <a href="Statements/Module10.1_WebDeployPersistent.html" target="_blank" rel="noopener noreferrer">View Statement ↗</a>  | [Notebook(Wrap+Pipeline)](Corrections/Ex10.1.md)  •  [Live App (Web)](apps/HappyPredict.html)  •  [Flask API (`src/app.py`)](https://github.com/JosBerGon34/DataScienceCourse/blob/main/src/app.py) |
-| **10.2** | **Time Series & Plotly Web Deploy** |  <a href="Statements/Module_10.2_InteractiveTimeSeriesEDA_PlotlyDashDeploy.html" target="_blank" rel="noopener noreferrer">View Statement ↗</a>  | [Notebook(Persistence)](Corrections/Ex10.2.md)  •  [Live App (Web)](https://module102.plotly.app/)  •  [Dash API (`app/dash_timeseries.py`)](https://github.com/JosBerGon34/DataScienceCourse/tree/Module10.2/notebooks/app/dash_timeseries.py) |
+| **9.1** | **Predictive Modeling & GroupKFold Validation** | <a href="Statements/Module_9.1_Predictive_Modeling_Cross-Validation.html" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [Part 1](Corrections/Ex9.1.md) &nbsp;•&nbsp; [Part 2](Corrections/Ex9.12.md) |
+| **10.1** | **Flask Deployment & Client Integration** | <a href="Statements/Module10.1_WebDeployPersistent.html" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [Notebook(Wrap+Pipeline)](Corrections/Ex10.1.md) &nbsp;•&nbsp; [Live App (Web)](apps/HappyPredict.html) &nbsp;•&nbsp; [Flask API (`src/app.py`)](https://github.com/JosBerGon34/DataScienceCourse/blob/main/src/app.py) |
+| **10.2** | **Time Series & Plotly Web Deploy** | <a href="Statements/Module_10.2_InteractiveTimeSeriesEDA_PlotlyDashDeploy.html" target="_blank" rel="noopener noreferrer">View Statement ↗</a> | [Notebook(Persistence)](Corrections/Ex10.2.md) &nbsp;•&nbsp; [Live App (Web)](https://module102.plotly.app/) &nbsp;•&nbsp; [Dash API (`app/dash_timeseries.py`)](https://github.com/JosBerGon34/DataScienceCourse/tree/Module10.2/notebooks/app/dash_timeseries.py) |
+
 ---
+
 
 ## 🛠️ Tech Stack & Tools
 
