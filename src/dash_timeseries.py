@@ -15,9 +15,7 @@ from statsmodels.tsa.seasonal import seasonal_decompose
 # ==============================================================================
 # 1. RELATIVE PATHS & TWO-JOBLIB LOADING
 # ==============================================================================
-ROOT_DIR = Path(__file__).resolve().parents[1]
-MODELS_DIR = ROOT_DIR / "models"
-MODELS_DIR.mkdir(parents=True, exist_ok=True)
+
 
 RAW_BASE = "https://raw.githubusercontent.com/JosBerGon34/DataScienceCourse/Module10.2/models"
 
