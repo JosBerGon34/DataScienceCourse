@@ -2,11 +2,13 @@
 
 **Notebook Naming & Compartmentalization Convention:** Each project phase is structured into sequential Jupyter Notebooks starting at `Step_X.0.ipynb`. Whenever a phase is modularized into sub-tasks (e.g., separate data sources, clustering routines, or model families), I will increment the numbering by `+0.1` (`X.1`, `X.2`, etc.) while keeping the repository clean and traceable.
 
-### **STEP 0 (Notebooks `0.0` – `0.x`): Problem Formulation, Hypothesis Design & Initial Cataloging**
+### **STEP 0 (Notebooks `0.0` – `0.x`): Problem Formulation, Exploratory Screening & Hypothesis Design**
 
-- **0.0 — Scope & Hypothesis Definition:** I will collect the primary European Social Survey (ESS) microdata dataset, formulate my multi-layered research hypothesis against the null hypothesis ($H_0$), and stipulate the expected correlation structures across variables.
-    
-- **0.1 — Reference Control Datasets & Variable Dictionary:** I will integrate auxiliary reference datasets to control for macro-level contexts (such as regional, cultural, and economic country groupings). I will define and execute an initial cataloging of every variable—documenting scale ranges, missingness codes, and theoretical roles—and persist these metadata dictionaries into my pre-pipeline Wrapper.
+- **0.0 — Scope, Target Selection & Exploratory Screening:** I will collect the primary European Social Survey (ESS) microdata and macro control data. I will perform an exploratory scan (shape analysis, kurtosis/skewness profiling, missingness auditing, and `SelectKBest` univariate screening) to identify variables with empirical signal. From this evidence, I will formulate a multi-layered research hypothesis ($H_1$) against the null ($H_0$), stipulating the expected correlation structures and the target variable. `Country` is designated as a random effect (grouping factor), not a fixed predictor, to separate between-country variance from within-country signal.
+
+- **0.1 — Reference Control Datasets & Variable Dictionary:** I will integrate auxiliary reference datasets (World Bank, Eurostat) to control for macro-level contexts (regional, cultural, and economic country groupings). I will define and execute an initial cataloging of every variable—documenting scale ranges, missingness codes, transformation requirements, and theoretical roles—and persist these metadata dictionaries into the pre-pipeline Wrapper.
+
+> **Methodological note:** Hypothesis formulation follows a two-phase exploratory-confirmatory design (Tukey, 1977; Kerr, 1998). Phase 1 (Steps 0.0–3) is inductive: data structure informs variable selection and hypothesis generation. Phase 2 (Steps 4–5) is deductive: the formulated $H_0$ is tested confirmatorily with country-grouped cross-validation. This is not HARKing; the exploratory origin of the hypothesis is explicitly documented.   
     
 
 ### **STEP 1 (Notebooks `1.0` – `1.x`): Multi-Source Data Ingestion & SQL Persistence** 

@@ -3,7 +3,7 @@ import os
 import duckdb
 import pandas as pd
 from dotenv import load_dotenv
-from src.paths import ROOT_DIR
+from paths import ROOT_DIR
 
 # 1. Cargar las variables de entorno de forma silenciosa y segura
 ENV_PATH = ROOT_DIR / ".env"
