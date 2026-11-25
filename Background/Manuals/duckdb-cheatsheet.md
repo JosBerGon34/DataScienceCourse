@@ -1,4 +1,11 @@
 # DuckDB Cheatsheet
+#VIEW DATA FROM RELATIONAL DBS OR URL PATHS:
+#Local example:
+'''/home/josu/Documentos/DataScienceCourse/.venv-core/bin/python -c "import duckdb; con = duckdb.connect(':memory:'); con.execute(\"ATTACH '/home/josu/Documentos/DataScienceCourse/temp/ess11.duckdb' AS ess11 (READ_ONLY)\"); con.execute('CALL start_ui()'); input('UI activa. Pulsa ENTER para cerrar...')"'''
+#Check  if some PID is running already duckdb file
+fuser -v /home/josu/Documentos/DataScienceCourse/temp/ess11.duckdb
+#Close program wich has relational db file runnning before use UI
+ls -la /home/josu/Documentos/DataScienceCourse/temp/ess11.duckdb*
 
 ## Part 1: DuckDB Essentials
 

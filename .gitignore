@@ -111,3 +111,12 @@ configsql.cfg
 .env
 configsql.cfg
 *.cfg
+cat << 'EOF' >> .gitignore
+
+# Archivos pesados y navegadores locales de Playwright
+temp/
+.pw-browsers/
+*.sav
+*.csv
+*.duckdb.wal
+EOF
