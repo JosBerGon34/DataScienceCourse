@@ -1,0 +1,103 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "datascience-course-capstone"
+version = "0.1.0"
+description = "End-to-End Multi-Level Modeling Pipeline for European Sociopolitical Outcomes"
+readme = "Index_Readme.md"
+requires-python = ">=3.11"
+
+# 1. SERIAL / HEADLESS BASE (Installed via: pip install -e .)
+dependencies = [
+    "numpy",
+    "pandas",
+    "scipy",
+    "joblib",
+    "pyarrow",
+    "duckdb",
+    "psycopg2-binary",
+    "sqlalchemy",
+    "python-dotenv",
+    "requests",
+]
+
+# 2. CLI ENTRY POINTS
+[project.scripts]
+run-pipeline = "wrapper:main"
+build-db = "s1_ingestion:main"
+
+# 3. MODULAR PROFILES (Installed via: pip install -e ".[profile]")
+[project.optional-dependencies]
+ide = [
+    "jupyterlab", "notebook", "ipykernel", "ipywidgets",
+    "jupyterlab-git", "nbdime", "ipydatagrid", "jupyterlab_latex",
+    "jupyterlab-lsp", "python-lsp-server",
+]
+viz = ["matplotlib", "seaborn", "plotly"]
+scraping = ["beautifulsoup4", "lxml", "playwright", "aiohttp", "httpx"]
+ml = ["scikit-learn", "imbalanced-learn", "statsmodels", "xgboost", "lightgbm"]
+dl = ["torch", "torchvision", "tensorflow", "pyspark"]
+web = ["flask", "flask-cors", "fastapi", "uvicorn[standard]", "dash", "pydantic"]
+dev = ["nbstripout", "pre-commit", "black", "flake8", "pylint", "isort", "pytest", "mypy"]
+
+# Shortcuts
+core = ["datascience-course-capstone[ide,viz]"]
+all = ["datascience-course-capstone[ide,viz,scraping,ml,dl,web,dev]"]
+
+# Isolated Web Deployment Sandboxes (base serial + ML deserializers + web stack)
+web_dash = ["datascience-course-capstone[ml]", "dash", "plotly"]
+web_flask = ["datascience-course-capstone[ml]", "flask", "flask-cors", "gunicorn"]
+web_fapi = ["datascience-course-capstone[ml]", "fastapi", "uvicorn[standard]", "pydantic"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+
+# ==============================================================================
+# 7. INSTALLATION & DEPLOYMENT CHEATSHEET (CLI Reference)
+# ==============================================================================
+# Always activate the virtual environment first:
+#   source .venv-core/bin/activate
+#
+# --- A. BASE & MODULAR WORKSTATION INSTALLS (Editable mode registers src/) ---
+# 1. Headless / Serial runtime ONLY (VM, cronjob, wrapper execution, zero GUI):
+#    pip install -e .
+#
+# 2. Single optional profile (e.g., only JupyterLab IDE or only ML):
+#    pip install -e ".[ide]"
+#    pip install -e ".[ml]"
+#
+# 3. Multiple combined profiles (e.g., Core IDE + ML + Web Scraping):
+#    pip install -e ".[core,ml,scraping]"
+#    playwright install chromium   # Required once if 'scraping' is installed
+#
+# 4. Full workstation (All profiles: IDE, Viz, Scraping, ML, DL, Web, Dev):
+#    pip install -e ".[all]"
+#
+# --- B. SANDBOX WEB DEPLOYMENTS (Minimal footprint: serial + ML + web stack) ---
+# 1. From repository root (Docker / VM / CI-CD):
+#    pip install --no-cache-dir ".[web_dash]"    # Plotly Dash sandbox
+#    pip install --no-cache-dir ".[web_flask]"   # Flask REST API sandbox
+#    pip install --no-cache-dir ".[web_fapi]"    # FastAPI microservice sandbox
+#
+# 2. Isolated folder deploy (e.g., Plotly Cloud / Render reading only sandbox subfolder):
+#    Export minimal requirements.txt inside the target sandbox before pushing:
+#    pip install --no-cache-dir ".[web_dash]" && pip freeze > src/apps_dash/app000dash/requirements.txt
+# ==============================================================================
